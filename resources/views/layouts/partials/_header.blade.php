@@ -1,285 +1,267 @@
 <aside class="main-sidebar fixed offcanvas shadow" data-toggle='offcanvas'>
     <section class="sidebar">
-        <div class="w-80px mt-3 mb-3 ml-3">
-            <img src="assets/img/basic/logo.png" alt="">
+        <div class="w-150px mt-3 mb-3 ml-3">
+            {{ Html::image('assets/img/basic/logoadm.png', 'a picture', array('alt'=>'Logo')) }}
         </div>
-        <div class="relative">
-            <a data-toggle="collapse" href="#userSettingsCollapse" role="button" aria-expanded="false"
-               aria-controls="userSettingsCollapse" class="btn-fab btn-fab-sm absolute fab-right-bottom fab-top btn-primary shadow1 ">
-                <i class="icon icon-cogs"></i>
-            </a>
+          <div class="relative">
+
             <div class="user-panel p-3 light mb-2">
                 <div>
                     <div class="float-left image">
-                        <img class="user_avatar" src="assets/img/dummy/u2.png" alt="User Image">
+                        {{ Html::image('img/avatar/default.png', 'a picture', array('class'=>'user_avatar','alt'=>'a picture')) }}
                     </div>
                     <div class="float-left info">
-                        <h6 class="font-weight-light mt-2 mb-1">Alexander Pierce</h6>
+                        <h6 class="font-weight-light mt-2 mb-1">{{ Auth::user()->fullname }}</h6>
                         <a href="#"><i class="icon-circle text-primary blink"></i> Online</a>
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="collapse multi-collapse" id="userSettingsCollapse">
-                    <div class="list-group mt-3 shadow">
-                        <a href="index.html" class="list-group-item list-group-item-action ">
-                            <i class="mr-2 icon-umbrella text-blue"></i>Profile
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action"><i
-                                class="mr-2 icon-cogs text-yellow"></i>Settings</a>
-                        <a href="#" class="list-group-item list-group-item-action"><i
-                                class="mr-2 icon-security text-purple"></i>Change Password</a>
-                    </div>
-                </div>
+                
             </div>
         </div>
+        
         <ul class="sidebar-menu">
-            <li class="header"><strong>MAIN NAVIGATION</strong></li>
-           
-            <li class="treeview"><a href="{{ route('group')}}">
-                <i class="icon icon icon-package blue-text s-18"></i>
-                <span>Grupos</span>
-            </a>
+        <li class="header"><strong>MÓDULOS DEL SISTEMA</strong></li>
+        @if((Auth::user()->hasRole('mayor')))
+             <li class="treeview">
+                <a href="{{url('loginUser')}}" onclick="event.preventDefault(); document.getElementById('loginUser-form').submit();">
+                    <i class="icon icon-compass gray-text s-18"></i> <span>{{ __('Tablero') }}</span>
+                </a>
+                <form id="loginUser-form" action="{{ route('loginUser') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                </form>
+                 
+            </li>
+         @endif   
+         @if(Auth::user()->hasRole('super') || Auth::user()->hasRole('corredor') || Auth::user()->hasRole('operador'))
+          <li class="treeview"><a href="{{url('home')}}">
+                <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Dashboard') }}</span></a>
+             </li>
+        <li class="treeview no-b"><a href="{{ route('buildings.index') }}">
+            <i class="icon icon-equalizer gray-text s-18"></i>
+            <span>{{ __('Edificios') }}</span></a>
+        </li>
+        @else  
+            <li class="treeview no-b"><a href="{{ route('edificio.mostrar') }}">
+                <i class="icon icon-equalizer gray-text s-18"></i>
+                <span>{{ __('Edificios') }}</span></a>
+            </li>
+            @if(!Auth::user()->hasRole('operador'))
+            @if(!Auth::user()->hasRole('copro'))
+            <li><a href="{!! route('encomienda.mostrar') !!}"><i class="icon icon-equalizer s-18"></i>Encomiendas</a>
+                @endif
+           </li>
+           <li class="treeview no-b"><a href="{{ route('reservaEspacioPorEdificio') }}">
+            <i class="icon icon-equalizer gray-text s-18"></i>
+                <span>{{ __('Reservas') }}</span></a>
+            </li>
+            @endif
+            @if(Auth::user()->hasRole('mayor') || Auth::user()->hasRole('admin'))
+                <li class="treeview no-b"><a href="{{ route('empresaExterna.index') }}">
+                    <i class="icon icon-equalizer gray-text s-18"></i>
+                    <span>{{ __('Empresas Externas') }}</span></a>
+                </li>
+            @endif
+            <li class="treeview"><a href="{{url('home')}}">
+                <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Cambiar Edificio') }}</span></a>
+             </li>
+      
+        @endif 
+        
+       
+    </li>
+    @if(Auth::user()->hasRole('super') || Auth::user()->hasRole('admin'))
+         <li class="treeview no-b"><a href="{{ route('administraciones.index') }}">
+            <i class="icon icon-equalizer gray-text s-18"></i>
+            <span>{{ __('Administraciones') }}</span></a>
+        </li>
+    @endif
+    @if(Auth::user()->hasRole('operador'))
+     <li><a href="{!! route('corredor.index') !!}">
+        <i class="icon icon-equalizer gray-text s-18"></i>Corredores</a>
+    </li>
+    @endif
+    @if(Auth::user()->hasRole('super'))
+        <li class="treeview no-b"><a href="{{ route('empresaExterna.index') }}">
+            <i class="icon icon-equalizer gray-text s-18"></i>
+            <span>{{ __('Empresas Externas') }}</span></a>
+        </li>
+    @endif
     
-            </li>
-            <li class="treeview"><a href="{{ route('user')}}"><i class="icon icon-account_box light-green-text s-18"></i>Usuarios</a>
-            </li>
-            <li class="treeview no-b"><a href="#">
-                <i class="icon icon-package light-green-text s-18"></i>
-                <span>Inbox</span>
-                <span class="badge r-3 badge-success pull-right">20</span>
+    
+    @if(Auth::user()->hasRole('operador'))
+        <li class="treeview no-b"><a href="{{ route('empresaExterna.index') }}">
+            <i class="icon icon-equalizer gray-text s-18"></i>
+            <span>{{ __('Mis Empresas') }}</span></a>
+        </li>
+    @endif
+    @if(Auth::user()->hasRole('super') || Auth::user()->hasRole('corredor') || Auth::user()->hasRole('copro'))
+        <li><a href="{!! route('corredor.index') !!}"><i class="icon icon-equalizer gray-text s-18"></i>Corredores</a>
+        </li>
+    @endif
+    @if(Auth::user()->hasRole('super'))
+        <li class="treeview no-b"><a href="{{ route('reservaEspacio.index') }}">
+            <i class="icon icon-equalizer gray-text s-18"></i>
+            <span>{{ __('Reservas') }}</span></a>
+        </li>
+        <li class="treeview">
+            <a href="{{ route('user.index') }}">
+                <i class="icon icon-equalizer gray-text s-18"></i>{{ __('Usuarios') }}
             </a>
-                <ul class="treeview-menu">
-                    <li><a href="panel-page-inbox.html"><i class="icon icon-circle-o"></i>All Messages</a>
-                    </li>
-                    <li><a href="panel7-inbox.html"><i class="icon icon-circle-o"></i>Panel7 - Inbox</a>
-                    </li>
-                    <li><a href="panel8-inbox.html"><i class="icon icon-circle-o"></i>Panel8 - Inbox</a>
-                    </li>
-                    <li><a href="panel-page-inbox-create.html"><i class="icon icon-add"></i>Compose</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="header light mt-3"><strong>UI COMPONENTS</strong></li>
-            <li class="treeview ">
-                <a href="#">
-                    <i class="icon icon-package text-lime s-18"></i> <span>Apps</span>
-                    <i class="icon icon-angle-left s-18 pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="panel-page-chat.html"><i class="icon icon-circle-o"></i>Chat</a>
-                    </li>
-                    <li><a href="panel7-tasks.html"><i class="icon icon-circle-o"></i>Tasks / Todo</a>
-                    </li>
-                    <li><a href="panel-page-calendar.html"><i class="icon icon-date_range"></i>Calender</a>
-                    </li>
-                    <li><a href="panel-page-calendar2.html"><i class="icon icon-date_range"></i>Calender 2</a>
-                    </li>
-                    <li><a href="panel-page-contacts.html"><i class="icon icon-circle-o"></i>Contacts</a>
-                    </li>
-                    <li><a href="panel1-projects.html"><i class="icon icon-circle-o"></i>Panel1 - Projects</a>
-                    </li>
-                    <li><a href="panel7-projects-list.html"><i class="icon icon-circle-o"></i>Panel7 - Projects List</a>
-                    </li>
-                    <li><a href="panel7-invoices.html"><i class="icon icon-circle-o"></i>Invoices</a>
-                    <li><a href="panel7-meetings.html"><i class="icon icon-circle-o"></i>Meetings</a>
-                    <li><a href="panel7-payments.html"><i class="icon icon-circle-o"></i>Payments</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="icon icon-documents3 text-blue s-18"></i> <span>Pages</span>
-                    <i class="icon icon-angle-left s-18 pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#"><i class="icon icon-documents3"></i>Blank Pages<i
-                            class="icon icon-angle-left s-18 pull-right"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a href="panel-page-blank.html"><i class="icon icon-document"></i>Simple Blank</a>
-                            </li>
-                            <li><a href="panel-page-blank-tabs.html"><i class="icon icon-document"></i>Tabs Blank <i
-                                    class="icon icon-angle-left s-18 pull-right"></i></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="icon icon-fingerprint text-green"></i>Auth Pages<i
-                            class="icon icon-angle-left s-18 pull-right"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a href="login.html"><i class="icon icon-document"></i>Login Page 1</a>
-                            </li>
-                            <li><a href="login-2.html"><i class="icon icon-document"></i>Login Page 2</a>
-                            </li>
-                            <li><a href="login-3.html"><i class="icon icon-document"></i>Login Page 3</a>
-                            </li>
-                            <li><a href="login-4.html"><i class="icon icon-document"></i>Login Page 4</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="icon icon-bug text-red"></i>Error Pages<i
-                            class="icon icon-angle-left s-18 pull-right"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a href="panel-page-404.html"><i class="icon icon-document"></i>404 Page</a>
-                            </li>
-                            <li><a href="panel-page-500.html"><i class="icon icon-document"></i>500 Page<i
-                                    class="icon icon-angle-left s-18 pull-right"></i></a>
-                            </li>
-                            <li><a href="panel-page-error.html"><i class="icon icon-document"></i>420 Page<i
-                                    class="icon icon-angle-left s-18 pull-right"></i></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="icon icon-documents3"></i>Other Pages<i
-                            class="icon icon-angle-left s-18 pull-right"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a href="panel-page-invoice.html"><i class="icon icon-document"></i>Invoice Page</a>
-                            </li>
-                            <li><a href="panel-page-no-posts.html"><i class="icon icon-document"></i>No Post Page</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="icon icon-goals-1 amber-text s-18"></i> <span>Elements</span>
-                    <i class="icon icon-angle-left s-18 pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="panel-element-widgets.html">
-                        <i class="icon icon-widgets amber-text s-14"></i> <span>Widgets</span>
-                    </a>
-                    </li>
-                    <li><a href="panel-element-counters.html">
-                        <i class="icon icon-filter_9_plus amber-text s-14"></i> <span>Counters</span>
-                    </a>
-                    <li><a href="panel-element-buttons.html">
-                        <i class="icon icon-touch_app amber-text s-14"></i> <span>Buttons</span>
-                    </a>
-                    </li>
-                    <li>
-                        <a href="panel-element-typography.html">
-                            <i class="icon icon-text-width amber-text s-14"></i> <span>Typography</span>
-                        </a>
-                    </li>
-                    <li><a href="panel-element-tabels.html">
-                        <i class="icon icon-table amber-text s-14"></i> <span>Tables</span>
-                    </a>
-                    </li>
-                    <li><a href="panel-element-alerts.html">
-                        <i class="icon icon-exclamation-circle amber-text s-14"></i> <span>Alerts</span>
-                    </a>
-                    </li>
-                    <li><a href="panel-element-slider.html"><i class="icon icon-view_carousel amber-text s-14"></i>
-                        <span>Slider</span></a></li>
-                    <li><a href="panel-element-tabs.html"><i class="icon icon-folders2 amber-text s-14"></i>
-                        <span>Tabs</span></a></li>
-                    <li><a href="panel-element-progress-bars.html"><i class="icon icon-folders2 amber-text s-14"></i>
-                        <span>Progress Bars</span></a></li>
-                    <li><a href="panel-element-badges.html"><i class="icon icon-flag7 amber-text s-14"></i>
-                        <span>Badges</span></a></li>
-                    <li><a href="panel-element-preloaders.html"><i class="icon icon-data_usage amber-text s-14"></i>
-                        <span>Preloaders</span></a></li>
-                </ul>
-            </li>
-            <li class="treeview ">
-                <a href="#">
-                    <i class="icon icon-wpforms light-green-text s-18 "></i> <span>Forms & Plugins</span>
-                    <i class="icon icon-angle-left s-18 pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="panel-element-forms.html"><i class="icon icon-wpforms light-green-text"></i>Bootstrap
-                        Inputs</a>
-                    </li>
-                    <li><a href="form-jquery-validations.html"><i class="icon icon-note-important light-green-text"></i>
-                        Form Validation (Jquery)</a>
-                    </li>
-                    <li><a href="form-bootstrap-validations.html"><i class="icon icon-note-important light-green-text"></i>
-                        Form Validation (Bootstrap)</a>
-                    </li>
-                    <li><a href="panel-element-editor.html"><i class="icon icon-pen2 light-green-text"></i>Editor</a>
-                    </li>
-                    <li><a href="panel-element-toast.html"><i
-                            class="icon icon-notifications_active light-green-text"></i>Toasts</a>
-                    </li>
-                    <li><a href="panel-element-stepper.html"><i class="icon icon-burst_mode light-green-text"></i>Stepper</a>
-                    </li>
-                    <li><a href="panel-element-date-time-picker.html"><i
-                            class="icon icon-date_range light-green-text"></i>Date Time Picker</a>
-                    </li>
-                    <li><a href="panel-element-color-picker.html"><i class="icon icon-adjust light-green-text"></i>Color
-                        Picker</a>
-                    </li>
-                    <li><a href="panel-element-range-slider.html"><i class="icon icon-space_bar light-green-text"></i>Range
-                        Slider</a>
-                    </li>
-                    <li><a href="panel-element-select2.html"><i
-                            class="icon  icon-one-finger-click light-green-text"></i>Select 2</a>
-                    </li>
-                    <li><a href="panel-element-tags.html"><i class="icon  icon-tags3 light-green-text"></i>Tags</a>
-                    </li>
-                    <li><a href="panel-element-data-tables.html"><i class="icon icon-table light-green-text"></i>Data
-                        Tables</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="treeview"><a href="#">
-                <i class="icon icon-bar-chart2 pink-text s-18"></i>
-                <span>Charts</span>
+        </li>  
+    @endif
+    @if(Auth::user()->hasRole('super') || Auth::user()->hasRole('operador'))
+        <li class="treeview no-b"><a href="{{ route('getAllAnuncios') }}">
+            <i class="icon icon-equalizer gray-text s-18"></i>
+                <span>{{ __('Anuncios') }}</span></a>
+        </li>
+    @endif
+  
+    @if(Auth::user()->hasRole('super'))
+        
+        <li class="header light mt-3"><strong>CONFIGURACIÓN</strong></li>
+        <li class="treeview">
+            <a href="#">
+                <i class="icon icon-book gray-text s-18"></i> <span>{{ __('Configuración') }}</span>
                 <i class="icon icon-angle-left s-18 pull-right"></i>
             </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="panel-element-charts-js.html"><i class="icon icon-area-chart pink-text s-14"></i><span>Charts.Js</span></a>
-                    </li>
-                    <li>
-                        <a href="panel-element-morris.html"><i class="icon icon-bubble_chart pink-text s-14"></i>Morris
-                            Charts</a>
-                    </li>
-                    <li>
-                        <a href="panel-element-echarts.html">
-                            <i class="icon icon-bar-chart-o pink-text s-14"></i>Echarts</a>
-                    </li>
-                    <li>
-                        <a href="panel-element-easy-pie-charts.html">
-                            <i class="icon icon-area-chart pink-text s-14"></i>Easy Pie Charts</a>
-                    </li>
-                    <li>
-                        <a href="panel-element-jqvmap.html">
-                            <i class="icon icon-map pink-text s-14"></i>Jqvmap</a>
-                    </li>
-                    <li>
-                        <a href="panel-element-sparklines.html">
-                            <i class="icon icon-line-chart2 pink-text s-14"></i>Sparklines</a>
-                    </li>
-                    <li>
-                        <a href="panel-element-float.html">
-                            <i class="icon icon-pie-chart pink-text s-14"></i>Float Charts</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="treeview"><a href="#">
-                <i class="icon icon-dialpad blue-text  s-18"></i>
-                <span>Extra</span>
-                <i class="icon icon-angle-left s-18 pull-right"></i>
-            </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="panel-element-letters.html">
-                            <i class="icon icon-brightness_auto light-blue-text s-14"></i>
-                            <span>Avatar Placeholders</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="panel-element-icons.html">
-                            <i class="icon icon-camera2 light-blue-text s-14"></i> <span>Icons</span>
-                        </a>
-                    </li>
-                    <li><a href="panel-element-colors.html">
-                        <i class="icon icon-palette light-blue-text s-14"></i> <span>Colors</span>
+            <ul class="treeview-menu">
+                
+                <li class="treeview"><a href="{{ route('dataType.index') }}">
+                    <i class="icon icon-circle-o gray-text s-14"></i>
+                    <span>{{ __('MetaData') }}</span></a>
+                </li>
+                <li>
+                    <a href="{!! route('metaType.index') !!}">
+                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Campos adicionales') }}</span>
                     </a>
+                </li>
+                <li>
+                    <a href="{!! route('metaList.index') !!}">
+                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Lista de Datos') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{!! route('module.index') !!}">
+                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Módulos') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{!! route('tipoDocumento.index') !!}">
+                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Tipos de Documento') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{!! route('tipoPersona.index') !!}">
+                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Tipos de Persona') }}</span>
+                    </a>
+                </li>
+                 <li>
+                    <a href="{!! route('tipologia.index') !!}">
+                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Tipología') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{!! route('espacioComun.index') !!}">
+                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Espacio Común') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{!! route('module.index') !!}">
+                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Documentos') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('edificios.asamblea') }}">
+                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Calendario') }}</span>
+                    </a>
+                </li>
+               
+            </ul>
+        </li>
+        <li class="treeview ">
+                <a href="#">
+                    <i class="icon icon-data_usage text-lime s-18"></i> <span>Gestión Interna</span>
+                    <i class="icon icon-angle-left s-18 pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{!! route('regions.index') !!}"><i class="icon icon-circle-o"></i>Regiones/Comunas</a>
                     </li>
+                    <li><a href="#"><i class="icon icon-circle-o"></i>Reserva de espacios</a>
+                    </li>
+                    <li><a href="{{ route('edificios.asamblea') }}"><i class="icon icon-circle-o"></i>Asambleas</a>
+                    </li>
+                    <li><a href="{!! route('encomiendas.index') !!}"><i class="icon icon-date_range"></i>Encomiendas</a>
+                    </li>
+                  
+                    
+                    
                 </ul>
-            </li>
-        </ul>
-    </section>
+         </li>
+
+    </ul>
+
+        @else
+            <!--<div>Acceso usuario</div>-->
+    @endif
+    
+        
+      
+</section>
 </aside>
+<script>
+    $(document).ready(function() {
+    
+        $.ajaxSetup({
+                  headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+
+        $('#search1').on('keyup',function(){
+
+            $value=$(this).val();
+            window.location.href = "{{URL::to('resultOperations')}}"
+            $.ajax({
+            type : 'get',
+            url : "{{URL::to('search/operation')}}",
+            data:{'search':$value},
+            success:function(data){
+                //$('tbody').html(data);
+                
+                //console.log(data);
+                $('tbody').html(data);
+                }
+            });
+        })
+
+
+    });
+
+    function SearchOperation(){
+        var value = $("#search11").val();
+        //console.log(value);
+        $.ajaxSetup({
+                  headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+            $.ajax({
+                type: "POST",
+                url:"{{ url('search/operation') }}/"+value,
+                dataType:'json',
+                success: function(data){
+                    console.log(data);
+                    // window.location.href = "{{URL::to('getAllLanguages')}}"
+                    
+                }
+            });
+
+    }
+</script>
+<script type="text/javascript">
+   
+</script>
+
+
+<!--Sidebar End-->

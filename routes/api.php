@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('shipTotals',function(){
+    return datatables()
+    ->collection(App\OperationShipTotal::all()->where('operation_id',10))
+    ->addColumn('btn','pages.operation.shipTotal.partials.actions')
+    ->rawColumns(['btn'])
+    ->toJson();
+});

@@ -1,73 +1,73 @@
 @extends('app')
-
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<div>
+    @include('alerts.toastr')
+</div>
+<div class="page parallel">
+    <div class="d-flex row">
+        <div class="col-md-4 white">
+            <div class="p-5 mt-5">
+                <img src="assets/img/basic/logoadm.png" alt=""/>
             </div>
+            <div class="p-5 login-form">
+                <h3>Welcome Back</h3>
+                <p>Hey Soldier welcome back signin now there is lot of
+                    new stuff waiting
+                    for you</p>
+                {!! Form::open(['route'=>'login','method'=>'POST']) !!}
+                    {{ csrf_field() }}
+                    <div class="form-group has-icon">
+                        <i class="icon-envelope-o"></i>
+                        {!! Form::email('email', null, ['class'=>'form-control form-control-lg', 'placeholder'=>'Email Address', 'require']) !!}
+                        @error('email')
+                        <span class="help-block text-danger">
+                            {{ $message }}
+                        </span>
+                        @enderror 
+                    </div>
+                    <div class="form-group has-icon"><i class="icon-user-secret"></i>
+                        {!! Form::password('password', ['class'=>'form-control form-control-lg', 'placeholder'=>'password', 'require']) !!}
+                        @error('password')
+                        <span class="help-block text-danger">
+                            {{ $message }}
+                        </span>
+                        @enderror 
+                    </div>
+                    <a href="#" onclick="mostrarForm('passwordReset')">
+                        <p class="forget-pass">¿ Olvidaste tu contraseña ?</p>
+                    </a>
+                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Log In">
+                {!! Form::close() !!}
+            </div>
+            <div class="p-5 form-passwordReset" style="display:none;" > 
+                @include('auth.passwords.email')
+            </div>
+        </div>
+        <div class="col-md-8  height-full blue accent-3 align-self-center text-center" data-bg-repeat="false"
+             data-bg-possition="center"
+             style="background: url('./assets/img/app/bgLogin.jpg') #FFEFE4; background-position: center center; background-repeat: no-repeat;
+    background-size: cover;">
         </div>
     </div>
 </div>
+<script>
+  function mostrarForm(key){ 
+      switch (key) {
+        case 'passwordReset':
+            $(".login-form").hide();
+            $(".form-passwordReset").show('fast');
+        break;
+        case 'register':
+            $(".login-form").hide();
+            $(".form-passwordReset").hide();
+            $(".form-register").show('fast');
+        break;
+        case 'login':
+            $(".form-passwordReset").hide();
+            $(".form-register").hide();
+            $(".login-form").show('fast');
+        break;
+      }
+  }
+</script>
 @endsection

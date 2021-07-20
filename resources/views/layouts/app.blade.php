@@ -50,11 +50,7 @@
             z-index: 9999;
         }
         
-        .modal-backdrop{
-        position: relative; 
-        }
     </style>
-    @livewireStyles
     <!-- Js -->
     <!--
     --- Head Part - Use Jquery anywhere at page.
@@ -83,7 +79,7 @@
     --- Footer Part - Use Jquery anywhere at page.
     --- http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/
     -->
-    <script src={{asset('assets/js/app.js')}} ></script>
+    <script src={{asset('assets/js/app.js')}}></script>
     <script>
         (function($,d){$.each(readyQ,function(i,f){$(f)});$.each(bindReadyQ,function(i,f){$(d).bind("ready",f)})})(jQuery,document)
     </script>
@@ -98,7 +94,11 @@
    
     <script src={{asset('assets/plugins/toastr/toastr.js')}}></script>
     
-   
+    <!-- <script src={{asset('assets/plugins/bootstrap-fileinput/js/fileinput.js')}}></script>
+    <script src={{asset('assets/plugins/bootstrap-fileinput/js/plugins/piexif.js')}}></script>
+    <script src={{asset('assets/plugins/bootstrap-fileinput/js/plugins/sortable.js')}}></script>
+    <script src={{asset('assets/plugins/bootstrap-fileinput/js/locales/es.js')}}></script>
+    <script src={{asset('assets/plugins/bootstrap-fileinput/themes/gly/theme.js')}}></script> -->
     {{-- dataTables export excel --}}
     <script src={{asset('assets/plugins/datatables/buttons-1.5.6/js/dataTables.buttons.min.js')}}></script>
     <script src={{asset('assets/plugins/datatables/buttons-1.5.6/js/buttons.html5.min.js')}}></script>
@@ -113,11 +113,6 @@
     <script src={{asset('assets/plugins/bootstrap-fileinput/js/locales/es.js')}}></script>
     <script src={{asset('assets/plugins/bootstrap-fileinput/themes/gly/theme.js')}}></script>
     
-    @livewireScripts
-    <script type="text/javascript">
-        window.livewire.on('userStore', () => {
-            $('#exampleModal').modal('hide');
-        });
-    </script>
+
 </html>
 @yield('js')

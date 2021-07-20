@@ -40,17 +40,27 @@
                        
                         
                         <div class="row box justify-content-between my-4">
-                       
-                            <div class="col"><a href="#">
+                              @if((Auth::user()->hasRole('mayor')))
+                                <div class="col">
+                                  
+                                    <a href="{{ route('home') }}">
+                                        <i class="icon-refresh green lighten-1 avatar  r-5"></i>
+                                        {{ Auth::user()->rol }}
+                                        <div class="pt-1">{{ __('Cambiar Edificio') }}</div>
+                                    </a>
+                                   
+                                </div>
+                             @endif
+                            <div class="col"><a href="{{ route('passwordReset') }}">
                                 <i class="icon-beach_access pink lighten-1 avatar  r-5"></i>
                                 <div class="pt-1">{{ __('Perfil') }}</div>
                             </a></div>
                             <div class="col">
-                                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="icon-power-off red avatar  r-5"></i>
                                     <div class="pt-1">{{ __('Salir') }}</div>
                                 </a>
-                                <form id="logout-form" action="#" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </div>

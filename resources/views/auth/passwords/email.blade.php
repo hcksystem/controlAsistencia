@@ -1,11 +1,11 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header">{{ __('Cambio de Contraseña') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -34,7 +34,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
+                                    {{ __('Enviar link de restablecimiento') }}
                                 </button>
                             </div>
                         </div>
@@ -44,4 +44,28 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}
+<h3>Restablecimiento de contraseña</h3>
+@if (session('status'))
+    <div class="alert alert-success" role="alert">
+        {{ session('status') }}
+    </div>
+@endif
+<form method="POST" action="{{ route('password.email') }}">
+    {{ csrf_field() }}
+    <div class="form-group has-icon">
+        <i class="icon-envelope-o"></i>
+        {!! Form::email('email', null, ['class'=>'form-control form-control-lg', 'placeholder'=>'Dirección de correo electrónico', 'require', 'autofocus']) !!}
+        @error('email')
+        <span class="help-block text-danger">
+            {{ $message }}
+        </span>
+        @enderror 
+    </div>
+    <a href="#" onclick="mostrarForm('login')">
+        <p class="forget-pass">Atrás para iniciar sesión</p>
+    </a>  
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Enviar link de restablecimiento">
+    </div>
+</form>
