@@ -22,83 +22,15 @@
         
         <ul class="sidebar-menu">
         <li class="header"><strong>MÓDULOS DEL SISTEMA</strong></li>
-        @if((Auth::user()->hasRole('mayor')))
-             <li class="treeview">
-                <a href="{{url('loginUser')}}" onclick="event.preventDefault(); document.getElementById('loginUser-form').submit();">
-                    <i class="icon icon-compass gray-text s-18"></i> <span>{{ __('Tablero') }}</span>
-                </a>
-                <form id="loginUser-form" action="{{ route('loginUser') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                </form>
-                 
-            </li>
-         @endif   
+        
          @if(Auth::user()->hasRole('super') || Auth::user()->hasRole('corredor') || Auth::user()->hasRole('operador'))
           <li class="treeview"><a href="{{url('home')}}">
                 <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Dashboard') }}</span></a>
-             </li>
-        <li class="treeview no-b"><a href="{{ route('buildings.index') }}">
-            <i class="icon icon-equalizer gray-text s-18"></i>
-            <span>{{ __('Edificios') }}</span></a>
-        </li>
-        @else  
-            <li class="treeview no-b"><a href="{{ route('edificio.mostrar') }}">
-                <i class="icon icon-equalizer gray-text s-18"></i>
-                <span>{{ __('Edificios') }}</span></a>
-            </li>
-            @if(!Auth::user()->hasRole('operador'))
-            @if(!Auth::user()->hasRole('copro'))
-            <li><a href="{!! route('encomienda.mostrar') !!}"><i class="icon icon-equalizer s-18"></i>Encomiendas</a>
-                @endif
-           </li>
-           <li class="treeview no-b"><a href="{{ route('reservaEspacioPorEdificio') }}">
-            <i class="icon icon-equalizer gray-text s-18"></i>
-                <span>{{ __('Reservas') }}</span></a>
-            </li>
-            @endif
-            @if(Auth::user()->hasRole('mayor') || Auth::user()->hasRole('admin'))
-                <li class="treeview no-b"><a href="{{ route('empresaExterna.index') }}">
-                    <i class="icon icon-equalizer gray-text s-18"></i>
-                    <span>{{ __('Empresas Externas') }}</span></a>
-                </li>
-            @endif
-            <li class="treeview"><a href="{{url('home')}}">
-                <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Cambiar Edificio') }}</span></a>
-             </li>
-      
+          </li>
         @endif 
-        
-       
-    </li>
-    @if(Auth::user()->hasRole('super') || Auth::user()->hasRole('admin'))
-         <li class="treeview no-b"><a href="{{ route('administraciones.index') }}">
-            <i class="icon icon-equalizer gray-text s-18"></i>
-            <span>{{ __('Administraciones') }}</span></a>
-        </li>
-    @endif
-    @if(Auth::user()->hasRole('operador'))
-     <li><a href="{!! route('corredor.index') !!}">
-        <i class="icon icon-equalizer gray-text s-18"></i>Corredores</a>
-    </li>
-    @endif
-    @if(Auth::user()->hasRole('super'))
-        <li class="treeview no-b"><a href="{{ route('empresaExterna.index') }}">
-            <i class="icon icon-equalizer gray-text s-18"></i>
-            <span>{{ __('Empresas Externas') }}</span></a>
-        </li>
-    @endif
+   
     
     
-    @if(Auth::user()->hasRole('operador'))
-        <li class="treeview no-b"><a href="{{ route('empresaExterna.index') }}">
-            <i class="icon icon-equalizer gray-text s-18"></i>
-            <span>{{ __('Mis Empresas') }}</span></a>
-        </li>
-    @endif
-    @if(Auth::user()->hasRole('super') || Auth::user()->hasRole('corredor') || Auth::user()->hasRole('copro'))
-        <li><a href="{!! route('corredor.index') !!}"><i class="icon icon-equalizer gray-text s-18"></i>Corredores</a>
-        </li>
-    @endif
     @if(Auth::user()->hasRole('super'))
         <li class="treeview no-b"><a href="{{ route('reservaEspacio.index') }}">
             <i class="icon icon-equalizer gray-text s-18"></i>

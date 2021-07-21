@@ -81,6 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('anuncio', 'AnuncioController');
 	Route::resource('tipoDocumento','TipoDocumentoController');
 	Route::resource('tipoPersona','TipoPersonaController');
+	Route::resource('grupo','GrupoController');
 
 	Route::get("administraciones/contacto/{id}", "BuildingController@showContacts")->name("administraciones.contacto");
 	Route::get("building/contacto/{id}", "BuildingController@createContact")->name("building.create_contact");

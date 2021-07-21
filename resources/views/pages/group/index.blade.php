@@ -46,7 +46,7 @@
                             <div class="card-body no-p">
                                 <div class="tab-content">
                                     <div class="tab-pane animated fadeIn show active" id="v-pills-tab4" role="tabpanel" aria-labelledby="v-pills-tab1">
-                                    @livewire('groups')
+                                
                                         <div class="slimScroll b-b" data-height="385">
                                         <ul id="menu">
                                             <li><input type="checkbox" name="list" id="nivel1-1"><label for="nivel1-1">Nivel 1</label>
