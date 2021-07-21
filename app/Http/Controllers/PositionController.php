@@ -14,8 +14,8 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $dataType=Position::all();
-        return view('pages.dataType.index',compact('dataType')); 
+        $positions=Position::all();
+        return view('pages.position.index',compact('positions')); 
     }
 
     /**
@@ -36,7 +36,9 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();         
+        Position::create($data);
+        return response()->json(['message'=>'Posición registrado correctamente']);
     }
 
     /**
@@ -45,9 +47,9 @@ class PositionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Position $position)
     {
-        //
+        return response()->json($position);
     }
 
     /**
