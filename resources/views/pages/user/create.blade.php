@@ -10,12 +10,21 @@
 			<div class="modal-body">
 				<div class="form-row">
 					<div class="col-md-12">
-						<div class="form-group m-0 has-feedback" id="fullname_group">
-							<i class="icon-person mr-2"></i>
-							{!! Form::label('name', 'Nombre Completo', ['class'=>'col-form-label s-12']) !!}
-							{!! Form::text('fullname', null, ['class'=>'form-control r-0 light s-12',  'id'=>'fullname', 'onclick'=>'inputClear(this.id)']) !!}
-							<span class="fullname_span"></span>
+						<div class="form-row">
+							<div class="form-group m-0 col-6 has-feedback" id="fullname_group">
+								<i class="icon-person mr-2"></i>
+								{!! Form::label('name', 'Nombres', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::text('fullname', null, ['class'=>'form-control r-0 light s-12',  'id'=>'fullname', 'onclick'=>'inputClear(this.id)']) !!}
+								<span class="fullname_span"></span>
+							</div>
+							<div class="form-group m-0 col-6 has-feedback" id="last_name_group">
+								<i class="icon-person mr-2"></i>
+								{!! Form::label('last_name', 'Apellidos', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::text('last_name', null, ['class'=>'form-control r-0 light s-12',  'id'=>'user_last_name']) !!}
+								<span class="last_name_span"></span>
+							</div>
 						</div>
+						
 						<div class="form-row">
 							<div class="form-group col-6 m-0" id="password_group">
 								<i class="icon-key3 mr-2"></i>
@@ -30,12 +39,17 @@
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="form-group col-6 m-0" id="rol_group">
+							<div class="form-group col-4 m-0" id="rol_group">
+								{!! Form::label('rut', 'RUT', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::text('rut', null, ['class'=>'form-control r-0 light s-12', 'id'=>'rut', 'onclick'=>'inputClear(this.id)']) !!}
+								<span class="rol_span"></span>
+							</div>
+							<div class="form-group col-4 m-0" id="rol_group">
 								{!! Form::label('role', 'Perfil', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::select('rol', $roles, null, ['class'=>'form-control r-0 light s-12', 'id'=>'rol', 'onclick'=>'inputClear(this.id)']) !!}
 								<span class="rol_span"></span>
 							</div>
-							<div class="form-group col-6 m-0" id="status_group">
+							<div class="form-group col-4 m-0" id="status_group">
 								{!! Form::label('status', 'Estado', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::select('status', $status, null, ['class'=>'form-control r-0 light s-12', 'id'=>'status', 'onclick'=>'inputClear(this.id)']) !!}
 								<span class="status_span"></span>
@@ -45,6 +59,11 @@
 					
 					<div class="col-md-12">
 						<div class="form-row mt-1">
+							<div class="form-group col-4 m-0">
+								<i class="icon-phone mr-2"></i>
+								{!! Form::label('position', 'Posición', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::text('position', null, ['class'=>'form-control r-0 light s-12', 'id'=>'position', 'onclick'=>'inputClear(this.id)']) !!}
+							</div>
 							<div class="form-group col-4 m-0" id="email_group">
 								<i class="icon-envelope-o mr-2"></i>
 								{!! Form::label('email', 'Correo', ['class'=>'col-form-label s-12']) !!}
@@ -56,12 +75,11 @@
 								{!! Form::label('phone1', 'Teléfono 1', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::text('phone1', null, ['class'=>'form-control r-0 light s-12', 'id'=>'phone1', 'onclick'=>'inputClear(this.id)']) !!}
 							</div>
-							<div class="form-group col-4 m-0" id="div_dias" style="display:none;">
-								{!! Form::label('phone2', 'Días Activos', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::number('phone2', null, ['class'=>'form-control r-0 light s-12', 'id'=>'phone2','min'=>'0','onkeypress'=>'return soloNumeros(event)']) !!}
-							</div>
 						</div>
-						
+						<div class="form-group col-12 m-0">
+								{!! Form::label('address', 'Dirección', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::textarea('address', null, ['class'=>'form-control r-0 light s-12', 'id'=>'address', 'onclick'=>'inputClear(this.id)','row'=>'2']) !!}
+						</div>
 					</div>
 				</div>
 			</div>

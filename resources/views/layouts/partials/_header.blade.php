@@ -32,9 +32,9 @@
     
     
     @if(Auth::user()->hasRole('super'))
-        <li class="treeview no-b"><a href="{{ route('reservaEspacio.index') }}">
+        <li class="treeview no-b"><a href="{{ route('grupo.index') }}">
             <i class="icon icon-equalizer gray-text s-18"></i>
-            <span>{{ __('Reservas') }}</span></a>
+            <span>{{ __('Grupos') }}</span></a>
         </li>
         <li class="treeview">
             <a href="{{ route('user.index') }}">
@@ -42,13 +42,6 @@
             </a>
         </li>  
     @endif
-    @if(Auth::user()->hasRole('super') || Auth::user()->hasRole('operador'))
-        <li class="treeview no-b"><a href="{{ route('getAllAnuncios') }}">
-            <i class="icon icon-equalizer gray-text s-18"></i>
-                <span>{{ __('Anuncios') }}</span></a>
-        </li>
-    @endif
-  
     @if(Auth::user()->hasRole('super'))
         
         <li class="header light mt-3"><strong>CONFIGURACIÓN</strong></li>

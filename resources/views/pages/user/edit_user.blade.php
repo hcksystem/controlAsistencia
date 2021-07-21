@@ -25,224 +25,91 @@
                     </div>
                 </div>
                 <div class="card-body">
-                  <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-contact" role="tabpanel" aria-labelledby="nav-home-tab">
-                                
-                                <div class="form-row">
-                                  
-                                    <div class="modal-body">
-                                      <nav>
-                                          <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                              <a class="nav-item nav-link active" id="nav-tdetails-1-tab" data-toggle="tab" href="#nav-tdetails-1" role="tab" aria-controls="nav-tdetails-1" aria-selected="true" style="padding-right:1px;padding-left: 2px;font-size: 15px;">Información</a>
-
-                                              <a class="nav-item nav-link" id="nav-tdetails-2-tab" data-toggle="tab" href="#nav-tdetails-2" role="tab" aria-controls="nav-tdetails-2" aria-selected="false" style="padding-right:1px;padding-left: 2px;font-size: 15px;">Accesos</a>
-                                                                              
-                                                                               
-                                         </div>
-                                    </nav>  
-                                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="nav-tdetails-1" role="tabpanel" aria-labelledby="nav-tdetails-1-tab">
-                                        <form action="{{ route('usuario.update',$user->id) }}" method="GET" autocomplete="off">
-
-                                
-                                            <div class="form-row">
-                                                <div class="col-md-12">
-                                                    <div class="form-row">
-                                                        <div class="form-group m-0 col-6 has-feedback" id="fullname_group">
-                                                        <i class="icon-person mr-2"></i>
-                                                        {!! Form::label('name', 'Nombre Completo', ['class'=>'col-form-label s-12']) !!}
-                                                        {!! Form::text('fullname', $user->fullname ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'Enter User Name', 'id'=>'_fullname', 'onclick'=>'inputClear(this.id)']) !!}
-                                                         {!! Form::hidden('id', $user->id ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'Enter User Name', 'id'=>'_id', 'onclick'=>'inputClear(this.id)']) !!}
-                                                         
-                                                        <span class="fullname_span"></span>
-                                                    </div>
-                                                    <div class="form-group m-0 col-6 has-feedback" id="fullname_group"> 
-                                                        <i class="icon-envelope-o mr-2"></i>
-                                                            {!! Form::label('email', 'Correo', ['class'=>'col-form-label s-12']) !!}
-                                                            {!! Form::email('email', $user->email ?? '', ['class'=>'form-control r-0 light s-12 ', 'placeholder'=>'user@email.com', 'id'=>'_email', 'onclick'=>'inputClear(this.id)']) !!}
-                                                         
-                                                        <span class="fullname_span"></span>
-                                                    </div>   
-                                                    </div>
-                                                    
-                                                    <div class="form-row">
-                                                        <div class="form-group col-6 m-0" id="password_group">
-                                                            <i class="icon-key3 mr-2"></i>
-                                                            {!! Form::label('password', 'Contraseña', ['class'=>'col-form-label s-12','placeholder'=>'Password', 'onclick'=>'inputClear(this.id)']) !!}
-                                                            {!! Form::password('password', ['class'=>'form-control r-0 light s-12','id'=>'password', 'onclick'=>'inputClear(this.id)']) !!}
-                                                            <span class="password_span"></span>
-                                                        </div>
-                                                        <div class="form-group col-6 m-0">
-                                                            <i class="icon-key4 mr-2"></i>
-                                                            {!! Form::label('passwordConfirm', 'Confirma Contraseña', ['class'=>'col-form-label s-12','placeholder'=>'Password Confirm']) !!}
-                                                            {!! Form::password('password_confirmation', ['class'=>'form-control r-0 light s-12', 'id'=>'password_confirmation', 'onclick'=>'inputClear(this.id)']) !!}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-6 m-0" id="_rol_group">
-                                                            {!! Form::label('role', 'Perfil', ['class'=>'col-form-label s-12']) !!}
-                                                            {!! Form::select('rol', $roles, $user->rol_user->rol->slug ?? '', ['class'=>'form-control r-0 light s-12', 'id'=>'_rol', 'onclick'=>'inputClear(this.id)']) !!}
-                                                            <span class="_rol_span"></span>
-                                                        </div>
-                                                        <div class="form-group col-6 m-0" id="status_group">
-                                                            {!! Form::label('status', 'Estado', ['class'=>'col-form-label s-12']) !!}
-                                                            {!! Form::select('status', $status, $user->status ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'Select', 'id'=>'_status', 'onclick'=>'inputClear(this.id)']) !!}
-                                                            <span class="status_span"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                        
-                                                <div class="col-md-12">
-                                                    <div class="form-row mt-1">
-                                                       
-                                                        <div class="form-group col-6 m-0">
-                                                            <i class="icon-phone mr-2"></i>
-                                                            {!! Form::label('phone1', 'Teléfono 1', ['class'=>'col-form-label s-12']) !!}
-                                                            {!! Form::text('phone1', $user->phone1 ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'05112345678', 'id'=>'_phone1', 'onclick'=>'inputClear(this.id)']) !!}
-                                                        </div>
-                                                       
-                                                        <div class="form-group col-6 m-0" id="div_dias">
-                                                            {!! Form::label('phone2', 'Días Activos', ['class'=>'col-form-label s-12']) !!}
-                                                            {!! Form::number('phone2', $user->phone2 ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'05112345678', 'id'=>'_phone2','min'=>'0','onkeypress'=>'return soloNumeros(event)' ]) !!}
-                                                        </div>
-                                                      
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                             <div class="row text-right">
-                                                <div class="col-md-12 mt-4">
-                                                    <a href="{{ route('user.index') }}" class="btn btn-default" data-dismiss="modal">{{__('Atrás')}}</a>
-                                                    <button  type="submit" id="editar" class="btn btn-primary"><i class="icon-save mr-2"></i>{{__('Guardar Datos')}}</button>
-                                                </div>
-                                            </div>
-
-                                            </form>
-                                        </div>
-                                        <div class="tab-pane fade show" id="nav-tdetails-2" role="tabpanel" aria-labelledby="nav-tdetails-2-tab">
-                                            <div class="form-row">
-
-                                                 <div class="form-inline col-8 m-0" id="status_group">
-                                                    <div class="col-4">
-                                                         {!! Form::label('edificios', 'Edificios', ['class'=>'col-form-label s-12']) !!}
-                                                            {!! Form::select('id_edificio', $building, null, ['class'=>'form-control r-0 light s-12 select2', 'placeholder'=>'Seleccione', 'id'=>'id_edificio', 'onclick'=>'inputClear(this.id)']) !!}
-                                                            <span class="status_span"></span>
-                                                    </div>
-                                                     <div class="col-2">
-                                                         {!! Form::label('', '', ['class'=>'col-form-label s-12']) !!}
-                                                          <a class="btn btn-primary btn-sm mt-3" onclick="addEdificio()"><i class="icon icon-plus" style="font-size: 12px;padding: .10rem .4rem;"></i></a>
-                                                            <span class="status_span"></span>
-                                                     </div>      
-                                                 </div>
-                                                  <div class="form-group col-12 mt-4" id="status_group">
-                                                     <table id="table_edificio" class="table table-bordered table-hover table-sm" data-order='[[ 0, "desc" ]]' data-page-length='10' style="width: 100%">
-                                                         <thead>
-                                                                <tr>
-                                                                    <th class="text-center"><b>{{ __('Edificio') }}</b></th>
-                                                                    <th>Opción</th>
-                                                                </tr>
-                                                            </thead>
-                                                            
-                                                     </table>
-                                                 </div>
-                                             </div> 
-                                             <div class="form-row">
-
-                                                 <div class="form-inline col-8 m-0" id="status_group">
-                                                    <div class="col-4">
-                                                         {!! Form::label('edificios', 'Empresas Externas', ['class'=>'col-form-label s-12']) !!}
-                                                            {!! Form::select('id_empresa', $empresas, null, ['class'=>'form-control r-0 light s-12 select2', 'placeholder'=>'Seleccione', 'id'=>'id_empresa', 'onclick'=>'inputClear(this.id)']) !!}
-                                                            <span class="status_span"></span>
-                                                    </div>
-                                                     <div class="col-2">
-                                                         {!! Form::label('', '', ['class'=>'col-form-label s-12']) !!}
-                                                          <a class="btn btn-primary btn-sm mt-3" onclick="addEmpresa()"><i class="icon icon-plus" style="font-size: 12px;padding: .10rem .4rem;"></i></a>
-                                                            <span class="status_span"></span>
-                                                     </div>      
-                                                 </div>
-                                                  <div class="form-group col-12 mt-4" id="status_group">
-                                                     <table id="table_empresa" class="table table-bordered table-hover table-sm" data-order='[[ 0, "desc" ]]' data-page-length='10' style="width: 100%">
-                                                         <thead>
-                                                                <tr>
-                                                                    <th class="text-center"><b>{{ __('Empresa') }}</b></th>
-                                                                    <th>Opción</th>
-                                                                </tr>
-                                                            </thead>
-                                                            
-                                                     </table>
-                                                 </div>
-                                             </div> 
-                                              <div class="form-row">
-
-                                                 <div class="form-inline col-8 m-0" id="status_group">
-                                                    <div class="col-4">
-                                                         {!! Form::label('administraciones', 'Administraciones', ['class'=>'col-form-label s-12']) !!}
-                                                            {!! Form::select('id_administracion', $administraciones, null, ['class'=>'form-control r-0 light s-12 select2', 'placeholder'=>'Seleccione', 'id'=>'id_administracion', 'onclick'=>'inputClear(this.id)']) !!}
-                                                            <span class="status_span"></span>
-                                                    </div>
-                                                     <div class="col-2">
-                                                         {!! Form::label('', '', ['class'=>'col-form-label s-12']) !!}
-                                                          <a class="btn btn-primary btn-sm mt-3" onclick="addAdministracion()"><i class="icon icon-plus" style="font-size: 12px;padding: .10rem .4rem;"></i></a>
-                                                            <span class="status_span"></span>
-                                                     </div>      
-                                                 </div>
-                                                  <div class="form-group col-12 mt-4" id="status_group">
-                                                     <table id="table_administracion" class="table table-bordered table-hover table-sm" data-order='[[ 0, "desc" ]]' data-page-length='10' style="width: 100%">
-                                                         <thead>
-                                                                <tr>
-                                                                    <th class="text-center"><b>{{ __('Administración') }}</b></th>
-                                                                    <th>Opción</th>
-                                                                </tr>
-                                                            </thead>
-                                                            
-                                                     </table>
-                                                 </div>
-                                             </div>
-                                             <div class="form-row">
-
-                                                 <div class="form-inline col-8 m-0" id="status_group">
-                                                    <div class="col-4">
-                                                         {!! Form::label('corredores', 'Corredores', ['class'=>'col-form-label s-12']) !!}
-                                                            {!! Form::select('id_corredor', $corredores, null, ['class'=>'form-control r-0 light s-12 select2', 'placeholder'=>'Seleccione', 'id'=>'id_corredor', 'onclick'=>'inputClear(this.id)']) !!}
-                                                            <span class="status_span"></span>
-                                                    </div>
-                                                     <div class="col-2">
-                                                         {!! Form::label('', '', ['class'=>'col-form-label s-12']) !!}
-                                                          <a class="btn btn-primary btn-sm mt-3" onclick="addCorredor()"><i class="icon icon-plus" style="font-size: 12px;padding: .10rem .4rem;"></i></a>
-                                                            <span class="status_span"></span>
-                                                     </div>      
-                                                 </div>
-                                                  <div class="form-group col-12 mt-4" id="status_group">
-                                                     <table id="table_corredor" class="table table-bordered table-hover table-sm" data-order='[[ 0, "desc" ]]' data-page-length='10' style="width: 100%">
-                                                         <thead>
-                                                                <tr>
-                                                                    <th class="text-center"><b>{{ __('Corredor') }}</b></th>
-                                                                    <th>Opción</th>
-                                                                </tr>
-                                                            </thead>
-                                                            
-                                                     </table>
-                                                 </div>
-                                             </div>  
-                                        </div> 
-                                    </div>
-                                   
+                  <form action="{{ route('usuario.update',$user->id) }}" method="GET" autocomplete="off">
+                          <div class="col-md-12">
+                              <div class="form-row">
+                                  <div class="form-group m-0 col-6 has-feedback" id="fullname_group">
+                                    <i class="icon-person mr-2"></i>
+                                    {!! Form::label('name', 'Nombre Completo', ['class'=>'col-form-label s-12']) !!}
+                                    {!! Form::text('fullname', $user->fullname ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'Enter User Name', 'id'=>'_fullname', 'onclick'=>'inputClear(this.id)']) !!}
+                                    {!! Form::hidden('id', $user->id ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'Enter User Name', 'id'=>'_id', 'onclick'=>'inputClear(this.id)']) !!}
+                                    <span class="fullname_span"></span>
+                                  </div>
+                                  <div class="form-group m-0 col-6 has-feedback" id="last_name_group">
+                                    <i class="icon-person mr-2"></i>
+                                    {!! Form::label('last_name', 'Apellidos', ['class'=>'col-form-label s-12']) !!}
+                                    {!! Form::text('last_name', $user->last_name ?? null, ['class'=>'form-control r-0 light s-12',  'id'=>'user_last_name']) !!}
+                                    <span class="last_name_span"></span>
+							                     </div>
+                                   <div class="form-group col-4 m-0" id="rol_group">
+                                    {!! Form::label('rut', 'RUT', ['class'=>'col-form-label s-12']) !!}
+                                    {!! Form::text('rut', $user->rut ?? null, ['class'=>'form-control r-0 light s-12', 'id'=>'rut', 'onclick'=>'inputClear(this.id)']) !!}
+                                    <span class="rol_span"></span>
+							                    </div>
+                                  <div class="form-group col-4 m-0">
+                                    <i class="icon-phone mr-2"></i>
+                                    {!! Form::label('position', 'Posición', ['class'=>'col-form-label s-12']) !!}
+                                    {!! Form::text('position', $user->position ?? null, ['class'=>'form-control r-0 light s-12', 'id'=>'position', 'onclick'=>'inputClear(this.id)']) !!}
+							                    </div>
+                                  <div class="form-group m-0 col-4 has-feedback" id="fullname_group"> 
+                                      <i class="icon-envelope-o mr-2"></i>
+                                          {!! Form::label('email', 'Correo', ['class'=>'col-form-label s-12']) !!}
+                                          {!! Form::email('email', $user->email ?? '', ['class'=>'form-control r-0 light s-12 ', 'placeholder'=>'user@email.com', 'id'=>'_email', 'onclick'=>'inputClear(this.id)']) !!}
+                                      
+                                      <span class="fullname_span"></span>
+                                    </div>   
+                              </div>
+                              
+                              <div class="form-row">
+                                  <div class="form-group col-6 m-0" id="password_group">
+                                      <i class="icon-key3 mr-2"></i>
+                                      {!! Form::label('password', 'Contraseña', ['class'=>'col-form-label s-12','placeholder'=>'Password', 'onclick'=>'inputClear(this.id)']) !!}
+                                      {!! Form::password('password', ['class'=>'form-control r-0 light s-12','id'=>'password', 'onclick'=>'inputClear(this.id)']) !!}
+                                      <span class="password_span"></span>
+                                  </div>
+                                  <div class="form-group col-6 m-0">
+                                      <i class="icon-key4 mr-2"></i>
+                                      {!! Form::label('passwordConfirm', 'Confirma Contraseña', ['class'=>'col-form-label s-12','placeholder'=>'Password Confirm']) !!}
+                                      {!! Form::password('password_confirmation', ['class'=>'form-control r-0 light s-12', 'id'=>'password_confirmation', 'onclick'=>'inputClear(this.id)']) !!}
+                                  </div>
+                              </div>
+                              <div class="form-row">
+                                  <div class="form-group col-4 m-0" id="_rol_group">
+                                      {!! Form::label('role', 'Perfil', ['class'=>'col-form-label s-12']) !!}
+                                      {!! Form::select('rol', $roles, $user->rol_user->rol->slug ?? '', ['class'=>'form-control r-0 light s-12', 'id'=>'_rol', 'onclick'=>'inputClear(this.id)']) !!}
+                                      <span class="_rol_span"></span>
+                                  </div>
+                                  <div class="form-group col-4 m-0" id="status_group">
+                                      {!! Form::label('status', 'Estado', ['class'=>'col-form-label s-12']) !!}
+                                      {!! Form::select('status', $status, $user->status ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'Select', 'id'=>'_status', 'onclick'=>'inputClear(this.id)']) !!}
+                                      <span class="status_span"></span>
+                                  </div>
+                                  <div class="form-group col-4 m-0">
+                                      <i class="icon-phone mr-2"></i>
+                                      {!! Form::label('phone1', 'Teléfono', ['class'=>'col-form-label s-12']) !!}
+                                      {!! Form::text('phone1', $user->phone1 ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'05112345678', 'id'=>'_phone1', 'onclick'=>'inputClear(this.id)']) !!}
+                                  </div>
+                                  <div class="form-group col-12 m-0">
+							              	      {!! Form::label('address', 'Dirección', ['class'=>'col-form-label s-12']) !!}
+								                    {!! Form::textarea('address',$user->address ?? null, ['class'=>'form-control r-0 light s-12', 'id'=>'address', 'onclick'=>'inputClear(this.id)','row'=>'2']) !!}
+						                      </div>
+                              </div>
+                              <div class="row text-right">
+                                <div class="col-md-12 mt-4">
+                                    <a href="{{ route('user.index') }}" class="btn btn-default" data-dismiss="modal">{{__('Atrás')}}</a>
+                                    <button  type="submit" id="editar" class="btn btn-primary"><i class="icon-save mr-2"></i>{{__('Guardar Datos')}}</button>
                                 </div>
-                                            
-                                 </div>
-                                           
-                                        
-                                <br>
-                               
-                        </div>  
+                              </div>
+                          </div>
 
+                      </div>
+                      
 
-
-
-                </div>
+                      </form>
+                  </div>
+                </div>  
             </div>
         </div>
-    </div>
 </div>
 
 @endsection

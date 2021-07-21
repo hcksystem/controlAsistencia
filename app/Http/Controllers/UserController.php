@@ -74,7 +74,7 @@ class UserController extends Controller
         $user = $this->user->create($data);
         //assig rol user
         $user->assignRoles($data['rol']);
-        Session::flash('message-success',' User '. $request->fullname.' editado correctamente.');
+        Session::flash('message-success',' User '. $request->fullname.' creado correctamente.');
     }
 
     /**
