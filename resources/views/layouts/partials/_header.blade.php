@@ -52,56 +52,10 @@
             </a>
             <ul class="treeview-menu">
                 
-                <li class="treeview"><a href="{{ route('dataType.index') }}">
+                <li class="treeview"><a href="{{ route('posicion.index') }}">
                     <i class="icon icon-circle-o gray-text s-14"></i>
-                    <span>{{ __('MetaData') }}</span></a>
+                    <span>{{ __('Posición') }}</span></a>
                 </li>
-                <li>
-                    <a href="{!! route('metaType.index') !!}">
-                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Campos adicionales') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{!! route('metaList.index') !!}">
-                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Lista de Datos') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{!! route('module.index') !!}">
-                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Módulos') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{!! route('tipoDocumento.index') !!}">
-                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Tipos de Documento') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{!! route('tipoPersona.index') !!}">
-                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Tipos de Persona') }}</span>
-                    </a>
-                </li>
-                 <li>
-                    <a href="{!! route('tipologia.index') !!}">
-                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Tipología') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{!! route('espacioComun.index') !!}">
-                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Espacio Común') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{!! route('module.index') !!}">
-                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Documentos') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('edificios.asamblea') }}">
-                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Calendario') }}</span>
-                    </a>
-                </li>
-               
             </ul>
         </li>
         <li class="treeview ">

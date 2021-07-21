@@ -88,15 +88,8 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = $this->role->get()->pluck('name', 'slug');
         $status = UsersStatus::get()->pluck('name', 'id');
-        $edificio = DB::table('adm_usuarios_edificios')->where('id_usuario','=',$id)->get();
-        $edificios = DB::table('adm_usuarios_edificios')->where('id_usuario','=',$id)->pluck('id_edificio');
-        $building = Building::whereNotIn('id',$edificios)->get()->pluck('name', 'id');
-        $empresas = Empresa_Externa::get()->pluck('nombre', 'id');
-        $administraciones = Administracion::get()->pluck('nombre', 'id');
-        $corredores = Corredor::get()->pluck('nombre', 'id');
-
-        return view('pages.user.edit_user', compact('user','status','roles','building','edificio','empresas','administraciones','corredores'));  
-  
+        
+        return view('pages.user.edit_user', compact('user','status','roles'));  
     }
 
     /**

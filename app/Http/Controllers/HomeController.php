@@ -32,43 +32,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if((Auth::user()->hasRole('super')) || (Auth::user()->hasRole('corredor')) || (Auth::user()->hasRole('operador'))){
-           return view('pages.dashboard1');
-        }else{
-
-            $user =  Auth::user()->id;
-            $edificios = Building::leftJoin('adm_usuarios_edificios','buildings.id', '=', 'adm_usuarios_edificios.id_edificio')
-            ->where('adm_usuarios_edificios.id_usuario',Auth::user()->id)
-            ->pluck('name','id');
-     
-            return view('login3',compact('edificios','user'));
-        }
-     
-       
+         return view('pages.dashboard1');
     } 
-     public function indexByUser(Request $request)
-    {
-        //dd($request->edificio_id."-".session()->has('idEdificio'));
-        if(session()->has('idEdificio')){
-            if(isset($request->edificio_id)){
-                $edificio = $request->edificio_id;
-                $nameEdificio = Building::where('id',$edificio)->value('name');
-            }else{ 
-                 $edificio = $request->session()->get('idEdificio');
-                $nameEdificio = Building::where('id',$edificio)->value('name');
-            }
-           
-        }else{
-             $edificio = $request->edificio_id;
-             $nameEdificio = Building::where('id',$edificio)->value('name');
-        }
-       
-         $user = $request->user_id;
-         config(['app.edificio' => $edificio]);
-         session(['idEdificio' => $edificio]);
-         session(['nameEdificio' => $nameEdificio]);
-         return view('pages.dashboard1',compact('user','edificio'));
-      
-    }
+    
 } 
 
