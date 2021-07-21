@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Position;
 
 class PositionController extends Controller
@@ -47,8 +48,9 @@ class PositionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Position $position)
+    public function show($id)
     {
+        $position = Position::find($id);
         return response()->json($position);
     }
 
@@ -60,7 +62,8 @@ class PositionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $position = Position::find($id);
+        return response()->json($position);
     }
 
     /**
@@ -72,7 +75,9 @@ class PositionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $position = Position::find($id);
+        $position->update($request->all());
+        Session::flash('message-success',' Posición actualizado correctamente.');
     }
 
     /**

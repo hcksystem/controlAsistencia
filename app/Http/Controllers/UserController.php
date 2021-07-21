@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Administracion;
+use App\Position;
 use App\Building;
 use App\Corredor;
 use App\Empresa_Externa;
@@ -40,12 +40,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $roles = $this->role->get()->pluck('name', 'slug');
-        $status = UsersStatus::get()->pluck('name', 'id');
-        
+        $roles = $this->role->get()->pluck('name', 'slug')->prepend('Seleccione...','');
+        $status = UsersStatus::get()->pluck('name', 'id')->prepend('Seleccione...','');
+        $positions = Position::get()->pluck('name', 'id')->prepend('Seleccione...','');
         $users = $this->user->all();
 
-        return view('pages.user.index', compact('users','status','roles'));  
+        return view('pages.user.index', compact('users','status','roles','positions'));  
     }
 
     /**
@@ -86,10 +86,10 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $roles = $this->role->get()->pluck('name', 'slug');
-        $status = UsersStatus::get()->pluck('name', 'id');
-        
-        return view('pages.user.edit_user', compact('user','status','roles'));  
+        $roles = $this->role->get()->pluck('name', 'slug')->prepend('Seleccione...','');
+        $status = UsersStatus::get()->pluck('name', 'id')->prepend('Seleccione...','');
+        $positions = Position::get()->pluck('name', 'id')->prepend('Seleccione...','');
+        return view('pages.user.edit_user', compact('user','status','roles','positions'));  
     }
 
     /**

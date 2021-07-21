@@ -13,8 +13,8 @@
                         <div class="form-row">
                             <div class="form-group col-12 m-0" id="name_group">
                                 <i class="icon-file-text mr-2"></i>
-                                {!! Form::label('type', 'Tipo', ['class'=>'col-form-label s-12']) !!}
-                                {!! Form::text('type', null, ['class'=>'form-control r-0 light s-12',  'id'=>'_type', 'onclick'=>'inputClear(this.id)']) !!}
+                                {!! Form::label('type', 'Nombre', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::text('name', null, ['class'=>'form-control r-0 light s-12',  'id'=>'_name', 'onclick'=>'inputClear(this.id)']) !!}
                                 <span class="name_span"></span>
                             </div>
                            

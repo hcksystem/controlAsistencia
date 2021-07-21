@@ -49,7 +49,7 @@
                                   <div class="form-group col-4 m-0">
                                     <i class="icon-phone mr-2"></i>
                                     {!! Form::label('position', 'Posición', ['class'=>'col-form-label s-12']) !!}
-                                    {!! Form::text('position', $user->position ?? null, ['class'=>'form-control r-0 light s-12', 'id'=>'position', 'onclick'=>'inputClear(this.id)']) !!}
+                                    {!! Form::select('position',$positions, $user->position ?? null, ['class'=>'form-control r-0 light s-12', 'id'=>'position', 'onclick'=>'inputClear(this.id)']) !!}
 							                    </div>
                                   <div class="form-group m-0 col-4 has-feedback" id="fullname_group"> 
                                       <i class="icon-envelope-o mr-2"></i>
