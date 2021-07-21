@@ -1,7 +1,7 @@
 <aside class="main-sidebar fixed offcanvas shadow" data-toggle='offcanvas'>
     <section class="sidebar">
         <div class="w-150px mt-3 mb-3 ml-3">
-            {{ Html::image('assets/img/basic/logoadm.png', 'a picture', array('alt'=>'Logo')) }}
+            {{--Html::image('assets/img/basic/logoadm.png', 'a picture', array('alt'=>'Logo')) --}}
         </div>
           <div class="relative">
 

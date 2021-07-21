@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Group;
 
 class GrupoController extends Controller
 {
@@ -13,7 +15,18 @@ class GrupoController extends Controller
      */
     public function index()
     {
-        return view('pages.group.index');
+        $count_user = User::count();
+        $count_jefes = User::leftjoin('role_user','users.id','role_user.user_id')
+                        ->leftjoin('roles','role_user.role_id','roles.id')
+                        ->where('roles.id',3)
+                        ->count();
+        $users = User::all();
+        $groups = Group::all();
+        $jefes = User::leftjoin('role_user','users.id','role_user.user_id')
+        ->leftjoin('roles','role_user.role_id','roles.id')
+        ->where('roles.id',3)
+        ->get();
+        return view('pages.group.index',compact('count_user','count_jefes','jefes','users','groups'));
     }
 
     /**

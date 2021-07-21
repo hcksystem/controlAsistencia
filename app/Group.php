@@ -4,11 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UsersStatus extends Model
+class Group extends Model
 {
-    protected $table = 'users_status';
 
     protected $fillable = [
-        'name','description'
+        'group','id_group_parent'
     ];
+
+    public $timestamps = true;
 }
