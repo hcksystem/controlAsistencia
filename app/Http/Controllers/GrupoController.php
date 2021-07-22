@@ -47,7 +47,9 @@ class GrupoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();         
+        Group::create($data);
+        return response()->json(['message'=>'Grupo registrado correctamente']);
     }
 
     /**
