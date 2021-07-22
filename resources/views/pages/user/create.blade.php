@@ -72,7 +72,7 @@
 							<div class="col-4">
 								<div class="col-md-12 offset-md-1">
 									<div class="form-group">
-										<input id="file" class="file" name="image" type="file"  onchange="ValidarTamaño(this);" size="15">
+										<input id="file" class="file" name="file" type="file"  onchange="ValidarTamaño(this);" size="15">
 									</div>
 								</div>
 							</div>
