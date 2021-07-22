@@ -154,9 +154,7 @@
                                                         @foreach($users as $u)
                                                         <tr>
                                                             <td class="w-10">
-                                                                <a href="panel-page-profile.html" class="avatar avatar-lg">
-                                                                    <img src="assets/img/dummy/u6.png" alt="">
-                                                                </a>
+                                                            {{ Html::image('img/avatar/'.$u->file, 'a picture', array('alt'=>'Logo')) }}
                                                             </td>
                                                             <td>
                                                                 <h6>{{ $u->fullname ?? null }} {{ $u->last_name ?? null }}</h6>
