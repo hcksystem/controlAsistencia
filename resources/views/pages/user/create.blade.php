@@ -1,5 +1,5 @@
 <!-- Modal -->
-{!! Form::open(['route'=>'user.store','method'=>'POST', 'class'=>'formlDinamic', 'id'=>'guardarRegistroMultitap']) !!}
+{!! Form::open(['route'=>'user.store','method'=>'POST', 'class'=>'formlDinamic', 'id'=>'guardarRegistroMultitap','files'=>'true']) !!}
 <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -11,74 +11,95 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div class="form-group m-0 col-6 has-feedback" id="fullname_group">
-								<i class="icon-person mr-2"></i>
-								{!! Form::label('name', 'Nombres', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::text('fullname', null, ['class'=>'form-control r-0 light s-12',  'id'=>'fullname', 'onclick'=>'inputClear(this.id)']) !!}
-								<span class="fullname_span"></span>
+							<div class="col-8">
+								<div class="form-row">
+									<div class="form-group m-0 col-6 has-feedback" id="fullname_group">
+										<i class="icon-person mr-2"></i>
+										{!! Form::label('name', 'Nombres', ['class'=>'col-form-label s-12']) !!}
+										{!! Form::text('fullname', null, ['class'=>'form-control r-0 light s-12',  'id'=>'fullname', 'onclick'=>'inputClear(this.id)']) !!}
+										<span class="fullname_span"></span>
+									</div>
+									<div class="form-group m-0 col-6 has-feedback" id="last_name_group">
+										<i class="icon-person mr-2"></i>
+										{!! Form::label('last_name', 'Apellidos', ['class'=>'col-form-label s-12']) !!}
+										{!! Form::text('last_name', null, ['class'=>'form-control r-0 light s-12',  'id'=>'user_last_name']) !!}
+										<span class="last_name_span"></span>
+									</div>
+									<div class="form-group col-6 m-0" id="password_group">
+										<i class="icon-key3 mr-2"></i>
+										{!! Form::label('password', 'Contraseña', ['class'=>'col-form-label s-12',  'onclick'=>'inputClear(this.id)']) !!}
+										{!! Form::password('password', ['class'=>'form-control r-0 light s-12','id'=>'_password']) !!}
+										<span class="password_span"></span>
+									</div>
+									<div class="form-group col-6 m-0">
+										<i class="icon-key4 mr-2"></i>
+										{!! Form::label('passwordConfirm', 'Confirmar Contraseña', ['class'=>'col-form-label s-12']) !!}
+										{!! Form::password('password_confirmation', ['class'=>'form-control r-0 light s-12', 'id'=>'_password_confirmation']) !!}
+									</div>
+									<div class="form-group col-6 m-0" id="email_group">
+										<i class="icon-envelope-o mr-2"></i>
+										{!! Form::label('email', 'Correo', ['class'=>'col-form-label s-12']) !!}
+										{!! Form::email('email', null, ['class'=>'form-control r-0 light s-12 ', 'id'=>'email', 'onclick'=>'inputClear(this.id)']) !!}
+										<span class="email_span"></span>
+									</div>
+									<div class="form-group col-6 m-0">
+										<i class="icon-phone mr-2"></i>
+										{!! Form::label('phone1', 'Teléfono 1', ['class'=>'col-form-label s-12']) !!}
+										{!! Form::text('phone1', null, ['class'=>'form-control r-0 light s-12', 'id'=>'phone1', 'onclick'=>'inputClear(this.id)']) !!}
+									</div>
+									<div class="form-group col-6 m-0" id="rol_group">
+										{!! Form::label('rut', 'RUT', ['class'=>'col-form-label s-12']) !!}
+										{!! Form::text('rut', null, ['class'=>'form-control r-0 light s-12', 'id'=>'rut', 'onclick'=>'inputClear(this.id)']) !!}
+										<span class="rol_span"></span>
+									</div>
+									<div class="form-group col-6 m-0">
+										<i class="icon-phone mr-2"></i>
+										{!! Form::label('position', 'Posición', ['class'=>'col-form-label s-12']) !!}
+										{!! Form::select('position', $positions, null, ['class'=>'form-control r-0 light s-12', 'id'=>'position', 'onclick'=>'inputClear(this.id)']) !!}
+									</div>
+									<div class="form-group col-6 m-0" id="rol_group">
+										{!! Form::label('fecha_contrato', 'FECHA DE CONTRATO', ['class'=>'col-form-label s-12']) !!}
+										{!! Form::text('fecha_contrato', null, ['class'=>'form-control r-0 light s-12', 'id'=>'fecha_contrato', 'onclick'=>'inputClear(this.id)']) !!}
+										<span class="rol_span"></span>
+									</div>
+									<div class="form-group col-6 m-0" id="rol_group">
+										{!! Form::label('fecha_fin_contrato', 'FECHA FIN DE CONTRATO', ['class'=>'col-form-label s-12']) !!}
+										{!! Form::text('fecha_fin_contrato', null, ['class'=>'form-control r-0 light s-12', 'id'=>'fecha_fin_contrato', 'onclick'=>'inputClear(this.id)']) !!}
+										<span class="rol_span"></span>
+									</div>
+								</div>
 							</div>
-							<div class="form-group m-0 col-6 has-feedback" id="last_name_group">
-								<i class="icon-person mr-2"></i>
-								{!! Form::label('last_name', 'Apellidos', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::text('last_name', null, ['class'=>'form-control r-0 light s-12',  'id'=>'user_last_name']) !!}
-								<span class="last_name_span"></span>
+							<div class="col-4">
+								<div class="col-md-12 offset-md-1">
+									<div class="form-group">
+										<input id="file" class="file" name="image" type="file"  onchange="ValidarTamaño(this);" size="15">
+									</div>
+								</div>
 							</div>
+							
 						</div>
 						
+						
 						<div class="form-row">
-							<div class="form-group col-6 m-0" id="password_group">
-								<i class="icon-key3 mr-2"></i>
-								{!! Form::label('password', 'Contraseña', ['class'=>'col-form-label s-12',  'onclick'=>'inputClear(this.id)']) !!}
-								{!! Form::password('password', ['class'=>'form-control r-0 light s-12','id'=>'_password']) !!}
-								<span class="password_span"></span>
-							</div>
-							<div class="form-group col-6 m-0">
-								<i class="icon-key4 mr-2"></i>
-								{!! Form::label('passwordConfirm', 'Confirmar Contraseña', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::password('password_confirmation', ['class'=>'form-control r-0 light s-12', 'id'=>'_password_confirmation']) !!}
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-group col-4 m-0" id="rol_group">
-								{!! Form::label('rut', 'RUT', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::text('rut', null, ['class'=>'form-control r-0 light s-12', 'id'=>'rut', 'onclick'=>'inputClear(this.id)']) !!}
-								<span class="rol_span"></span>
-							</div>
-							<div class="form-group col-4 m-0" id="rol_group">
+							
+							<div class="form-group col-6 m-0" id="rol_group">
 								{!! Form::label('role', 'Perfil', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::select('rol', $roles, null, ['class'=>'form-control r-0 light s-12', 'id'=>'rol', 'onclick'=>'inputClear(this.id)']) !!}
 								<span class="rol_span"></span>
 							</div>
-							<div class="form-group col-4 m-0" id="status_group">
+							<div class="form-group col-6 m-0" id="status_group">
 								{!! Form::label('status', 'Estado', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::select('status', $status, null, ['class'=>'form-control r-0 light s-12', 'id'=>'status', 'onclick'=>'inputClear(this.id)']) !!}
 								<span class="status_span"></span>
 							</div>
+							
 						</div>
 					</div>
 					
 					<div class="col-md-12">
-						<div class="form-row mt-1">
-							<div class="form-group col-4 m-0">
-								<i class="icon-phone mr-2"></i>
-								{!! Form::label('position', 'Posición', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::select('position', $positions, null, ['class'=>'form-control r-0 light s-12', 'id'=>'position', 'onclick'=>'inputClear(this.id)']) !!}
-							</div>
-							<div class="form-group col-4 m-0" id="email_group">
-								<i class="icon-envelope-o mr-2"></i>
-								{!! Form::label('email', 'Correo', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::email('email', null, ['class'=>'form-control r-0 light s-12 ', 'id'=>'email', 'onclick'=>'inputClear(this.id)']) !!}
-								<span class="email_span"></span>
-							</div>
-							<div class="form-group col-4 m-0">
-								<i class="icon-phone mr-2"></i>
-								{!! Form::label('phone1', 'Teléfono 1', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::text('phone1', null, ['class'=>'form-control r-0 light s-12', 'id'=>'phone1', 'onclick'=>'inputClear(this.id)']) !!}
-							</div>
-						</div>
 						<div class="form-group col-12 m-0">
 								{!! Form::label('address', 'Dirección', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::textarea('address', null, ['class'=>'form-control r-0 light s-12', 'id'=>'address', 'onclick'=>'inputClear(this.id)','row'=>'2']) !!}
+								{!! Form::textarea('address', null, ['class'=>'form-control r-0 light s-12', 'id'=>'address', 'onclick'=>'inputClear(this.id)','rows'=>'2']) !!}
 						</div>
 					</div>
 				</div>
