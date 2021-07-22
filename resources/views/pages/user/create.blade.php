@@ -59,12 +59,12 @@
 									</div>
 									<div class="form-group col-6 m-0" id="rol_group">
 										{!! Form::label('fecha_contrato', 'FECHA DE CONTRATO', ['class'=>'col-form-label s-12']) !!}
-										{!! Form::text('fecha_contrato', null, ['class'=>'form-control r-0 light s-12', 'id'=>'fecha_contrato', 'onclick'=>'inputClear(this.id)']) !!}
+										{!! Form::date('fecha_contrato', null, ['class'=>'form-control r-0 light s-12', 'id'=>'fecha_contrato', 'onclick'=>'inputClear(this.id)']) !!}
 										<span class="rol_span"></span>
 									</div>
 									<div class="form-group col-6 m-0" id="rol_group">
 										{!! Form::label('fecha_fin_contrato', 'FECHA FIN DE CONTRATO', ['class'=>'col-form-label s-12']) !!}
-										{!! Form::text('fecha_fin_contrato', null, ['class'=>'form-control r-0 light s-12', 'id'=>'fecha_fin_contrato', 'onclick'=>'inputClear(this.id)']) !!}
+										{!! Form::date('fecha_fin_contrato', null, ['class'=>'form-control r-0 light s-12', 'id'=>'fecha_fin_contrato', 'onclick'=>'inputClear(this.id)']) !!}
 										<span class="rol_span"></span>
 									</div>
 								</div>

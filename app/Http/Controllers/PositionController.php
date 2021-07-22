@@ -88,6 +88,8 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $position = Position::find($id);
+        $position->delete();
+        return response()->json(['message'=>'Posición eliminado correctamente']);
     }
 }

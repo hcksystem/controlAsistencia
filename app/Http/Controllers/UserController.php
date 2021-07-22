@@ -68,6 +68,21 @@ class UserController extends Controller
     {
         $data = $request->all();
 
+        $file = $request->file('file');
+         
+        if ($file != null) {
+            // url file save
+            $path = public_path().'/img/avatar/';
+            // file extension
+            $extension = $file->getClientOriginalExtension();
+            // file name
+            $fileName = $data['email']. '.' . $extension;
+            // file save
+            $file->move($path, $fileName);
+            // add route avarat
+            $data = array_add($data, 'image', $fileName);
+        }
+
         // encrypt password
         $data['password'] = bcrypt($data['password']);
         //create user
@@ -115,6 +130,13 @@ class UserController extends Controller
         $user = $this->user->find($id);
         $data = $request->all();
         $file = $request->file('file');
+        if ($file != null) {
+            $path = public_path().'/img/avatar/';
+            $extension = $file->getClientOriginalExtension();
+            $fileName = $data['email']. '.' . $extension;
+            $file->move($path, $fileName);
+            $data = array_add($data, 'image', $fileName);
+        }
        
         if($data['password'] == $data['password_confirmation']){
              if (isset($data['password'])) {
