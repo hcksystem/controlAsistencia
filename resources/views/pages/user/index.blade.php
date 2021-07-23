@@ -35,6 +35,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-center"><b>#</b></th>
+                                    <th class="text-center"></th>
                                     <th class="text-center"><b>{{ __('NOMBRE') }}</b></th>
                                     <th class="text-center"><b>{{ __('APELLIDO') }}</b></th>
                                     <th class="text-center"><b>{{ __('CORREO') }}</b></th>
@@ -47,6 +48,9 @@
                                 @foreach ($users as $user)
                                 <tr class="tbody">
                                     <td class="text-center"> {{$user->id}} </td>
+                                    <td class="w-10 text-center">
+                                        {{ Html::image('img/avatar/'.$user->file, 'a picture', array('alt'=>'Logo')) }}
+                                    </td>
                                     <td class="text-center"> {{ $user->fullname }} </td>
                                     <td class="text-center"> {{ $user->last_name ?? null }} </td>
                                     <td class="text-center"> {{ $user->email }} </td>
