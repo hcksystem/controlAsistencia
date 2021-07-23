@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Group;
+use Session;
 
 class GrupoController extends Controller
 {
@@ -21,12 +22,13 @@ class GrupoController extends Controller
                         ->where('roles.id',3)
                         ->count();
         $users = User::all();
-        $groups = Group::all();
+        $groups = Group::where('id_group_parent',0)->get();
+        $subgroups = Group::all();
         $jefes = User::leftjoin('role_user','users.id','role_user.user_id')
         ->leftjoin('roles','role_user.role_id','roles.id')
         ->where('roles.id',3)
         ->get();
-        return view('pages.group.index',compact('count_user','count_jefes','jefes','users','groups'));
+        return view('pages.group.index',compact('count_user','count_jefes','jefes','users','groups','subgroups'));
     }
 
     /**
@@ -71,7 +73,8 @@ class GrupoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $group = Group::find($id);
+        return response()->json($group);
     }
 
     /**
@@ -83,7 +86,10 @@ class GrupoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $group = Group::find($id);
+        $group->update($request->all());
+        $group->save();
+        Session::flash('message-success',' Grupo '. $request->group.' editada correctamente.');
     }
 
     /**

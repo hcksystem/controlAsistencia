@@ -12,7 +12,7 @@
                 <div class="form-group mb-3">
                     <label for="categoryName">Grupo:</label>
                     <input type="text" class="form-control" id="group" name="group" placeholder="Ingrese grupo">
-                   
+                    <input type="hidden" class="form-control" id="parent_group" name="id_group_parent" value="0">
                 </div>
             </div>
             <div class="modal-footer">

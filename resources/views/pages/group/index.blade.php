@@ -20,6 +20,7 @@
 @section('maincontent')
 
 @include('pages.group.create')
+@include('pages.group.edit')
 
 <div class="page  height-full"> 
     <div class="container-fluid animatedParent animateOnce my-3">
@@ -49,11 +50,15 @@
                                         <div class="slimScroll b-b" data-height="385">
                                         <ul id="menu">
                                             @foreach($groups as $gr)
-                                            <li><input type="checkbox" name="list" id="nivel1-{{$gr->group}}"><label for="nivel1-{{$gr->group}}">{{ $gr->group }}</label>
+                                            <li><input type="checkbox" name="list" id="nivel1-{{$gr->group}}"  onclick="subgrupo({{$gr->id}})">
+                                            <label for="nivel1-{{$gr->group}}" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('grupo.edit',$gr) }}', '{{ route('grupo.update',$gr->id) }}')">{{ $gr->group }}</label>
+                                          
                                                 <ul class="interior ml-2">
-                                                    <li><a href="#r">Nivel 3</a></li>
-                                                    <li><a href="#r">Nivel 3</a></li>
-                                                    <li><a href="#r">Nivel 3</a></li>
+                                                        @foreach($subgroups as $g)
+                                                            @if($gr->id == $g->id_group_parent)
+                                                                <li><a href="#r">{{ $g->group ?? ''}}</a></li>
+                                                            @endif
+                                                        @endforeach
                                                 </ul>
                                             </li>
                                             @endforeach
@@ -184,4 +189,10 @@
 </div>
 @endsection
 @section('js')
+<script>
+    function subgrupo(id){
+        $('#parent_group').val(id);
+    }
+</script>
+
 @endsection
