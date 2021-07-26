@@ -84,7 +84,7 @@
                                   <div class="form-group col-4 m-0">
                                       <i class="icon-phone mr-2"></i>
                                       {!! Form::label('phone1', 'Teléfono', ['class'=>'col-form-label s-12']) !!}
-                                      {!! Form::text('phone1', $user->phone1 ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'05112345678', 'id'=>'_phone1', 'onclick'=>'inputClear(this.id)']) !!}
+                                      {!! Form::text('phone1', $user->phone1 ?? '', ['class'=>'form-control r-0 light s-12','id'=>'_phone1', 'onclick'=>'inputClear(this.id)']) !!}
                                   </div>
                                   <div class="form-group col-6 m-0" id="rol_group">
                                     {!! Form::label('fecha_contrato', 'FECHA DE CONTRATO', ['class'=>'col-form-label s-12']) !!}
@@ -101,7 +101,8 @@
                               <div class="col-4">
                                 <div class="col-md-12 offset-md-1">
                                   <div class="form-group">
-                                    <input id="file" class="file" name="file" type="file"  onchange="ValidarTamaño(this);" size="15">
+                                    <input id="file" class="file" name="file" type="file"  onchange="ValidarTamaño(this);" size="15" value="">
+                                    {!! Form::hidden('file', $user->image ?? '', ['class'=>'form-control r-0 light s-12', 'id'=>'_file']) !!}
                                   </div>
 								                </div>
                               </div>
@@ -140,11 +141,9 @@
 <script>
     var title = 'Users';
     var colunms = [0,1,2,3,4];
-
-    edificios();
-    empresas();
-    administraciones();
-    corredores();
+    var image = $('#_file').val();
+    console.log(image)
+    validarFile(image,'file');
 
     $(".file").fileinput({
         // theme: 'gly',
@@ -186,534 +185,43 @@
     });
 
 
-
-
-  function edificios(){
-
-
-        var id = $('#_id').val();
-
-        $('#table_edificio').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "lengthChange": false,
-                "bFilter": false,
-                "bSort" : false,
-                "bPaginate": false,
-                "pageLength": 12,
-                "bInfo": false,
-                "ajax": {
-                        url: "{{ url('edificioByUser') }}/"+id,
-                        type:'GET',
-                        'headers': {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                    },
-                                    'data': function (d) {
-                                        //console.log(d);
-                                        }
-                         },
-                         columns: [
-                                 
-                                    {
-                                    "mRender": function ( data, type, row ) {
-                                      return '<div><p style="font-size:12px;">'+row['edificio']+'</p></div>'
-                                        },
-                                        className: 'text-center'
-                                    },
-                                   {
-                                    "mRender": function ( data, type, row ) {
-                                      return '<a onclick=deleteEdificio('+row['id_edificio']+') class="btn btn-default btn-sm" style="padding: .10rem .4rem;" title="Edit"><i class="icon-trash text-danger"></i></a>'
-                                        },
-                                        className: 'text-center'
-                                    }
-                                ]
-         });
-
-
-
-  }
-
-  function addEdificio(){
-     var id = $('#_id').val();
-     var id2 = $('#id_edificio').val();
-     //alert(id2);
-     //
-        var formData = {
-                "id_usuario" : id,
-                "id_edificio" : id2
-        }
-         var url ="{{url('agregaEdificioUser')}}";
-   
-
-          $.ajax({
-            type : 'POST',
-            url  : url,
-            data : formData,
-            success:function(data){
-             
-             toastr.success('Registro añadido correctamente!');
-         
-              $('#table_edificio').DataTable().clear().destroy();
-
-              edificios();
-              refrescarSelect(id);
-              
-            }
-          });
-  }
-
-  function deleteEdificio(id2){
-     var id = $('#_id').val();
-
-
-        var formData = {
-                "id_usuario" : id,
-                "id_edificio" : id2
-        }
-         var url ="{{url('eliminaEdificioUser')}}";
-   
-
-          $.ajax({
-            type : 'POST',
-            url  : url,
-            data : formData,
-            success:function(data){
-             
-             toastr.success('Registro eliminado correctamente!');
-         
-              $('#table_edificio').DataTable().clear().destroy();
-              edificios();
-              refrescarSelect(id);
-              
-            }
-          });
-  }
-
-    function refrescarSelect(id){
-
-        var formData = {
-                "id_usuario" : id
-        }
-
-         var url ="{{url('obtenerEdificioUser')}}";
-   
-
-          $.ajax({
-            type : 'GET',
-            url  : url,
-            data : formData,
-            success:function(data){
-             
-            $("#id_edificio").find('option').remove();
-             var options = [];
-             $.each(data, function(key, value) {
-                        options.push($("<option/>", {
-                        value: key,
-                        text: value
-                        }));
-            });
-
-              
-            $('#id_edificio').append(options);
-            }
-          });
-  }
-
-   function addEmpresa(){
-     var id = $('#_id').val();
-     var id2 = $('#id_empresa').val();
-
-        var formData = {
-                "id_usuario" : id,
-                "id_empresa" : id2
-        }
-         var url ="{{url('agregaEmpresaUser')}}";
-   
-
-          $.ajax({
-            type : 'POST',
-            url  : url,
-            data : formData,
-            success:function(data){
-             
-             toastr.success('Registro añadido correctamente!');
-         
-              $('#table_empresa').DataTable().clear().destroy();
-
-              empresas();
-              refrescarSelect2(id);
-              
-            }
-          });
-  }
-
-   function empresas(){
-
-
-        var id = $('#_id').val();
-
-        $('#table_empresa').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "lengthChange": false,
-                "bFilter": false,
-                "bSort" : false,
-                "bPaginate": false,
-                "pageLength": 12,
-                "bInfo": false,
-                "ajax": {
-                        url: "{{ url('empresaByUser') }}/"+id,
-                        type:'GET',
-                        'headers': {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                    },
-                                    'data': function (d) {
-                                        //console.log(d);
-                                        }
-                         },
-                         columns: [
-                                 
-                                    {
-                                    "mRender": function ( data, type, row ) {
-                                      return '<div><p style="font-size:12px;">'+row['empresa']+'</p></div>'
-                                        },
-                                        className: 'text-center'
-                                    },
-                                   {
-                                    "mRender": function ( data, type, row ) {
-                                      return '<a onclick=deleteEmpresa('+row['id_empresa']+') class="btn btn-default btn-sm" style="padding: .10rem .4rem;" title="Edit"><i class="icon-trash text-danger"></i></a>'
-                                        },
-                                        className: 'text-center'
-                                    }
-                                ]
-         });
-
-
-
-  }
-
-     function refrescarSelect2(id){
-
-        var formData = {
-                "id_empresa" : id
-        }
-
-         var url ="{{url('obtenerEmpresaUser')}}";
-   
-
-          $.ajax({
-            type : 'GET',
-            url  : url,
-            data : formData,
-            success:function(data){
-             
-            $("#id_empresa").find('option').remove();
-             var options = [];
-             $.each(data, function(key, value) {
-                        options.push($("<option/>", {
-                        value: key,
-                        text: value
-                        }));
-            });
-
-              
-            $('#id_empresa').append(options);
-            }
-          });
-  }
-
-    function deleteEmpresa(id2){
-     var id = $('#_id').val();
-
-
-        var formData = {
-                "id_usuario" : id,
-                "id_empresa" : id2
-        }
-         var url ="{{url('eliminaEmpresaUser')}}";
-   
-
-          $.ajax({
-            type : 'POST',
-            url  : url,
-            data : formData,
-            success:function(data){
-             
-             toastr.success('Registro eliminado correctamente!');
-         
-              $('#table_empresa').DataTable().clear().destroy();
-              empresas();
-              refrescarSelect2(id);
-              
-            }
-          });
-  }
-
-   function addAdministracion(){
-     var id = $('#_id').val();
-     var id2 = $('#id_administracion').val();
-
-        var formData = {
-                "id_usuario" : id,
-                "id_administracion" : id2
-        }
-         var url ="{{url('agregaAdministracionUser')}}";
-   
-
-          $.ajax({
-            type : 'POST',
-            url  : url,
-            data : formData,
-            success:function(data){
-             
-             toastr.success('Registro añadido correctamente!');
-         
-              $('#table_administracion').DataTable().clear().destroy();
-
-              administraciones();
-              refrescarSelect3(id);
-              
-            }
-          });
-  }
-
-  function administraciones(){
-
-
-        var id = $('#_id').val();
-
-        $('#table_administracion').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "lengthChange": false,
-                "bFilter": false,
-                "bSort" : false,
-                "bPaginate": false,
-                "pageLength": 12,
-                "bInfo": false,
-                "ajax": {
-                        url: "{{ url('administracionByUser') }}/"+id,
-                        type:'GET',
-                        'headers': {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                    },
-                                    'data': function (d) {
-                                        //console.log(d);
-                                        }
-                         },
-                         columns: [
-                                 
-                                    {
-                                    "mRender": function ( data, type, row ) {
-                                      return '<div><p style="font-size:12px;">'+row['administracion']+'</p></div>'
-                                        },
-                                        className: 'text-center'
-                                    },
-                                   {
-                                    "mRender": function ( data, type, row ) {
-                                      return '<a onclick=deleteAdministracion('+row['id_administracion']+') class="btn btn-default btn-sm" style="padding: .10rem .4rem;" title="Edit"><i class="icon-trash text-danger"></i></a>'
-                                        },
-                                        className: 'text-center'
-                                    }
-                                ]
-         });
-
-
-
-  }
-
-   function refrescarSelect3(id){
-
-        var formData = {
-                "id_administracion" : id
-        }
-
-         var url ="{{url('obtenerAdministracionUser')}}";
-   
-
-          $.ajax({
-            type : 'GET',
-            url  : url,
-            data : formData,
-            success:function(data){
-             
-            $("#id_administracion").find('option').remove();
-             var options = [];
-             $.each(data, function(key, value) {
-                        options.push($("<option/>", {
-                        value: key,
-                        text: value
-                        }));
-            });
-
-              
-            $('#id_administracion').append(options);
-            }
-          });
-  }
-
-    function deleteAdministracion(id2){
-     var id = $('#_id').val();
-
-
-        var formData = {
-                "id_usuario" : id,
-                "id_administracion" : id2
-        }
-         var url ="{{url('eliminaAdministracionUser')}}";
-   
-
-          $.ajax({
-            type : 'POST',
-            url  : url,
-            data : formData,
-            success:function(data){
-             
-             toastr.success('Registro eliminado correctamente!');
-         
-              $('#table_administracion').DataTable().clear().destroy();
-              administraciones();
-              refrescarSelect3(id);
-              
-            }
-          });
-  }
-
-  function corredores(){
-
-
-        var id = $('#_id').val();
-
-        $('#table_corredor').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "lengthChange": false,
-                "bFilter": false,
-                "bSort" : false,
-                "bPaginate": false,
-                "pageLength": 12,
-                "bInfo": false,
-                "ajax": {
-                        url: "{{ url('corredorByUser') }}/"+id,
-                        type:'GET',
-                        'headers': {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                    },
-                                    'data': function (d) {
-                                        //console.log(d);
-                                        }
-                         },
-                         columns: [
-                                 
-                                    {
-                                    "mRender": function ( data, type, row ) {
-                                      return '<div><p style="font-size:12px;">'+row['corredor']+'</p></div>'
-                                        },
-                                        className: 'text-center'
-                                    },
-                                   {
-                                    "mRender": function ( data, type, row ) {
-                                      return '<a onclick=deleteCorredor('+row['id_corredor']+') class="btn btn-default btn-sm" style="padding: .10rem .4rem;" title="Edit"><i class="icon-trash text-danger"></i></a>'
-                                        },
-                                        className: 'text-center'
-                                    }
-                                ]
-         });
-
-
-
-  }
-
-    function addCorredor(){
-     var id = $('#_id').val();
-     var id2 = $('#id_corredor').val();
-     //alert(id2);
-     //
-        var formData = {
-                "id_usuario" : id,
-                "id_corredor" : id2
-        }
-         var url ="{{url('agregaCorredorUser')}}";
-   
-
-          $.ajax({
-            type : 'POST',
-            url  : url,
-            data : formData,
-            success:function(data){
-             
-             toastr.success('Registro añadido correctamente!');
-         
-              $('#table_corredor').DataTable().clear().destroy();
-
-              corredores();
-              refrescarSelectCorredor(id2);
-              
-            }
-          });
-  }
-
-     function refrescarSelectCorredor(id){
-
-        var formData = {
-                "id_corredor" : id
-        }
-
-         var url ="{{url('obtenerCorredorUser')}}";
-   
-
-          $.ajax({
-            type : 'GET',
-            url  : url,
-            data : formData,
-            success:function(data){
-             
-            $("#id_corredor").find('option').remove();
-             var options = [];
-             $.each(data, function(key, value) {
-                        options.push($("<option/>", {
-                        value: key,
-                        text: value
-                        }));
-            });
-
-              
-            $('#id_corredor').append(options);
-            }
-          });
-  }
-
-   function deleteCorredor(id2){
-     var id = $('#_id').val();
-
-
-        var formData = {
-                "id_usuario" : id,
-                "id_corredor" : id2
-        }
-         var url ="{{url('eliminaCorredorUser')}}";
-   
-
-          $.ajax({
-            type : 'POST',
-            url  : url,
-            data : formData,
-            success:function(data){
-             
-             toastr.success('Registro eliminado correctamente!');
-         
-              $('#table_corredor').DataTable().clear().destroy();
-              corredores();
-              refrescarSelectCorredor(id2);
-              
-            }
-          });
-  }
-
   function soloNumeros(e){
     var key = window.Event ? e.which : e.keyCode
     return (key >= 48 && key <= 57)
   }
+   
+    function validarFile(image, id)
+  {
+      if (image != null)
+          {
+              var url = '/./public/img/avatar/' + image;
+              // destroy fileimput previous
+              $('#'+id).fileinput('destroy');
+              addImage2(url, id, image);
+          }
+  }
+
+  function addImage2(url, id, namefile)
+{
+    console.log(url)
+    $("#"+id).fileinput
+    ({
+        initialPreview: [url],
+        initialPreviewAsData: true,
+        initialPreviewConfig:
+            [
+                {caption: namefile},
+            ],
+        showCaption: false,
+        showRemove: false,
+        showUpload: false,
+        showBrowse: false,
+        overwriteInitial: true,
+        browseOnZoneClick: true,
+        initialCaption: namefile
+    });
+}
+
 
 </script>
 @endsection

@@ -77,36 +77,6 @@ $(".formlDinamic").on('submit', function(e) {
     }
 
     if (id == 'guardarRegistroMultitap') {
-       
-        saveDataMultitap(url, forml, method);
-    }
-    if (id == 'DataUpdate') {
-        //input file
-        var inputFile = $('#file-2');
-
-        if(inputFile[0] == undefined){
-            saveData(url, forml, method);
-        }else{
-            saveDataMultitap(url, forml, method, inputFile);
-        }
-    }
-    if (id == 'eliminarRegistro'){
-        deleteReg(url,forml,method);
-    }
-});
-
-$(".formSupplier").on('submit', function(e) {
-    e.preventDefault();
-    var id = $(this).attr('id');
-    var url = $(this).attr("action");
-    var method = $(this).attr("method");
-    var forml = $(this);
-
-    if (id == 'guardarRegistro2') {
-        saveData2(url, forml, method);
-    }
-
-    if (id == 'guardarRegistroMultitap') {
         var inputFile = $('#file');
         saveDataMultitap(url, forml, method, inputFile);
     }
@@ -124,7 +94,6 @@ $(".formSupplier").on('submit', function(e) {
         deleteReg(url,forml,method);
     }
 });
-
 
 /**
  * { function_description }
@@ -267,11 +236,15 @@ function saveData2(url, forml, method)
  * @param      {<type>}    forml   The forml
  * @param      {Function}  method  The method
  */
-function saveDataMultitap(url, forml, method)
+function saveDataMultitap(url, forml, method, inputFile)
 {
     var route = $('#route').val();
     var formData = new FormData();
     
+    if (inputFile != null)
+    {
+        formData.append('file', inputFile[0].files[0]);
+    }
     $.ajax({
         url: url + '?' + forml.serialize(),
         type: method,
@@ -282,9 +255,7 @@ function saveDataMultitap(url, forml, method)
 
         success: function(result)
         {
-            $('.modal').modal('hide');// Oculta el modal del formulario create
-            // $('#tbody').load(' .tbody');//Recarga el body de la tabla
-            // toastr.success(result.message,"Exitoso");
+            $('.modal').modal('hide');
             if (result.id != undefined) {
                 if(result.page == 'show'){
                     window.location.replace(route  + "/" + result.id);
