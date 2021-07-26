@@ -51,8 +51,7 @@
                                         <ul id="menu">
                                             @foreach($groups as $gr)
                                             <li><input type="checkbox" name="list" id="nivel1-{{$gr->group}}"  onclick="subgrupo({{$gr->id}})">
-                                            <label for="nivel1-{{$gr->group}}" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('grupo.edit',$gr) }}', '{{ route('grupo.update',$gr->id) }}')">{{ $gr->group }}</label>
-                                          
+                                            <label for="nivel1-{{$gr->group}}" onclick="asignEdit({{$gr->id}})">{{ $gr->group }}</label>
                                                 <ul class="interior ml-2">
                                                         @foreach($subgroups as $g)
                                                             @if($gr->id == $g->id_group_parent)
@@ -66,7 +65,9 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
+                                        <input type="hidden" id="id_grupo">
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreateGroup">CREAR GRUPO</button>
+                                        <button type="button" class="btn btn-success" onclick="modificar()">MODIFICAR</button>
                                     </div>
                                 </div>
                             </div>
@@ -188,7 +189,9 @@
 
 </div>
 @endsection
+@routes
 @section('js')
+<script src={{asset('assets/js/group.js')}}></script>
 <script>
     function subgrupo(id){
         $('#parent_group').val(id);

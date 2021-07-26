@@ -64,17 +64,6 @@
                     <i class="icon icon-angle-left s-18 pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{!! route('regions.index') !!}"><i class="icon icon-circle-o"></i>Regiones/Comunas</a>
-                    </li>
-                    <li><a href="#"><i class="icon icon-circle-o"></i>Reserva de espacios</a>
-                    </li>
-                    <li><a href="{{ route('edificios.asamblea') }}"><i class="icon icon-circle-o"></i>Asambleas</a>
-                    </li>
-                    <li><a href="{!! route('encomiendas.index') !!}"><i class="icon icon-date_range"></i>Encomiendas</a>
-                    </li>
-                  
-                    
-                    
                 </ul>
          </li>
 

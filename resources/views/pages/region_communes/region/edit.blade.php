@@ -30,15 +30,12 @@ Countries
                                         {!! Form::text('name', null, ['class'=>'form-control r-0 light s-12', 'id'=>'_name', 'onclick'=>'inputClear(this.id)']) !!}
                                         <span class="name_span"></span>
                                     </div>
-                                    
-                                   
-                                    {!! Form::hidden('route', route('regions.index'), ['id'=>'route']) !!}
                                 </div>
                             </div>
                         </div>
                         <br>
                         <div class="col-md-12 text-right">
-                            <a href="{{ route('regions.index') }}" class="btn btn-default" data-dismiss="modal">Atrás</a>
+                            <a href="#" class="btn btn-default" data-dismiss="modal">Atrás</a>
                             <button type="submit" class="btn btn-primary"><i class="icon-save mr-2"></i>Guardar datos</button>
                         </div>
                         {!! Form::close() !!}
