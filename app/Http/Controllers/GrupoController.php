@@ -73,7 +73,6 @@ class GrupoController extends Controller
      */
     public function edit($id)
     {
-        dd($id);
         $group = Group::find($id);
         return response()->json($group);
     }
