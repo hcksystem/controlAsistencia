@@ -65,6 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('posicion','PositionController');
 
 	Route::get('grupo/edit/{id}', 'GrupoController@edit')->name('grupo.edit');
+	Route::get('grupo/delete/{id}', 'GrupoController@destroy')->name('grupo.delete');
 
 });
 

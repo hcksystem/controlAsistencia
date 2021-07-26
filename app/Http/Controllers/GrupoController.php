@@ -100,6 +100,14 @@ class GrupoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $parent = Group::where('id_group_parent',$id)->get()->count();
+        if($parent > 0){
+            return response()->json($parent);
+        }else{
+            $group = Group::find($id);
+            $group->delete();
+            return response()->json($parent);
+        }
+        
     }
 }
