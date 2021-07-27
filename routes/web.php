@@ -69,6 +69,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('searchJefes/{id}', 'GrupoController@searchJefes')->name('searchJefes');
 	Route::get('searchUsers/{id}', 'GrupoController@searchUsers')->name('searchUsers');
 
+	Route::post('user/update/{id}', 'UserController@update')->name('user.update');
+
 });
 
 

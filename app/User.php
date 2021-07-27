@@ -47,7 +47,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\UsersStatus', 'status','id');
     }
 
-
+    public function grupo()
+    {
+        return $this->belongsTo('App\UsersGroups', 'id_user','id');
+    }
 
     /**
      * Get the user that owns the operation.

@@ -25,7 +25,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                  <form action="{{ route('usuario.update',$user->id) }}" method="GET" autocomplete="off">
+                  <form action="{{ route('user.update',$user->id) }}" method="POST" autocomplete="off">
+                  @csrf
                           <div class="col-md-12">
                             <div class="row">
                               <div class="col-8">
@@ -86,16 +87,21 @@
                                       {!! Form::label('phone1', 'Teléfono', ['class'=>'col-form-label s-12']) !!}
                                       {!! Form::text('phone1', $user->phone1 ?? '', ['class'=>'form-control r-0 light s-12','id'=>'_phone1', 'onclick'=>'inputClear(this.id)']) !!}
                                   </div>
-                                  <div class="form-group col-6 m-0" id="rol_group">
+                                  <div class="form-group col-4 m-0" id="rol_group">
                                     {!! Form::label('fecha_contrato', 'FECHA DE CONTRATO', ['class'=>'col-form-label s-12']) !!}
                                     {!! Form::date('fecha_contrato', $user->fecha_contrato ?? null, ['class'=>'form-control r-0 light s-12', 'id'=>'fecha_contrato', 'onclick'=>'inputClear(this.id)']) !!}
                                     <span class="rol_span"></span>
 									                </div>
-                                <div class="form-group col-6 m-0" id="rol_group">
+                                <div class="form-group col-4 m-0" id="rol_group">
                                   {!! Form::label('fecha_fin_contrato', 'FECHA FIN DE CONTRATO', ['class'=>'col-form-label s-12']) !!}
                                   {!! Form::date('fecha_fin_contrato', $user->fecha_fin_contrato ?? '', ['class'=>'form-control r-0 light s-12', 'id'=>'fecha_fin_contrato', 'onclick'=>'inputClear(this.id)']) !!}
                                   <span class="rol_span"></span>
                                 </div>
+                                <div class="form-group col-4 m-0" id="status_group">
+                                  {!! Form::label('grupo', 'Grupo', ['class'=>'col-form-label s-12']) !!}
+                                  {!! Form::select('id_group', $grupos, $user->grupo->id_group ?? '', ['class'=>'form-control r-0 light s-12', 'id'=>'id_group', 'onclick'=>'inputClear(this.id)']) !!}
+                                  <span class="status_span"></span>
+							                  </div>
                               </div>
                               </div>
                               <div class="col-4">
@@ -103,6 +109,7 @@
                                   <div class="form-group">
                                     <input id="file" class="file" name="file" type="file"  onchange="ValidarTamaño(this);" size="15" value="">
                                     {!! Form::hidden('file', $user->image ?? '', ['class'=>'form-control r-0 light s-12', 'id'=>'_file']) !!}
+                                    <input type="hidden" id="_token" value="{{ csrf_token() }}">
                                   </div>
 								                </div>
                               </div>

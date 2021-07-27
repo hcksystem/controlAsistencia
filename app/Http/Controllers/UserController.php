@@ -6,7 +6,9 @@ use App\User;
 use App\Position;
 use App\Building;
 use App\Corredor;
+use App\Group;
 use App\Empresa_Externa;
+use App\UsersGroups;
 use App\UsersStatus;
 use Illuminate\Http\Request;
 use App\Http\Requests\User\createRequest;
@@ -43,9 +45,10 @@ class UserController extends Controller
         $roles = $this->role->get()->pluck('name', 'slug')->prepend('Seleccione...','');
         $status = UsersStatus::get()->pluck('name', 'id')->prepend('Seleccione...','');
         $positions = Position::get()->pluck('name', 'id')->prepend('Seleccione...','');
+        $grupos = Group::get()->pluck('group', 'id')->prepend('Seleccione...','');
         $users = $this->user->all();
 
-        return view('pages.user.index', compact('users','status','roles','positions'));  
+        return view('pages.user.index', compact('users','status','roles','positions','grupos'));  
     }
 
     /**
@@ -89,6 +92,9 @@ class UserController extends Controller
         $user = $this->user->create($data);
         //assig rol user
         $user->assignRoles($data['rol']);
+        $lastUser= User::all()->last();
+        DB::insert('insert into users_groups (id_user, id_group) values (?, ?)', [$lastUser->id, $request->id_grupo]);
+
         Session::flash('message-success',' User '. $request->fullname.' creado correctamente.');
     }
 
@@ -104,7 +110,8 @@ class UserController extends Controller
         $roles = $this->role->get()->pluck('name', 'slug')->prepend('Seleccione...','');
         $status = UsersStatus::get()->pluck('name', 'id')->prepend('Seleccione...','');
         $positions = Position::get()->pluck('name', 'id')->prepend('Seleccione...','');
-        return view('pages.user.edit_user', compact('user','status','roles','positions'));  
+        $grupos = Group::get()->pluck('group', 'id')->prepend('Seleccione...','');
+        return view('pages.user.edit_user', compact('user','status','roles','positions','grupos'));  
     }
 
     /**
@@ -125,7 +132,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(updateRequest $request,$id)
+    public function update(Request $request,$id)
     {
         $user = $this->user->find($id);
         $data = $request->all();
@@ -148,6 +155,15 @@ class UserController extends Controller
             }   
             $user->save();
             $user->syncRoles($data['rol']);
+
+            $userGroups = UsersGroups::where('id_user',$id)->first();
+            if(isset($userGroups)){
+                $userGroups->id_group = $request->id_group;
+                $userGroups->save();
+            }else{
+                DB::insert('insert into users_groups (id_user, id_group) values (?, ?)', [$id, $request->id_group]);
+            }
+           
             Session::flash('message-success',' User '. $request->fullname.' editado correctamente.');
             return Redirect::back();
           

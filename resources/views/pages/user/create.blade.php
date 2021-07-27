@@ -82,14 +82,19 @@
 						
 						<div class="form-row">
 							
-							<div class="form-group col-6 m-0" id="rol_group">
+							<div class="form-group col-4 m-0" id="rol_group">
 								{!! Form::label('role', 'Perfil', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::select('rol', $roles, null, ['class'=>'form-control r-0 light s-12', 'id'=>'rol', 'onclick'=>'inputClear(this.id)']) !!}
 								<span class="rol_span"></span>
 							</div>
-							<div class="form-group col-6 m-0" id="status_group">
+							<div class="form-group col-4 m-0" id="status_group">
 								{!! Form::label('status', 'Estado', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::select('status', $status, null, ['class'=>'form-control r-0 light s-12', 'id'=>'status', 'onclick'=>'inputClear(this.id)']) !!}
+								<span class="status_span"></span>
+							</div>
+							<div class="form-group col-4 m-0" id="status_group">
+								{!! Form::label('grupo', 'Grupo', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::select('id_grupo', $grupos, null, ['class'=>'form-control r-0 light s-12', 'id'=>'id_grupo', 'onclick'=>'inputClear(this.id)']) !!}
 								<span class="status_span"></span>
 							</div>
 							
