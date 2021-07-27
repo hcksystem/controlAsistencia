@@ -51,11 +51,11 @@
                                         <ul id="menu">
                                             @foreach($groups as $gr)
                                             <li><input type="checkbox" name="list" id="nivel1-{{$gr->group}}"  onclick="subgrupo({{$gr->id}})">
-                                            <label for="nivel1-{{$gr->group}}" onclick="asignEdit({{$gr->id}})">{{ $gr->group }}</label>
+                                            <label for="nivel1-{{$gr->group}}" onclick="asignEdit({{$gr->id}}),searchUsers({{$gr->id}})">{{ $gr->group }}</label>
                                                 <ul class="interior ml-2">
                                                         @foreach($subgroups as $g)
                                                             @if($gr->id == $g->id_group_parent)
-                                                                <li><a href="#r">{{ $g->group ?? ''}}</a></li>
+                                                                <li><a href="#r" onclick="searchUsers({{$g->id}})">{{ $g->group ?? ''}}</a></li>
                                                             @endif
                                                         @endforeach
                                                 </ul>
@@ -83,42 +83,25 @@
                                         <div class="bg-primary text-white lighten-2">
                                             <div class="pt-5 pb-2 pl-5 pr-5">
                                                 <h5 class="font-weight-normal s-14">Jefes</h5>
-                                                <span class="s-48 font-weight-lighter text-primary">
-                                                {{ $count_jefes }}</span>
+                                                <span class="s-48 font-weight-lighter text-primary" id="countJefes">0</span>
                                                 <div class="float-right"></div>
                                             </div>
                                             <canvas width="378" height="94" data-chart="spark" data-chart-type="line" data-dataset="[[28,530,200,430]]" data-labels="['a','b','c','d']"
                                                     data-dataset-options="[
-                                             { borderColor:  'rgba(54, 162, 235, 1)', backgroundColor: 'rgba(54, 162, 235,1)'},
+                                            { borderColor:  'rgba(54, 162, 235, 1)', backgroundColor: 'rgba(54, 162, 235,1)'},
                                             ]">
                                             </canvas>
                                         </div>
                                         <div class="slimScroll b-b" data-height="385">
                                             <div class="table-responsive">
-                                                <table class="table table-hover earning-box">
+                                                <table class="table table-hover earning-box" id="contentJefes">
                                                     <thead class="no-b">
                                                     <tr>
                                                         <th colspan="2">Nombres y Apellidos</th>
                                                         <th>Teléfono</th>
                                                     </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        @foreach($jefes as $j)
-                                                        <tr>
-                                                            <td class="w-10">
-                                                                <a href="panel-page-profile.html" class="avatar avatar-lg">
-                                                                    <img src="assets/img/dummy/u6.png" alt="">
-                                                                </a>
-                                                            </td>
-                                                            <td>
-                                                                <h6>{{ $j->fullname ?? null }} {{ $j->last_name ?? null }}</h6>
-                                                                <small class="text-muted">{{ $j->position ?? null }}</small>
-                                                            </td>
-                                                            <td>{{ $j->phone1 ?? null }}</td>
-                                                            
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
+                                                    <tbody></tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -137,8 +120,7 @@
                                         <div class="bg-primary text-white lighten-2">
                                             <div class="pt-5 pb-2 pl-5 pr-5">
                                                 <h5 class="font-weight-normal s-14">Usuarios</h5>
-                                                <span class="s-48 font-weight-lighter text-primary">
-                                                {{ $count_user }}</span>
+                                                <span class="s-48 font-weight-lighter text-primary" id="countUsers">0</span>
                                                 <div class="float-right"></div>
                                             </div>
                                             <canvas width="378" height="94" data-chart="spark" data-chart-type="line" data-dataset="[[28,530,200,430]]" data-labels="['a','b','c','d']"
@@ -149,28 +131,14 @@
                                         </div>
                                         <div class="slimScroll b-b" data-height="385">
                                             <div class="table-responsive">
-                                            <table class="table table-hover earning-box">
+                                            <table class="table table-hover earning-box" id="contentUsers">
                                                     <thead class="no-b">
                                                     <tr>
                                                         <th colspan="2">Nombres y Apellidos</th>
                                                         <th>Teléfono</th>
                                                     </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        @foreach($users as $u)
-                                                        <tr>
-                                                            <td class="w-10">
-                                                            {{ Html::image('img/avatar/'.$u->file, 'a picture', array('alt'=>'Logo')) }}
-                                                            </td>
-                                                            <td>
-                                                                <h6>{{ $u->fullname ?? null }} {{ $u->last_name ?? null }}</h6>
-                                                                <small class="text-muted">{{ $u->position ?? null }}</small>
-                                                            </td>
-                                                            <td>{{ $u->phone1 ?? null }}</td>
-                                                            
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
+                                                    <tbody></tbody>
                                                 </table>
                                             </div>
                                         </div>

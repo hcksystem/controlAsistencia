@@ -66,6 +66,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('grupo/edit/{id}', 'GrupoController@edit')->name('grupo.edit');
 	Route::get('grupo/delete/{id}', 'GrupoController@destroy')->name('grupo.delete');
+	Route::get('searchJefes/{id}', 'GrupoController@searchJefes')->name('searchJefes');
+	Route::get('searchUsers/{id}', 'GrupoController@searchUsers')->name('searchUsers');
 
 });
 

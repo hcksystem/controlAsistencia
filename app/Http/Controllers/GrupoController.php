@@ -110,4 +110,20 @@ class GrupoController extends Controller
         }
         
     }
+
+    public function searchJefes($id)
+    {
+        $jefes = User::leftjoin('role_user','users.id','role_user.user_id')
+        ->leftjoin('roles','role_user.role_id','roles.id')
+        ->where('roles.id',3)
+        ->get();
+        return response()->json($jefes);
+    }
+
+    public function searchUsers($id)
+    {
+        $users = User::all();
+        return response()->json($users);
+    }
+
 }

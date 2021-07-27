@@ -81,3 +81,37 @@ function updateGroup(id){
         },
     });
 }
+
+function searchUsers(id){
+    url = route("searchJefes",id);
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function(data)
+        {
+            let countJefes = data.length;
+            $("#countJefes").html(countJefes);
+            $("#contentJefes tr").remove(); 
+            $.each(data, function(key, value){
+                $('#contentJefes').append('<tr><td><img src="img/avatar/'+value.image+'" alt=""></td><td>' + value.fullname +' '+ value.lastname + '</td><td>' + value.phone1 + '</td></tr>');
+                    $('#'+'_'+key).val(value);
+            });
+        }
+    });
+
+    url = route("searchUsers",id);
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function(data)
+        {
+            let countUsers = data.length;
+            $("#countUsers").html(countUsers);
+            $("#contentUsers tr").remove(); 
+            $.each(data, function(key, value){
+                $('#contentUsers').append('<tr><td><img src="img/avatar/'+value.image+'" alt=""></td><td>' + value.fullname +' '+ value.lastname + '</td><td>' + value.phone1 + '</td></tr>');
+                    $('#'+'_'+key).val(value);
+            });
+        }
+    });
+}

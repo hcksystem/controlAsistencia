@@ -9,10 +9,8 @@
             </div>
             <div class="modal-body">
                 <div class="form-row">
-                   
                     <div class="col-md-12">
                         <div class="form-group m-0 has-feedback" id="campo_group">
-                            
                             {!! Form::label('grupo', 'Grupo', ['class'=>'col-form-label s-12']) !!}
                             {!! Form::text('group', null, ['class'=>'form-control r-0 light s-12', 'id'=>'_group', 'onclick'=>'inputClear(this.id)']) !!}
                             <span class="campo_span"></span>
