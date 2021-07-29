@@ -51,11 +51,11 @@
                                         <ul id="menu">
                                             @foreach($groups as $gr)
                                             <li><input type="checkbox" name="list" id="nivel1-{{$gr->group}}"  onclick="subgrupo({{$gr->id}})">
-                                            <label for="nivel1-{{$gr->group}}" onclick="asignEdit({{$gr->id}}),searchUsers({{$gr->id}})">{{ $gr->group }}</label>
+                                            <label for="nivel1-{{$gr->group}}" onclick="asignEdit({{$gr->id}},'{{ $gr->group }}'),searchUsers({{$gr->id}})" style="cursor: pointer">{{ $gr->group }}</label>
                                                 <ul class="interior ml-2">
                                                         @foreach($subgroups as $g)
                                                             @if($gr->id == $g->id_group_parent)
-                                                                <li><a href="#r" onclick="searchUsers({{$g->id}})">{{ $g->group ?? ''}}</a></li>
+                                                                <li><a href="#r" onclick="searchUsers(asignEdit({{$g->id}},'{{ $g->group }}'),{{$g->id}})">{{ $g->group ?? ''}}</a></li>
                                                             @endif
                                                         @endforeach
                                                 </ul>

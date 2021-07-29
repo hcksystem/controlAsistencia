@@ -1,28 +1,12 @@
-function asignEdit(id){
+function asignEdit(id,name){
 
     $('#id_grupo').val(id);
+    $('#_group').val(name);
 }
 
 function modificar(){
     let id = $('#id_grupo').val();
     $('#update').modal('show');
-
-    url = route("grupo.edit",id);
-    $.ajax({
-        url: url,
-        type: "GET",
-        success: function(data)
-        {
-            $.each(data, function(key, value){
-                    $('#'+'_'+key).val(value);
-            });
-        },
-        fail: function(){
-        },
-        beforeSend: function(){
-        }
-    });
-
 }
 
 function eventGroup(action){
@@ -93,7 +77,7 @@ function searchUsers(id){
             $("#countJefes").html(countJefes);
             $("#contentJefes td").remove(); 
             $.each(data, function(key, value){
-                $('#contentJefes').append('<tr><td><img src="img/avatar/'+value.image+'" alt=""></td><td>' + value.fullname +' '+ value.lastname + '</td><td>' + value.phone1 + '</td></tr>');
+                $('#contentJefes').append('<tr><td><a class="avatar avatar-lg"><img src="img/avatar/'+value.image+'" alt=""></a></td><td>' + value.fullname +' '+ value.lastname + '</td><td>' + value.phone1 + '</td></tr>');
                     $('#'+'_'+key).val(value);
             });
         }
