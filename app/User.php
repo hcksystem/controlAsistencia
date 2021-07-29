@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function grupo()
     {
-        return $this->belongsTo('App\UsersGroups', 'id_user','id');
+        return $this->belongsTo('App\UsersGroups', 'id','id_user');
     }
 
     /**

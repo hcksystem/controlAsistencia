@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                  <form action="{{ route('user.update',$user->id) }}" method="POST" autocomplete="off">
+                  <form action="{{ route('user.update',$user->id) }}" method="POST" autocomplete="off" enctype='multipart/form-data' files='true'>
                   @csrf
                           <div class="col-md-12">
                             <div class="row">
@@ -148,19 +148,30 @@
 <script>
     var title = 'Users';
     var colunms = [0,1,2,3,4];
-    var image = $('#_file').val();
-    console.log(image)
-    validarFile(image,'file');
+    var namefile = $('#_file').val();
+ 
+        var url = '../img/avatar/' +namefile;
+        
+        $(".file").fileinput({
+            allowedFileExtensions: ['jpg','jpge','png', 'gif'],
+            initialPreview: [url],
+            initialPreviewAsData: true,
+            showCaption: false,
+            showRemove: false,
+            showUpload: false,
+            showCancel: false,
+            showBrowse: false,
+            browseOnZoneClick: true,
+            overwriteInitial: true
+        });
 
-    $(".file").fileinput({
-        // theme: 'gly',
-        // uploadUrl: '#',
-        showCaption: false,
-        showRemove: false,
-        showUpload: false,
-        showBrowse: false,
-        browseOnZoneClick: true,
-    });
+        $('#file').on('fileclear', function(event) {
+            var ruta = $('#_url_imagen').val("");
+        });
+
+        $('#file').change(function () {
+                $('#_url_imagen').val($(this).val());
+            });
 
     dataTableExport(title,colunms);
 
@@ -196,39 +207,6 @@
     var key = window.Event ? e.which : e.keyCode
     return (key >= 48 && key <= 57)
   }
-   
-    function validarFile(image, id)
-  {
-      if (image != null)
-          {
-              var url = '/./public/img/avatar/' + image;
-              // destroy fileimput previous
-              $('#'+id).fileinput('destroy');
-              addImage2(url, id, image);
-          }
-  }
-
-  function addImage2(url, id, namefile)
-{
-    console.log(url)
-    $("#"+id).fileinput
-    ({
-        initialPreview: [url],
-        initialPreviewAsData: true,
-        initialPreviewConfig:
-            [
-                {caption: namefile},
-            ],
-        showCaption: false,
-        showRemove: false,
-        showUpload: false,
-        showBrowse: false,
-        overwriteInitial: true,
-        browseOnZoneClick: true,
-        initialCaption: namefile
-    });
-}
-
 
 </script>
 @endsection
