@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="form-group col-4 m-0" id="status_group">
                                   {!! Form::label('grupo', 'Grupo', ['class'=>'col-form-label s-12']) !!}
-                                  {!! Form::select('id_group', $grupos, $user->grupo->id_group ?? '', ['class'=>'form-control r-0 light s-12', 'id'=>'id_group', 'onclick'=>'inputClear(this.id)']) !!}
+                                  {!! Form::select('id_group', $grupos, $user->grupo->id_group ?? '', ['class'=>'form-control r-0 light s-12', 'id'=>'id_group', 'onclick'=>'inputClear(this.id)','required']) !!}
                                   <span class="status_span"></span>
 							                  </div>
                               </div>
