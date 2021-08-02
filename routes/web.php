@@ -68,6 +68,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('grupo/delete/{id}', 'GrupoController@destroy')->name('grupo.delete');
 	Route::get('searchJefes/{id}', 'GrupoController@searchJefes')->name('searchJefes');
 	Route::get('searchUsers/{id}', 'GrupoController@searchUsers')->name('searchUsers');
+	Route::get('getAllGroups', 'GrupoController@getAllGroups')->name('getAllGroups');
+	Route::get('getAllJefes', 'GrupoController@getAllJefes')->name('getAllJefes');
 
 	Route::post('user/update/{id}', 'UserController@update')->name('user.update');
 

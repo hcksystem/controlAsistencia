@@ -41,40 +41,12 @@
                             </div>
                         @endif
                     <div class="row" style="margin-top:-100px;">
-                    <div class="col-md-4">
-                    <div class="white">
-                        <div class="card">
-                            <div class="card-body no-p">
-                                <div class="tab-content">
-                                    <div>
-                                        <div class="slimScroll b-b" data-height="385">
-                                        <ul id="menu">
-                                            @foreach($groups as $gr)
-                                            <li><input type="checkbox" name="list" id="nivel1-{{$gr->group}}"  onclick="subgrupo({{$gr->id}})">
-                                            <label for="nivel1-{{$gr->group}}" onclick="asignEdit({{$gr->id}},'{{ $gr->group }}'),searchUsers({{$gr->id}})" style="cursor: pointer">{{ $gr->group }}</label>
-                                                <ul class="interior ml-2">
-                                                        @foreach($subgroups as $g)
-                                                            @if($gr->id == $g->id_group_parent)
-                                                                <li><a href="#r" onclick="searchUsers(asignEdit({{$g->id}},'{{ $g->group }}'),{{$g->id}})">{{ $g->group ?? ''}}</a></li>
-                                                            @endif
-                                                        @endforeach
-                                                </ul>
-                                            </li>
-                                            @endforeach
-                                         </ul>
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <input type="hidden" id="id_grupo">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreateGroup">CREAR GRUPO</button>
-                                        <button type="button" class="btn btn-success" onclick="modificar()">MODIFICAR</button>
-                                    </div>
-                                </div>
+                        <div class="col-md-12" style="margin-bottom:0px !important">
+                            <div class="col-md-6" style="margin-top:100px; margin-bottom:0px !important">
+                                {!! Form::select('group', $groups,null, ['class'=>'form-control r-0 light s-12', 'id'=>'_group', 'onclick'=>'searchUsers(this.value)']) !!}
                             </div>
                         </div>
-                    </div>
-                </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                     <div class="white">
                         <div class="card">
                             <div class="card-body no-p">
@@ -99,6 +71,7 @@
                                                     <tr>
                                                         <th colspan="2">Nombres y Apellidos</th>
                                                         <th>Teléfono</th>
+                                                        <th>Grupo</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody></tbody>
@@ -111,7 +84,7 @@
                             </div>
                         </div>
                     </div>
-                </div> <div class="col-md-4">
+                </div> <div class="col-md-6">
                     <div class="white">
                         <div class="card">
                             <div class="card-body no-p">
@@ -136,6 +109,7 @@
                                                     <tr>
                                                         <th colspan="2">Nombres y Apellidos</th>
                                                         <th>Teléfono</th>
+                                                        <th>Grupo</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody></tbody>
@@ -161,9 +135,109 @@
 @section('js')
 <script src={{asset('assets/js/group.js')}}></script>
 <script>
+    mostrarJefes();
     function subgrupo(id){
+        //alert(id)
         $('#parent_group').val(id);
+        $.ajax({
+            type : 'get',
+            url : "{{ url('getAllGroups') }}",
+            success:function(data){
+                console.log(data)
+                $.each(data, function(key, value){
+                    if(value.id_group_parent == value.id){
+                        $('#list'+id).append(
+                            $('<ul onclick="subgrupo('+value.id+')">').attr('id', 'list'+value.id).append(
+                                $('<label>').append(
+                                    $('<span>').attr('class', 'tab').append(value.group)
+                                    
+                            )));
+                    }
+                });    
+                
+                }
+            });
+
     }
+
+    //grupos();
+
+    function grupos(){
+
+            $.ajax({
+            type : 'get',
+            url : "{{ url('getAllGroups') }}",
+            success:function(data){
+                console.log(data)
+                $.each(data, function(key, value){
+                    if(value.id_group_parent == 0){
+                        $('#menu').append(
+                            $('<ul onclick="subgrupo('+value.id+')">').attr('id', 'list'+value.id).append(
+                                $('<label>').append(
+                                    $('<span>').attr('class', 'tab').append(value.group)
+                                    
+                            )));
+                    }
+                });    
+                
+                }
+            });
+
+    }
+
+    function mostrarJefes(){
+    url = route("getAllJefes");
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function(data)
+        {
+            let countJefes = data.length;
+            $("#countJefes").html(countJefes);
+            $("#contentJefes td").remove(); 
+            $.each(data, function(key, value){
+                $('#contentJefes').append('<tr><td><a class="avatar avatar-lg"><img src="img/avatar/'+value.image+'" alt=""></a></td><td>' + value.fullname +' '+ value.last_name + '</td><td>' + value.phone1 + '</td><td>' + value.group + '</td></tr>');
+                    $('#'+'_'+key).val(value);
+            });
+        }
+    });
+}
+
+
+function searchUsers(id){
+    
+    url = route("searchJefes",id);
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function(data)
+        {
+            let countJefes = data.length;
+            $("#countJefes").html(countJefes);
+            $("#contentJefes td").remove(); 
+            $.each(data, function(key, value){
+                $('#contentJefes').append('<tr><td><a class="avatar avatar-lg"><img src="img/avatar/'+value.image+'" alt=""></a></td><td>' + value.fullname +' '+ value.lastname + '</td><td>' + value.phone1 + '</td></tr>');
+                    $('#'+'_'+key).val(value);
+            });
+        }
+    });
+
+    url = route("searchUsers",id);
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function(data)
+        {
+            let countUsers = data.length;
+            $("#countUsers").html(countUsers);
+            $("#contentUsers td").remove(); 
+            $.each(data, function(key, value){
+                $('#contentUsers').append('<tr><td><a class="avatar avatar-lg"><img src="img/avatar/'+value.image+'" alt=""></a></td><td><h6>' + value.fullname +' '+ value.lastname + '</h6></td><td>' + value.phone1 + '</td></tr>');
+                    $('#'+'_'+key).val(value);
+            });
+        }
+    });
+}
 </script>
 
 @endsection

@@ -22,7 +22,7 @@ class GrupoController extends Controller
                         ->where('roles.id',3)
                         ->count();
         $users = User::all();
-        $groups = Group::where('id_group_parent',0)->get();
+        $groups = Group::get()->sortBy('group')->pluck('group','id')->prepend('Seleccione...','');
         $subgroups = Group::all();
         $jefes = User::leftjoin('role_user','users.id','role_user.user_id')
         ->leftjoin('roles','role_user.role_id','roles.id')
@@ -130,6 +130,36 @@ class GrupoController extends Controller
         ->where('groups.id',$id)
         ->get();
         return response()->json($users);
+    }
+
+    public function getAllGroups()
+    {
+        $groups = Group::all();
+        return response()->json($groups);
+    }
+
+    public function getAllJefes()
+    {
+        $jefes = User::leftjoin('role_user','users.id','role_user.user_id')
+        ->leftjoin('roles','role_user.role_id','roles.id')
+        ->leftjoin('users_groups','users.id','users_groups.id_user')
+        ->leftjoin('groups','users_groups.id','groups.id')
+        ->select('users.fullname','users.last_name','users.phone1','users.image','groups.group')
+        ->where('roles.id',3)
+        ->get();
+        return response()->json($jefes);
+    }
+
+    public function getAllUsers()
+    {
+        $jefes = User::leftjoin('role_user','users.id','role_user.user_id')
+        ->leftjoin('roles','role_user.role_id','roles.id')
+        ->leftjoin('users_groups','users.id','users_groups.id_user')
+        ->leftjoin('groups','users_groups.id','groups.id')
+        ->select('users.fullname','users.last_name','users.phone1','users.image','groups.group')
+        ->where('roles.id',3)
+        ->get();
+        return response()->json($jefes);
     }
 
 }
