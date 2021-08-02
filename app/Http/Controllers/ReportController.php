@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 use App\Asistencia;
 
-class AsistenciaController extends Controller
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,8 @@ class AsistenciaController extends Controller
      */
     public function index()
     {
-        //
+        $asistencia = Asistencia::all();
+        return view('pages.report.index',compact('asistencia'));
     }
 
     /**
@@ -37,12 +36,7 @@ class AsistenciaController extends Controller
      */
     public function store(Request $request)
     {
-        $asis = new Asistencia();
-        $asis->id_user = Auth::user()->id;
-        $asis->fecha = Carbon::now();
-        $asis->tipo = true;
-        $asis->sistema = 'web';
-        $asis->save();
+        //
     }
 
     /**
@@ -76,12 +70,7 @@ class AsistenciaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request->all());
-        $asis = Asistencia::find($id);
-        $asis->fecha = Carbon::now();
-        $asis->tipo = $request->tipo;
-        $asis->sistema = 'web';
-        $asis->save();
+        //
     }
 
     /**

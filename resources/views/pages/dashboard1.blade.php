@@ -30,9 +30,16 @@
                                     </p>
                                 </div>
                                 @if(isset($asistencia))
-                                <a onclick="actualizarAsistencia({{ $asistencia->id }})" class="btn btn-danger col-6">Registrar Salida</a>
+                                    @if($asistencia->tipo == 0)
+                                        <input type="hidden" value="1" name="tipo">
+                                        <a onclick="actualizarAsistencia({{ $asistencia->id }})" class="btn btn-danger col-6">Registrar Salida</a>
+                                    @else
+                                        <input type="hidden" value="0" name="tipo">
+                                        <a onclick="actualizarAsistencia({{ $asistencia->id }})" class="btn btn-success col-6">Registrar Entrada</a>
+                                    @endif
                                 @else
-                                <a onclick="guardarAsistencia()" class="btn btn-success col-6">Registrar Entrada</a>
+                                    <input type="hidden" value="0" name="tipo">
+                                    <a onclick="guardarAsistencia()" class="btn btn-success col-6">Registrar Entrada</a>
                                 @endif
                             </form>
                         </div>

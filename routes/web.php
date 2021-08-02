@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController');
 	Route::resource('rol', 'RolController');
 	Route::resource('permission', 'PermissionController');
+	Route::resource('report', 'ReportController');
 	// home
 	Route::get('/home', 'HomeController@index')->name('home');
 
