@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Session;
-use App\Building;
+use App\Asistencia;
 use App\Usuario_Edificio;
 
 
@@ -32,7 +32,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-         return view('pages.dashboard1');
+         $asistencia = Asistencia::where('id_user',Auth::user()->id)->first();
+         return view('pages.dashboard1',compact('asistencia'));
     } 
     
 } 

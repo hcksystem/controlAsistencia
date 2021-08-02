@@ -72,6 +72,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('getAllJefes', 'GrupoController@getAllJefes')->name('getAllJefes');
 
 	Route::post('user/update/{id}', 'UserController@update')->name('user.update');
+	Route::post('asistencia/store', 'AsistenciaController@store')->name('asistencia.store');
+	Route::post('asistencia/update/{id}', 'AsistenciaController@update')->name('asistencia.update');
 
 });
 

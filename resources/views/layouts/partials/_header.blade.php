@@ -66,6 +66,15 @@
                 <ul class="treeview-menu">
                 </ul>
          </li>
+         <li class="treeview ">
+                <a href="#">
+                    <i class="icon icon-data_usage text-lime s-18"></i> <span>Reporte</span>
+                    <i class="icon icon-angle-left s-18 pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                </ul>
+         </li>
+
 
     </ul>
 

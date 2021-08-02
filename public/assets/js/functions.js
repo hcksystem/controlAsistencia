@@ -952,3 +952,39 @@ $("#_principal_com , #_p_broker_com_mt_id, #_s_broker_com_mt" ).on("click keyup 
       $(this).val(number);
     }
 }); 
+
+function guardarAsistencia(){
+    url = route("asistencia.store");
+    var formData =  $('#formAsistencia').serialize();
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: formData,
+        success: function(data)
+        {
+            toastr.success('¡Actualizado con éxito!');
+            location.reload();
+        },
+        error: function (data){
+            toastr.error('¡Ocurrió un error!');
+        },
+    });
+}
+
+function actualizarAsistencia(id){
+    url = route("asistencia.update",id);
+    var formData =  $('#formAsistencia').serialize();
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: formData,
+        success: function(data)
+        {
+            toastr.success('¡Actualizado con éxito!');
+            location.reload();
+        },
+        error: function (data){
+            toastr.error('¡Ocurrió un error!');
+        },
+    });
+}
