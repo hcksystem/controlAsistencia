@@ -19,9 +19,9 @@
                                 </div>
                                 <div class="content">
                                     <h6 class="pt-2 pb-2" style="background-color:#d4d2d2"> HORA ACTUAL </h6>
-                                    <h1 class="text-blue" id="hour">{{ date('H:i:s') }}</h1>
+                                    <h1 class="text-blue" id="hour"></h1>
                                     <p class="text-left"><b>Última Marca:</b>{{$asistencia->fecha ?? null }}</p>
-                                    <p class="text-left"><b>Tipo Marca:</b>@if($asistencia->tipo == 1) Entrada @else Salida @endif</p>
+                                    <p class="text-left"><b>Tipo Marca:</b>@if(isset($asistencia->tipo))@if($asistencia->tipo == 1) Entrada @else Salida @endif @endif</p>
                                 </div>
                                 <div class="footer text-left">
                                     <p>Para registrar asistencia presione el botón correspondiente
@@ -60,7 +60,7 @@
 @endsection
 @section('js')
 <script>
-  
+  mueveReloj();
    function mueveReloj(){
     momentoActual = new Date()
     hora = momentoActual.getHours()
@@ -69,7 +69,6 @@
 
     horaImprimible = hora + " : " + minuto + " : " + segundo
 
-    document.form_reloj.reloj.value = horaImprimible
     $('#hour').html(horaImprimible)
 
     setTimeout("mueveReloj()",1000)
