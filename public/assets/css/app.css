@@ -8,7 +8,7 @@
  */
 
 :root {
-    --blue: #03a9f4;
+    --blue: #064572;
     --indigo: #6610f2;
     --purple: #6f42c1;
     --pink: #e83e8c;
@@ -21,7 +21,7 @@
     --white: #fff;
     --gray: #6c757d;
     --gray-dark: #343a40;
-    --primary: #03a9f4;
+    --primary: #064572;
     --secondary: #6c757d;
     --success: #7dc855;
     --info: #78BCEE;
@@ -171,7 +171,7 @@ sup {
 }
 
 a {
-    color: #03a9f4;
+    color: #064572;
     text-decoration: none;
     background-color: transparent
 }
@@ -2370,8 +2370,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #03a9f4;
-    border-color: #03a9f4
+    background-color: #064572;
+    border-color: #064572
 }
 
 .btn-primary:hover {
@@ -2388,8 +2388,8 @@ fieldset:disabled a.btn {
 .btn-primary.disabled,
 .btn-primary:disabled {
     color: #fff;
-    background-color: #03a9f4;
-    border-color: #03a9f4
+    background-color: #064572;
+    border-color: #064572
 }
 
 .btn-primary:not(:disabled):not(.disabled).active,
@@ -2673,14 +2673,14 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-primary {
-    color: #03a9f4;
-    border-color: #03a9f4
+    color: #064572;
+    border-color: #064572
 }
 
 .btn-outline-primary:hover {
     color: #fff;
-    background-color: #03a9f4;
-    border-color: #03a9f4
+    background-color: #064572;
+    border-color: #064572
 }
 
 .btn-outline-primary.focus,
@@ -2690,7 +2690,7 @@ fieldset:disabled a.btn {
 
 .btn-outline-primary.disabled,
 .btn-outline-primary:disabled {
-    color: #03a9f4;
+    color: #064572;
     background-color: transparent
 }
 
@@ -2698,8 +2698,8 @@ fieldset:disabled a.btn {
 .btn-outline-primary:not(:disabled):not(.disabled):active,
 .show>.btn-outline-primary.dropdown-toggle {
     color: #fff;
-    background-color: #03a9f4;
-    border-color: #03a9f4
+    background-color: #064572;
+    border-color: #064572
 }
 
 .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
@@ -2962,7 +2962,7 @@ fieldset:disabled a.btn {
 
 .btn-link {
     font-weight: 400;
-    color: #03a9f4;
+    color: #064572;
     text-decoration: none
 }
 
@@ -3270,7 +3270,7 @@ input[type=submit].btn-block {
 .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #03a9f4
+    background-color: #064572
 }
 
 .dropdown-item.disabled,
@@ -3628,8 +3628,8 @@ input[type=submit].btn-block {
 
 .custom-control-input:checked~.custom-control-label::before {
     color: #fff;
-    border-color: #03a9f4;
-    background-color: #03a9f4
+    border-color: #064572;
+    background-color: #064572
 }
 
 .custom-control-input:focus~.custom-control-label::before {
@@ -3693,8 +3693,8 @@ input[type=submit].btn-block {
 }
 
 .custom-checkbox .custom-control-input:indeterminate~.custom-control-label::before {
-    border-color: #03a9f4;
-    background-color: #03a9f4
+    border-color: #064572;
+    background-color: #064572
 }
 
 .custom-checkbox .custom-control-input:indeterminate~.custom-control-label::after {
@@ -3916,7 +3916,7 @@ input[type=submit].btn-block {
     width: 1rem;
     height: 1rem;
     margin-top: -.25rem;
-    background-color: #03a9f4;
+    background-color: #064572;
     border: 0;
     border-radius: 1rem;
     transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
@@ -3946,7 +3946,7 @@ input[type=submit].btn-block {
 .custom-range::-moz-range-thumb {
     width: 1rem;
     height: 1rem;
-    background-color: #03a9f4;
+    background-color: #064572;
     border: 0;
     border-radius: 1rem;
     transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
@@ -3979,7 +3979,7 @@ input[type=submit].btn-block {
     margin-top: 0;
     margin-right: .2rem;
     margin-left: .2rem;
-    background-color: #03a9f4;
+    background-color: #064572;
     border: 0;
     border-radius: 1rem;
     transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
@@ -4120,7 +4120,7 @@ input[type=submit].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
     color: #fff;
-    background-color: #03a9f4
+    background-color: #064572
 }
 
 .nav-fill .nav-item {
@@ -4792,7 +4792,7 @@ input[type=submit].btn-block {
     padding: .5rem .75rem;
     margin-left: -1px;
     line-height: 1.25;
-    color: #03a9f4;
+    color: #064572;
     background-color: #fff;
     border: 1px solid #e1e8ee
 }
@@ -4825,8 +4825,8 @@ input[type=submit].btn-block {
 .page-item.active .page-link {
     z-index: 1;
     color: #fff;
-    background-color: #03a9f4;
-    border-color: #03a9f4
+    background-color: #064572;
+    border-color: #064572
 }
 
 .page-item.disabled .page-link {
@@ -4910,7 +4910,7 @@ a.badge:hover {
 
 .badge-primary {
     color: #fff;
-    background-color: #03a9f4
+    background-color: #064572
 }
 
 a.badge-primary:focus,
@@ -5228,7 +5228,7 @@ a.badge-dark:focus {
     color: #fff;
     text-align: center;
     white-space: nowrap;
-    background-color: #03a9f4;
+    background-color: #064572;
     transition: width .6s ease
 }
 
@@ -5318,8 +5318,8 @@ a.badge-dark:focus {
 .list-group-item.active {
     z-index: 2;
     color: #fff;
-    background-color: #03a9f4;
-    border-color: #03a9f4
+    background-color: #064572;
+    border-color: #064572
 }
 
 .list-group-horizontal {
@@ -6429,7 +6429,7 @@ a.close.disabled {
 }
 
 .bg-primary {
-    background-color: #03a9f4!important
+    background-color: #064572!important
 }
 
 a.bg-primary:focus,
@@ -6565,7 +6565,7 @@ button.bg-dark:hover {
 }
 
 .border-primary {
-    border-color: #03a9f4!important
+    border-color: #064572!important
 }
 
 .border-secondary {
@@ -9595,7 +9595,7 @@ button.bg-dark:hover {
 }
 
 .text-primary {
-    color: #03a9f4!important
+    color: #064572!important
 }
 
 a.text-primary:focus,
@@ -23619,7 +23619,7 @@ a.text-dark:hover {
     opacity: .8;
     text-decoration: none;
     outline: medium none;
-    color: #03a9f4
+    color: #064572
 }
 
 .navbar .nav-btn {
@@ -24045,7 +24045,7 @@ body {
 }
 
 a {
-    color: #03a9f4
+    color: #064572
 }
 
 a:active,
@@ -24053,7 +24053,7 @@ a:focus,
 a:hover {
     outline: 0;
     text-decoration: none;
-    color: #03a9f4
+    color: #064572
 }
 
 h5,
@@ -24142,7 +24142,7 @@ header h2 {
 
 .page .page-header h1 small,
 .page .search-section h1 small {
-    background: #03a9f4;
+    background: #064572;
     color: #fff;
     font-size: 14px;
     font-weight: 300;
@@ -24233,7 +24233,7 @@ ul.iconList li {
 }
 
 ul.iconList li:before {
-    color: #03a9f4;
+    color: #064572;
     content: "";
     display: inline-block;
     font-family: paperIcons
@@ -24407,7 +24407,7 @@ ul li:before {
 
 .breadcrumbs ol li a {
     text-decoration: none;
-    color: #03a9f4
+    color: #064572
 }
 
 .breadcrumbs ol li::after {
@@ -24583,7 +24583,7 @@ ul li:before {
 }
 
 #nprogress .bar {
-    background: #03a9f4;
+    background: #064572;
     position: fixed;
     z-index: 9999;
     top: 0;
@@ -24598,7 +24598,7 @@ ul li:before {
     right: 0;
     width: 100px;
     height: 100%;
-    box-shadow: 0 0 10px #03a9f4, 0 0 5px #03a9f4;
+    box-shadow: 0 0 10px #064572, 0 0 5px #064572;
     opacity: 1;
     -webkit-transform: rotate(3deg) translate(0, -4px);
     -ms-transform: rotate(3deg) translate(0, -4px);
@@ -24618,8 +24618,8 @@ ul li:before {
     height: 18px;
     box-sizing: border-box;
     border: solid 2px transparent;
-    border-top-color: #03a9f4;
-    border-left-color: #03a9f4;
+    border-top-color: #064572;
+    border-left-color: #064572;
     border-radius: 50%;
     -webkit-animation: nprogress-spinner .4s linear infinite;
     animation: nprogress-spinner .4s linear infinite
@@ -25182,11 +25182,11 @@ ul li:before {
 }
 
 .text-light-blue {
-    color: #03a9f4!important
+    color: #064572!important
 }
 
 .light-blue {
-    background-color: #03a9f4!important
+    background-color: #064572!important
 }
 
 .dark-blue {
@@ -25787,7 +25787,7 @@ ul.list-group.list-group-hover li:hover {
 }
 
 .blue.accent-3 {
-    background-color: #2934ce!important
+    background-color: #064572!important
 }
 
 .blue.accent-4 {
@@ -25815,11 +25815,11 @@ ul.list-group.list-group-hover li:hover {
 }
 
 .light-blue {
-    background-color: #03a9f4!important
+    background-color: #064572!important
 }
 
 .light-blue-text {
-    color: #03a9f4!important
+    color: #064572!important
 }
 
 .light-blue.darken-1 {
@@ -31671,13 +31671,13 @@ a.fc-more:hover {
 }
 
 .sw-theme-circles>ul.step-anchor>li.active>a {
-    border-color: #03a9f4;
+    border-color: #064572;
     color: #fff;
-    background: #03a9f4
+    background: #064572
 }
 
 .sw-theme-circles>ul.step-anchor>li.active>a>small {
-    color: #03a9f4
+    color: #064572
 }
 
 .sw-theme-circles>ul.step-anchor>li.done>a {
@@ -32681,8 +32681,8 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child 
 }
 
 .lobilists .lobilist.lobilist-info .lobilist-header {
-    border-bottom: 1px solid #03a9f4;
-    background-color: #03a9f4
+    border-bottom: 1px solid #064572;
+    background-color: #064572
 }
 
 .lobilists .lobilist.lobilist-info .lobilist-header input {
@@ -32821,7 +32821,7 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child 
 }
 
 .lobilists .lobilist-actions .dropdown-menu .lobilist-info {
-    background-color: #03a9f4
+    background-color: #064572
 }
 
 .lobilists .lobilist-actions .dropdown-menu .lobilist-info:hover {
@@ -33104,7 +33104,7 @@ form label {
 .form-control-lg:focus,
 .input-group-lg>.form-control:focus,
 .input-group-lg>.input-group-addon:focus {
-    border-color: #03a9f4!important
+    border-color: #064572!important
 }
 
 textarea.form-control-lg {
@@ -33141,9 +33141,9 @@ input[type=radio] {
 }
 
 .btn-default:hover {
-    background: #03a9f4;
+    background: #064572;
     color: #fff;
-    border: 1px solid #03a9f4;
+    border: 1px solid #064572;
     box-shadow: none
 }
 
@@ -33164,7 +33164,7 @@ input[type=radio] {
     box-shadow: 0 3px 9px 0 rgba(0, 0, 0, .26);
     opacity: .8;
     color: #fff;
-    background: #03a9f4
+    background: #064572
 }
 
 .btn-danger {
@@ -33372,7 +33372,7 @@ a.btn-fab {
 .paper-nav-toggle.active i::before,
 .paper-nav-toggle.dl-active i::after,
 .paper-nav-toggle.dl-active i::before {
-    background: #03a9f4
+    background: #064572
 }
 
 .paper-nav-toggle:active,
@@ -33388,11 +33388,11 @@ a.btn-fab {
     display: inline-block;
     width: 25px;
     height: 2px;
-    color: #03a9f4;
+    color: #064572;
     font: bold 14px/.4 Helvetica;
     text-transform: uppercase;
     text-indent: -55px;
-    background: #03a9f4;
+    background: #FFFFFF;
     transition: all .2s ease-out
 }
 
@@ -33401,7 +33401,7 @@ a.btn-fab {
     content: '';
     width: 25px;
     height: 2px;
-    background: #03a9f4;
+    background: #FFFFFF;
     position: absolute;
     left: 0;
     transition: all .2s ease-out
@@ -33549,7 +33549,7 @@ a.btn-fab {
     -o-transition: .25s ease-in;
     -webkit-transition: .25s ease-in;
     transition: .25s ease-in;
-    border-bottom: 2px solid #03a9f4
+    border-bottom: 2px solid #064572
 }
 
 .form-material .input-group .form-line+.input-group-addon {
@@ -33710,7 +33710,7 @@ a.btn-fab {
     -o-transition: .25s ease-in;
     -webkit-transition: .25s ease-in;
     transition: .25s ease-in;
-    border-bottom: 2px solid #03a9f4
+    border-bottom: 2px solid #064572
 }
 
 .form-material .form-group .form-line .form-label {
@@ -33883,7 +33883,7 @@ a.btn-fab {
     display: block;
     width: 5px;
     height: 100%;
-    background: #03a9f4;
+    background: #064572;
     position: absolute;
     right: 0;
     bottom: 0
@@ -34260,7 +34260,7 @@ pre {
 .nav-material>li .nav-link.active {
     border: 0;
     background: 0 0;
-    border-bottom: 3px solid #03a9f4
+    border-bottom: 3px solid #064572
 }
 
 .nav-material>li>.nav-link {
@@ -34277,13 +34277,13 @@ pre {
 
 .nav-material>li>a:hover {
     border: none;
-    color: #03a9f4;
+    color: #064572;
     background: 0 0
 }
 
 .nav-material>li>a::after {
     content: "";
-    background: #03a9f4;
+    background: #064572;
     height: 3px;
     position: absolute;
     width: 100%;
@@ -34322,7 +34322,7 @@ pre {
 }
 
 .nav-icon-pills .btn-fab i {
-    color: #03a9f4
+    color: #064572
 }
 
 .nav-icon-pills .btn-fab.active i {
@@ -34383,7 +34383,7 @@ pre {
 }
 
 .v_tabs .tabs-left li .nav-link:hover {
-    background-color: #03a9f4;
+    background-color: #064572;
     text-decoration: none;
     color: #fff;
     border-radius: 5px
@@ -34537,7 +34537,7 @@ pre {
 .promotionsBar {
     position: relative;
     color: #fff;
-    background: #03a9f4;
+    background: #064572;
     z-index: 98
 }
 
@@ -34604,7 +34604,7 @@ pre {
 }
 
 .service-blocks .service-block .service-content h3 a:hover {
-    color: #03a9f4
+    color: #064572
 }
 
 .service-blocks .service-block .btn {
@@ -35519,8 +35519,8 @@ sticky:before {
 }
 
 .select2-container--default .select2-selection--single:focus {
-    border: 1px solid #03a9f4;
-    box-shadow: 0 1px 0 0 #03a9f4
+    border: 1px solid #064572;
+    box-shadow: 0 1px 0 0 #064572
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
@@ -35587,12 +35587,12 @@ sticky:before {
 }
 
 .select2-container--default.select2-container--focus .select2-selection--multiple {
-    border: 1px solid #03a9f4!important
+    border: 1px solid #064572!important
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
     background-color: #fff;
-    border: 2px solid #03a9f4!important;
+    border: 2px solid #064572!important;
     border-radius: 20px;
     cursor: default;
     float: left;
@@ -36510,7 +36510,7 @@ sticky:before {
 }
 
 .activity-item::before {
-    color: #03a9f4;
+    color: #064572;
     background: #fff;
     content: "\f10c";
     left: -7px;
@@ -36757,7 +36757,7 @@ sticky:before {
 }
 
 .theme-dark .form-control:focus {
-    border-color: #03a9f4
+    border-color: #064572
 }
 
 .theme-dark .card-header .white,
@@ -36778,7 +36778,7 @@ sticky:before {
 .theme-dark .sidebar-tabs a.active,
 .theme-dark .tab-content a.active,
 .theme-dark.offcanvas .sidebar-menu>li a.active {
-    color: #03a9f4
+    color: #064572
 }
 
 .theme-dark .offcanvas .sidebar-menu>li a.nav-link,
@@ -36942,6 +36942,7 @@ html[dir=rtl] .form-group.has-icon input {
    cursor:pointer; 
    cursor: hand;
 }
+
 
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
 

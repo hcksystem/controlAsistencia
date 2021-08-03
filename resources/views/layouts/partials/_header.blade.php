@@ -1,7 +1,7 @@
 <aside class="main-sidebar fixed offcanvas shadow" data-toggle='offcanvas'>
     <section class="sidebar">
         <div class="w-150px mt-3 mb-3 ml-3">
-            {{--Html::image('assets/img/basic/logoadm.png', 'a picture', array('alt'=>'Logo')) --}}
+            {{  Html::image('assets/img/basic/logoadm.png', 'a picture', array('alt'=>'Logo')) }}
         </div>
           <div class="relative">
 
@@ -11,7 +11,7 @@
                         {{ Html::image('img/avatar/default.png', 'a picture', array('class'=>'user_avatar','alt'=>'a picture')) }}
                     </div>
                     <div class="float-left info">
-                        <h6 class="font-weight-light mt-2 mb-1">{{ Auth::user()->fullname }}</h6>
+                        <h6 class="font-weight-light mt-2 mb-1">&#161Hola {{ Auth::user()->fullname }}!</h6>
                         <a href="#"><i class="icon-circle text-primary blink"></i> Online</a>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
         </div>
         
         <ul class="sidebar-menu">
-        <li class="header"><strong>MÓDULOS DEL SISTEMA</strong></li>
+        <li class="header"><strong>LIBRO DE ASISTENCIA</strong></li>
         
          @if(Auth::user()->hasRole('super') || Auth::user()->hasRole('user'))
           <li class="treeview"><a href="{{url('home')}}">

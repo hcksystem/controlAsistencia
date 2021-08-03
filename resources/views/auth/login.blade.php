@@ -9,16 +9,14 @@
             <div class="p-5 mt-5">
                 <img src="assets/img/basic/logoadm.png" alt=""/>
             </div>
-            <div class="p-5 login-form">
-                <h3>Welcome Back</h3>
-                <p>Hey Soldier welcome back signin now there is lot of
-                    new stuff waiting
-                    for you</p>
+            <div class="pl-5 pr-5 pb-5 login-form">
+                <h2>&#161Hola! &#161Hola!</h2>
+                <p>Ingresa para marcar asistencia, &#161que tengas una buena jornada y un gran dia!</p>
                 {!! Form::open(['route'=>'login','method'=>'POST']) !!}
                     {{ csrf_field() }}
                     <div class="form-group has-icon">
                         <i class="icon-envelope-o"></i>
-                        {!! Form::email('email', null, ['class'=>'form-control form-control-lg', 'placeholder'=>'Email Address', 'require']) !!}
+                        {!! Form::email('email', null, ['class'=>'form-control form-control-lg', 'placeholder'=>'Correo electronico', 'require']) !!}
                         @error('email')
                         <span class="help-block text-danger">
                             {{ $message }}
@@ -26,7 +24,7 @@
                         @enderror 
                     </div>
                     <div class="form-group has-icon"><i class="icon-user-secret"></i>
-                        {!! Form::password('password', ['class'=>'form-control form-control-lg', 'placeholder'=>'password', 'require']) !!}
+                        {!! Form::password('password', ['class'=>'form-control form-control-lg', 'placeholder'=>'Clave', 'require']) !!}
                         @error('password')
                         <span class="help-block text-danger">
                             {{ $message }}
@@ -36,16 +34,20 @@
                     <a href="#" onclick="mostrarForm('passwordReset')">
                         <p class="forget-pass">¿ Olvidaste tu contraseña ?</p>
                     </a>
-                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Log In">
+                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Iniciar Sesi&#243n">
                 {!! Form::close() !!}
             </div>
             <div class="p-5 form-passwordReset" style="display:none;" > 
                 @include('auth.passwords.email')
             </div>
         </div>
+        
+        
+ 
+
         <div class="col-md-8  height-full blue accent-3 align-self-center text-center" data-bg-repeat="false"
              data-bg-possition="center"
-             style="background: url('./assets/img/app/bgLogin.jpg') #FFEFE4; background-position: center center; background-repeat: no-repeat;
+             style=" background: url('./assets/img/app/bgLogin.jpeg') #FFEFE4; background-position: center center; background-repeat: no-repeat;
     background-size: cover;">
         </div>
     </div>
