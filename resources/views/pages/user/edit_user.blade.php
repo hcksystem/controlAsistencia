@@ -69,7 +69,7 @@
                                   <div class="form-group col-6 m-0">
                                       <i class="icon-key4 mr-2"></i>
                                       {!! Form::label('passwordConfirm', '* Confirma Contraseña', ['class'=>'col-form-label s-12','placeholder'=>'Password Confirm']) !!}
-                                      {!! Form::password('password_confirmation', ['class'=>'form-control r-0 light s-12', 'id'=>'password_confirmation', 'onclick'=>'inputClear(this.id)','required']) !!}
+                                      {!! Form::password('password_confirmation', ['class'=>'form-control r-0 light s-12', 'id'=>'password_confirmation', 'onclick'=>'inputClear(this.id)']) !!}
                                   </div>
                                   <div class="form-group col-4 m-0" id="_rol_group">
                                       {!! Form::label('role', '* Perfil', ['class'=>'col-form-label s-12']) !!}
