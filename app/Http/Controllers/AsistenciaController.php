@@ -36,13 +36,30 @@ class AsistenciaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   //dd($request->all());
+
+        $img = $request->image;
+        $path = public_path().'/img/avatar/';
+    
+        $image_parts = explode(";base64,", $img);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_parts[0] = isset($image_type_aux[1]) ? $image_type_aux[1] : null;
+        //$image_type = $image_type_aux[1];
+    
+        $image_base64 = base64_decode($image_parts[1]);
+        $fileName = uniqid() . '.png';
+    
+        $file = $path . $fileName;
+        file_put_contents($file, $image_base64);
+
+
         $asis = new Asistencia();
         $asis->id_user = Auth::user()->id;
         $asis->fecha = Carbon::now();
         $asis->tipo = $request->tipo;
         $asis->sistema = 'web';
         $asis->ip = $request->ip();
+        $asis->image = $fileName;
         $asis->save();
     }
 

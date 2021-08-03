@@ -1,19 +1,20 @@
 @extends('layouts.app')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 @section('title')
 <h1 class="nav-title text-white"> <i class="icon-home2"></i>
     Tablero @if(session()->has('idEdificio')) | {{ session('nameEdificio')}} @endif</h1>
 @endsection
 
 @section('maincontent')
-
-<div class="container-fluid animatedParent animateOnce my-3" onload="mueveReloj()">
+@include('pages.asistencia')
+<div class="container-fluid animatedParent animateOnce my-3">
         <div class="animated fadeInUpShort" style="margin-top:-40px;">
 
             <div class="d-flex row row-eq-height my-3">
                 <div class="col-md-5">
                     <div class="card text-center">
                         <div class="p-4">
-                            <form id="formAsistencia">
+                           
                                 <div class=" pt-2 pb-1" style="background-color:#f5f8fa">
                                     <h4 class="text-center font-weight-normal ">Registrar Nueva Marcación</h4>
                                 </div>
@@ -57,14 +58,14 @@
                                 @if(isset($asistencia))
                                     @if($asistencia->tipo == 0)
                                         <input type="hidden" value="1" name="tipo">
-                                        <a onclick="guardarAsistencia()" class="btn btn-danger col-6 mw-100">Registrar Salida</a>
+                                        <a onclick="mostrarAsistencia()" class="btn btn-danger col-6 mw-100">Registrar Salida</a>
                                     @else
                                         <input type="hidden" value="0" name="tipo">
-                                        <a onclick="guardarAsistencia()" class="btn btn-success col-6 mw-100">Registrar Entrada</a>
+                                        <a onclick="mostrarAsistencia()" class="btn btn-success col-6 mw-100">Registrar Entrada</a>
                                     @endif
                                 @else
                                     <input type="hidden" value="0" name="tipo">
-                                    <a onclick="guardarAsistencia()" class="btn btn-success col-6 mw-100">Registrar Entrada</a>
+                                    <a onclick="mostrarAsistencia()" class="btn btn-success col-6 mw-100">Registrar Entrada</a>
                                 @endif
                             </form>
                         </div>
@@ -96,6 +97,26 @@
 
     setTimeout("mueveReloj()",1000)
     window.onload=function(){mueveReloj();}
+    }
+
+    Webcam.set({
+        width: 490,
+        height: 390,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+  
+    Webcam.attach( '#my_camera' );
+  
+    function take_snapshot() {
+        Webcam.snap( function(data_uri) {
+            $(".image-tag").val(data_uri);
+            document.getElementById('results').innerHTML = '<img name="file" src="'+data_uri+'"/>';
+        } );
+    }
+
+    function mostrarAsistencia() {
+       $('#create').modal('show');
     }
 </script>
 @endsection
