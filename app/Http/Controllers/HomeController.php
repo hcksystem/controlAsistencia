@@ -32,7 +32,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-         $asistencia = Asistencia::where('id_user',Auth::user()->id)->latest('fecha')->first();
+         $asistencia = Asistencia::where('id_user',Auth::user()->id)->latest('id')->first();
          return view('pages.dashboard1',compact('asistencia'));
     } 
     

@@ -25,11 +25,12 @@
                     <div class="col">
                         <div class="pb-3">
                             <div class="image mr-3  float-left">
-                                <img class="user_avatar no-b no-p" src="assets/img/dummy/u1.png" alt="User Image">
+                            {{ Html::image('img/avatar/'.Auth::user()->image ?? 'dummy/u1.png', 'a picture', array('alt'=>'Logo','class'=>'user_avatar no-b no-p')) }}
+                               
                             </div>
                             <div>
                                 <h6 class="p-t-10 text-left">{{ Auth::user()->fullname }} {{ Auth::user()->last_name }}</h6>
-                                <h6 class="p-t-10 text-left">{{ Auth::user()->rut }}</h6>
+                                <h6 class="p-t-10 text-left">{{ Auth::user()->rut ??  null }}</h6>
                                 
                             </div>
                         </div>
@@ -37,7 +38,7 @@
                 </div>
                 
                                     <p class="text-left"><b>Última Marca: </b>{{$asistencia->fecha ?? null }}</p>
-                                    <p class="text-left"><b>Tipo de Marca:</b>@if(isset($asistencia->tipo))@if($asistencia->tipo == 1) Entrada @else Salida @endif @endif</p>
+                                    <p class="text-left"><b>Tipo de Marca:</b>@if(isset($asistencia->tipo))@if($asistencia->tipo == 0) Entrada @else Salida @endif @endif</p>
                                 </div>
                                 
               
@@ -52,7 +53,7 @@
                                 @if(isset($asistencia))
                                     @if($asistencia->tipo == 0)
                                         <input type="hidden" value="1" name="tipo">
-                                        <a onclick="actualizarAsistencia({{ $asistencia->id }})" class="btn btn-danger col-6 mw-100">Registrar Salida</a>
+                                        <a onclick="guardarAsistencia()" class="btn btn-danger col-6 mw-100">Registrar Salida</a>
                                     @else
                                         <input type="hidden" value="0" name="tipo">
                                         <a onclick="guardarAsistencia()" class="btn btn-success col-6 mw-100">Registrar Entrada</a>

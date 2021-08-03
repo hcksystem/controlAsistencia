@@ -84,6 +84,9 @@ class UserController extends Controller
             $file->move($path, $fileName);
             // add route avarat
             $data = array_add($data, 'image', $fileName);
+        }else{
+            $fileName = 'default.png';
+            $data = array_add($data, 'image', $fileName);
         }
 
         // encrypt password
@@ -142,6 +145,9 @@ class UserController extends Controller
             $extension = $file->getClientOriginalExtension();
             $fileName = $data['email']. '.' . $extension;
             $file->move($path, $fileName);
+            $data = array_add($data, 'image', $fileName);
+        }else{
+            $fileName = 'default.png';
             $data = array_add($data, 'image', $fileName);
         }
        

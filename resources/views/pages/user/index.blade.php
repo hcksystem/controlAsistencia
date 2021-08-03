@@ -49,9 +49,15 @@
                                 <tr class="tbody">
                                     <td class="text-center"> {{$user->id}} </td>
                                     <td class="w-10 text-center">
+                                        @if(isset($user->image))
                                         <a class="avatar avatar-lg">
                                             {{ Html::image('img/avatar/'.$user->image, 'a picture', array('alt'=>'Logo','class'=>'img-responsive')) }}
                                         </a>
+                                        @else
+                                        <a class="avatar avatar-lg">
+                                            {{ Html::image('img/avatar/default.png', 'a picture', array('alt'=>'Logo','class'=>'img-responsive')) }}
+                                        </a>   
+                                        @endif
                                        
                                     </td>
                                     <td class="text-center"> {{ $user->fullname }} </td>
