@@ -34,7 +34,7 @@
                         <table id="example3" class="table table-bordered table-hover table-sm" data-order='[[ 0, "desc" ]]' data-page-length='100'>
                             <thead>
                                 <tr>
-                                    <th class="text-center"><b>#</b></th>
+                                    <th class="text-center" style="display:none;"><b>#</b></th>
                                     <th class="text-center"></th>
                                     <th class="text-center"><b>{{ __('NOMBRE') }}</b></th>
                                     <th class="text-center"><b>{{ __('APELLIDO') }}</b></th>
@@ -47,7 +47,7 @@
                             <tbody id="tbody">
                                 @foreach ($users as $user)
                                 <tr class="tbody">
-                                    <td class="text-center"> {{$user->id}} </td>
+                                    <td class="text-center"  style="display:none;"> {{$user->id}} </td>
                                     <td class="w-10 text-center">
                                         @if(isset($user->image))
                                         <a class="avatar avatar-lg">
@@ -80,9 +80,6 @@
                                     </td>
                                     
                                     <td class="text-center">
-                                        <a href="#" class="btn btn-default btn-sm" title="Detalles" data-toggle="modal" data-target="#show" onclick="showData('{{ route('user.edit',$user) }}')">
-                                            <i class="icon-eye text-info"></i>
-                                        </a>
                                         <a href="{{ route('user.show',$user->id) }}" class="btn btn-default btn-sm" title="Editar">
                                             <i class="icon-pencil text-info"></i>
                                         </a>
