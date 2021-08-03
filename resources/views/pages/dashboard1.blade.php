@@ -42,6 +42,7 @@
                 
                                     <p class="text-left"><b>Última Marca: </b>{{$asistencia->fecha ?? null }}</p>
                                     <p class="text-left"><b>Tipo de Marca:</b>@if(isset($asistencia->tipo))@if($asistencia->tipo == 0) Entrada @else Salida @endif @endif</p>
+                                    <p class="text-left"><b>IP: </b>{{$asistencia->ip ?? null }}</p>
                                 </div>
                                 
               

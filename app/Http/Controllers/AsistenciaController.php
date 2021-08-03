@@ -42,6 +42,7 @@ class AsistenciaController extends Controller
         $asis->fecha = Carbon::now();
         $asis->tipo = $request->tipo;
         $asis->sistema = 'web';
+        $asis->ip = $request->ip();
         $asis->save();
     }
 
