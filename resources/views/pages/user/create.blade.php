@@ -96,14 +96,10 @@
 								{!! Form::select('id_grupo', $grupos, null, ['class'=>'form-control r-0 light s-12', 'id'=>'id_grupo', 'onclick'=>'inputClear(this.id)','required']) !!}
 								<span class="status_span"></span>
 							</div>
-							
-						</div>
-					</div>
-					
-					<div class="col-md-12">
-						<div class="form-group col-12 m-0">
+							<div class="form-group col-12 m-0">
 								{!! Form::label('address', 'Dirección', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::textarea('address', null, ['class'=>'form-control r-0 light s-12', 'id'=>'address', 'onclick'=>'inputClear(this.id)','rows'=>'2']) !!}
+							</div>
 						</div>
 					</div>
 				</div>
