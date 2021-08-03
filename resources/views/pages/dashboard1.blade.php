@@ -25,8 +25,11 @@
                     <div class="col">
                         <div class="pb-3">
                             <div class="image mr-3  float-left">
-                            {{ Html::image('img/avatar/'.Auth::user()->image ?? 'dummy/u1.png', 'a picture', array('alt'=>'Logo','class'=>'user_avatar no-b no-p')) }}
-                               
+                                 @if(isset(Auth::user()->image))
+                                    {{ Html::image('img/avatar/'.Auth::user()->image ?? 'dummy/u1.png', 'a picture', array('alt'=>'Logo','class'=>'user_avatar no-b no-p')) }}
+                                 @else
+                                 {{ Html::image('img/avatar/dummy/u1.png', 'a picture', array('alt'=>'Logo','class'=>'user_avatar no-b no-p')) }}
+                                 @endif
                             </div>
                             <div>
                                 <h6 class="p-t-10 text-left">{{ Auth::user()->fullname }} {{ Auth::user()->last_name }}</h6>
