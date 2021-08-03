@@ -12,4 +12,9 @@ class UsersGroups extends Model
         'id_user','id_group'
     ];
     public $timestamps = false;
+
+    public function group()
+    {
+        return $this->belongsTo('App\Group', 'id_group','id');
+    }
 }

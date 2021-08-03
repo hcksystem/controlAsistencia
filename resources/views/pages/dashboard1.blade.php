@@ -35,7 +35,7 @@
                                         <a onclick="actualizarAsistencia({{ $asistencia->id }})" class="btn btn-danger col-6">Registrar Salida</a>
                                     @else
                                         <input type="hidden" value="0" name="tipo">
-                                        <a onclick="actualizarAsistencia({{ $asistencia->id }})" class="btn btn-success col-6">Registrar Entrada</a>
+                                        <a onclick="guardarAsistencia()" class="btn btn-success col-6">Registrar Entrada</a>
                                     @endif
                                 @else
                                     <input type="hidden" value="0" name="tipo">

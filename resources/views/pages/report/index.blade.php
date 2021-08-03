@@ -44,9 +44,9 @@ MARCAS</h1>
                                     <td>{{ $a->user->fullname ?? null }}</td>
                                     <td>{{ $a->user->last_name ?? null}}</td>
                                     <td>{{ $a->user->rut ?? null }}</td>
-                                    <td>{{ $a->user->grupo->group ?? null}}</td> 
+                                    <td>{{ $a->user->grupo->group->group ?? null}}</td> 
                                     <td>{{ $a->fecha ?? null }}</td>
-                                    <td>{{ $a->tipo ?? null}}</td>
+                                    <td>@if(isset($a->tipo)) @if($a->tipo == 0) Entrada @else Salida @endif @endif </td>
                                     <td>{{ $a->sistema ?? null }}</td>
                                 </tr>
                                 @endforeach

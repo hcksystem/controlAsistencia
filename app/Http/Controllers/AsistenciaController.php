@@ -40,7 +40,7 @@ class AsistenciaController extends Controller
         $asis = new Asistencia();
         $asis->id_user = Auth::user()->id;
         $asis->fecha = Carbon::now();
-        $asis->tipo = true;
+        $asis->tipo = false;
         $asis->sistema = 'web';
         $asis->save();
     }
