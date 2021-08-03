@@ -45,13 +45,12 @@
                                     <span class="last_name_span"></span>
 							                     </div>
                                    <div class="form-group col-4 m-0" id="rol_group">
-                                    {!! Form::label('rut', 'Identificación', ['class'=>'col-form-label s-12']) !!}
-                                    {!! Form::text('rut', $user->rut ?? null, ['class'=>'form-control r-0 light s-12', 'id'=>'rut', 'onclick'=>'inputClear(this.id)']) !!}
+                                    {!! Form::label('rut', '* Identificación', ['class'=>'col-form-label s-12']) !!}
+                                    {!! Form::text('rut', $user->rut ?? null, ['class'=>'form-control r-0 light s-12', 'id'=>'rut', 'onclick'=>'inputClear(this.id)','required']) !!}
                                     <span class="rol_span"></span>
 							                    </div>
                                   <div class="form-group col-4 m-0">
-                                    <i class="icon-phone mr-2"></i>
-                                    {!! Form::label('position', 'Posición', ['class'=>'col-form-label s-12']) !!}
+                                    {!! Form::label('position', 'Cargo', ['class'=>'col-form-label s-12']) !!}
                                     {!! Form::select('position',$positions, $user->position ?? null, ['class'=>'form-control r-0 light s-12', 'id'=>'position', 'onclick'=>'inputClear(this.id)']) !!}
 							                    </div>
                                   <div class="form-group m-0 col-4 has-feedback" id="fullname_group"> 

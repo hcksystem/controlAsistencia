@@ -16,13 +16,13 @@
 									<div class="form-group m-0 col-6 has-feedback" id="fullname_group">
 										<i class="icon-person mr-2"></i>
 										{!! Form::label('name', '* Nombres', ['class'=>'col-form-label s-12']) !!}
-										{!! Form::text('fullname', null, ['class'=>'form-control r-0 light s-12',  'id'=>'fullname', 'onclick'=>'inputClear(this.id)']) !!}
+										{!! Form::text('fullname', null, ['class'=>'form-control r-0 light s-12',  'id'=>'fullname', 'onclick'=>'inputClear(this.id)','required']) !!}
 										<span class="fullname_span"></span>
 									</div>
 									<div class="form-group m-0 col-6 has-feedback" id="last_name_group">
 										<i class="icon-person mr-2"></i>
 										{!! Form::label('last_name', '* Apellidos', ['class'=>'col-form-label s-12']) !!}
-										{!! Form::text('last_name', null, ['class'=>'form-control r-0 light s-12',  'id'=>'user_last_name']) !!}
+										{!! Form::text('last_name', null, ['class'=>'form-control r-0 light s-12',  'id'=>'user_last_name','required']) !!}
 										<span class="last_name_span"></span>
 									</div>
 									<div class="form-group col-6 m-0" id="password_group">
@@ -49,13 +49,12 @@
 									</div>
 									<div class="form-group col-6 m-0" id="rol_group">
 										{!! Form::label('rut', 'Identificación', ['class'=>'col-form-label s-12']) !!}
-										{!! Form::text('rut', null, ['class'=>'form-control r-0 light s-12', 'id'=>'rut', 'onclick'=>'inputClear(this.id)']) !!}
+										{!! Form::text('rut', null, ['class'=>'form-control r-0 light s-12', 'id'=>'rut', 'onclick'=>'inputClear(this.id)','required']) !!}
 										<span class="rol_span"></span>
 									</div>
 									<div class="form-group col-6 m-0">
-										<i class="icon-phone mr-2"></i>
-										{!! Form::label('position', 'Posición', ['class'=>'col-form-label s-12']) !!}
-										{!! Form::select('position', $positions, null, ['class'=>'form-control r-0 light s-12', 'id'=>'position', 'onclick'=>'inputClear(this.id)']) !!}
+										{!! Form::label('position', 'Cargo', ['class'=>'col-form-label s-12']) !!}
+										{!! Form::select('position', $positions, null, ['class'=>'form-control r-0 light s-12', 'id'=>'position', 'onclick'=>'inputClear(this.id)','required']) !!}
 									</div>
 									<div class="form-group col-6 m-0" id="rol_group">
 										{!! Form::label('fecha_contrato', 'FECHA DE CONTRATO', ['class'=>'col-form-label s-12']) !!}
