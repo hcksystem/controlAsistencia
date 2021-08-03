@@ -33,19 +33,19 @@
                                 <div class="form-row">
                                   <div class="form-group m-0 col-6 has-feedback" id="fullname_group">
                                     <i class="icon-person mr-2"></i>
-                                    {!! Form::label('name', 'Nombre Completo', ['class'=>'col-form-label s-12']) !!}
+                                    {!! Form::label('name', '* Nombres', ['class'=>'col-form-label s-12']) !!}
                                     {!! Form::text('fullname', $user->fullname ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'Enter User Name', 'id'=>'_fullname', 'onclick'=>'inputClear(this.id)']) !!}
                                     {!! Form::hidden('id', $user->id ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'Enter User Name', 'id'=>'_id', 'onclick'=>'inputClear(this.id)']) !!}
                                     <span class="fullname_span"></span>
                                   </div>
                                   <div class="form-group m-0 col-6 has-feedback" id="last_name_group">
                                     <i class="icon-person mr-2"></i>
-                                    {!! Form::label('last_name', 'Apellidos', ['class'=>'col-form-label s-12']) !!}
+                                    {!! Form::label('last_name', '* Apellidos', ['class'=>'col-form-label s-12']) !!}
                                     {!! Form::text('last_name', $user->last_name ?? null, ['class'=>'form-control r-0 light s-12',  'id'=>'user_last_name']) !!}
                                     <span class="last_name_span"></span>
 							                     </div>
                                    <div class="form-group col-4 m-0" id="rol_group">
-                                    {!! Form::label('rut', 'RUT', ['class'=>'col-form-label s-12']) !!}
+                                    {!! Form::label('rut', 'Identificación', ['class'=>'col-form-label s-12']) !!}
                                     {!! Form::text('rut', $user->rut ?? null, ['class'=>'form-control r-0 light s-12', 'id'=>'rut', 'onclick'=>'inputClear(this.id)']) !!}
                                     <span class="rol_span"></span>
 							                    </div>
@@ -56,20 +56,20 @@
 							                    </div>
                                   <div class="form-group m-0 col-4 has-feedback" id="fullname_group"> 
                                       <i class="icon-envelope-o mr-2"></i>
-                                          {!! Form::label('email', 'Correo', ['class'=>'col-form-label s-12']) !!}
+                                          {!! Form::label('email', '* Correo', ['class'=>'col-form-label s-12']) !!}
                                           {!! Form::email('email', $user->email ?? '', ['class'=>'form-control r-0 light s-12 ', 'placeholder'=>'user@email.com', 'id'=>'_email', 'onclick'=>'inputClear(this.id)']) !!}
                                       
                                       <span class="fullname_span"></span>
                                     </div>   
                                   <div class="form-group col-6 m-0" id="password_group">
                                       <i class="icon-key3 mr-2"></i>
-                                      {!! Form::label('password', 'Contraseña', ['class'=>'col-form-label s-12','placeholder'=>'Password', 'onclick'=>'inputClear(this.id)']) !!}
+                                      {!! Form::label('password', '* Contraseña', ['class'=>'col-form-label s-12','placeholder'=>'Password', 'onclick'=>'inputClear(this.id)']) !!}
                                       {!! Form::password('password', ['class'=>'form-control r-0 light s-12','id'=>'password', 'onclick'=>'inputClear(this.id)']) !!}
                                       <span class="password_span"></span>
                                   </div>
                                   <div class="form-group col-6 m-0">
                                       <i class="icon-key4 mr-2"></i>
-                                      {!! Form::label('passwordConfirm', 'Confirma Contraseña', ['class'=>'col-form-label s-12','placeholder'=>'Password Confirm']) !!}
+                                      {!! Form::label('passwordConfirm', '* Confirma Contraseña', ['class'=>'col-form-label s-12','placeholder'=>'Password Confirm']) !!}
                                       {!! Form::password('password_confirmation', ['class'=>'form-control r-0 light s-12', 'id'=>'password_confirmation', 'onclick'=>'inputClear(this.id)']) !!}
                                   </div>
                                   <div class="form-group col-4 m-0" id="_rol_group">
