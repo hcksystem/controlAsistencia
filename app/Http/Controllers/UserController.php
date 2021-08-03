@@ -146,9 +146,6 @@ class UserController extends Controller
             $fileName = $data['email']. '.' . $extension;
             $file->move($path, $fileName);
             $data = array_add($data, 'image', $fileName);
-        }else{
-            $fileName = 'default.png';
-            $data = array_add($data, 'image', $fileName);
         }
        
         if($data['password'] == $data['password_confirmation']){
