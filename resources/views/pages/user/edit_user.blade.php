@@ -50,7 +50,7 @@
                                     <span class="rol_span"></span>
 							                    </div>
                                   <div class="form-group col-4 m-0">
-                                    {!! Form::label('position', 'Cargo', ['class'=>'col-form-label s-12']) !!}
+                                    {!! Form::label('position', '* Cargo', ['class'=>'col-form-label s-12']) !!}
                                     {!! Form::select('position',$positions, $user->position ?? null, ['class'=>'form-control r-0 light s-12', 'id'=>'position', 'onclick'=>'inputClear(this.id)']) !!}
 							                    </div>
                                   <div class="form-group m-0 col-4 has-feedback" id="fullname_group"> 
@@ -69,16 +69,16 @@
                                   <div class="form-group col-6 m-0">
                                       <i class="icon-key4 mr-2"></i>
                                       {!! Form::label('passwordConfirm', '* Confirma Contraseña', ['class'=>'col-form-label s-12','placeholder'=>'Password Confirm']) !!}
-                                      {!! Form::password('password_confirmation', ['class'=>'form-control r-0 light s-12', 'id'=>'password_confirmation', 'onclick'=>'inputClear(this.id)']) !!}
+                                      {!! Form::password('password_confirmation', ['class'=>'form-control r-0 light s-12', 'id'=>'password_confirmation', 'onclick'=>'inputClear(this.id)','required']) !!}
                                   </div>
                                   <div class="form-group col-4 m-0" id="_rol_group">
-                                      {!! Form::label('role', 'Perfil', ['class'=>'col-form-label s-12']) !!}
-                                      {!! Form::select('rol', $roles, $user->rol_user->rol->slug ?? '', ['class'=>'form-control r-0 light s-12', 'id'=>'_rol', 'onclick'=>'inputClear(this.id)']) !!}
+                                      {!! Form::label('role', '* Perfil', ['class'=>'col-form-label s-12']) !!}
+                                      {!! Form::select('rol', $roles, $user->rol_user->rol->slug ?? '', ['class'=>'form-control r-0 light s-12', 'id'=>'_rol', 'onclick'=>'inputClear(this.id)','required']) !!}
                                       <span class="_rol_span"></span>
                                   </div>
                                   <div class="form-group col-4 m-0" id="status_group">
-                                      {!! Form::label('status', 'Estado', ['class'=>'col-form-label s-12']) !!}
-                                      {!! Form::select('status', $status, $user->status ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'Select', 'id'=>'_status', 'onclick'=>'inputClear(this.id)']) !!}
+                                      {!! Form::label('status', '* Estado', ['class'=>'col-form-label s-12']) !!}
+                                      {!! Form::select('status', $status, $user->status ?? '', ['class'=>'form-control r-0 light s-12', 'placeholder'=>'Select', 'id'=>'_status', 'onclick'=>'inputClear(this.id)','required']) !!}
                                       <span class="status_span"></span>
                                   </div>
                                   <div class="form-group col-4 m-0">
@@ -97,7 +97,7 @@
                                   <span class="rol_span"></span>
                                 </div>
                                 <div class="form-group col-4 m-0" id="status_group">
-                                  {!! Form::label('grupo', 'Grupo', ['class'=>'col-form-label s-12']) !!}
+                                  {!! Form::label('grupo', '* Grupo', ['class'=>'col-form-label s-12']) !!}
                                   {!! Form::select('id_group', $grupos, $user->grupo->id_group ?? '', ['class'=>'form-control r-0 light s-12', 'id'=>'id_group', 'onclick'=>'inputClear(this.id)','required']) !!}
                                   <span class="status_span"></span>
 							                  </div>
