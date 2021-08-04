@@ -1,5 +1,7 @@
 @extends('layouts.app')
 <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKA5z9mjBp51OKJ0Ub2rEZmOf2TDliAnk&libraries=places">
+        </script>
 @section('title')
 <h1 class="nav-title text-white"> <i class="icon-home2"></i>
     Tablero @if(session()->has('idEdificio')) | {{ session('nameEdificio')}} @endif</h1>
@@ -44,6 +46,7 @@
                                     <p class="text-left"><b>Última Marca: </b>{{$asistencia->fecha ?? null }}</p>
                                     <p class="text-left"><b>Tipo de Marca:</b>@if(isset($asistencia->tipo))@if($asistencia->tipo == 0) Entrada @else Salida @endif @endif</p>
                                     <p class="text-left"><b>IP: </b>{{$asistencia->ip ?? null }}</p>
+                                    <p class="text-left"><b>Longitud: <p id="lngval"></p> </b></p>
                                 </div>
                                 
               
@@ -72,7 +75,8 @@
                     </div>
                 </div>
                 
-                
+                <div id="map">
+                                </div>
             </div>
 
         </div>
@@ -107,8 +111,7 @@
 
     const webcamElement = document.getElementById('webcam');
     const canvasElement = document.getElementById('canvas');
-    const snapSoundElement = document.getElementById('snapSound');
-    const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
+    const webcam = new Webcam(webcamElement, 'user', canvasElement,null);
 
     webcam.start()
    .then(result =>{
@@ -145,5 +148,43 @@
     }); /*END click*/
     
 });/* END ready*/
+
+var map;
+var myLatLng;
+$(document).ready(function() {
+    geoLocationInit();
+});
+    function geoLocationInit() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(success, fail);
+        } else {
+            alert("Browser not supported");
+        }
+    }
+
+    function success(position) {
+        console.log(position);
+        var latval = position.coords.latitude;
+        var lngval = position.coords.longitude;
+        myLatLng = new google.maps.LatLng(latval, lngval);
+        document.getElementById("lngval").innerHTML = lngval;
+        createMap(myLatLng);
+    }
+
+    function fail() {
+        alert("it fails");
+    }
+
+    function createMap(myLatLng) {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatLng,
+            zoom: 12
+        });
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map
+        });
+    }
+
 </script>
 @endsection
