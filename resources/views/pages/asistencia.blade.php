@@ -9,14 +9,9 @@
 			<div class="modal-body">
             <form id="formAsistencia">
 				<div class="form-row">
-                <div>
-                    <select name="listaDeDispositivos" id="listaDeDispositivos"></select>
-                    <button id="boton">Tomar foto</button>
-                    <p id="estado"></p>
-	            </div>
-                    <br>
-                    <video muted="muted" id="video"></video>
-                    <canvas id="canvas" style="display: none;"></canvas>
+                <video id="webcam" autoplay playsinline width="640" height="480"></video>
+                <canvas id="canvas" class="d-none"></canvas>
+                <audio id="snapSound" src="audio/snap.wav" preload = "auto"></audio>
 				</div>
                 @if(isset($asistencia))
                     @if($asistencia->tipo == 0)

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
 @section('title')
 <h1 class="nav-title text-white"> <i class="icon-home2"></i>
     Tablero @if(session()->has('idEdificio')) | {{ session('nameEdificio')}} @endif</h1>
@@ -82,7 +83,7 @@
 
 @endsection
 @section('js')
-<script src={{asset('assets/js/camara.js')}}></script>
+
 <script>
   mueveReloj();
    function mueveReloj(){
@@ -103,5 +104,21 @@
     function mostrarAsistencia() {
        $('#create').modal('show');
     }
+
+    const webcamElement = document.getElementById('webcam');
+    const canvasElement = document.getElementById('canvas');
+    const snapSoundElement = document.getElementById('snapSound');
+    const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
+
+    webcam.start()
+  .then(result =>{
+    console.log("webcam started");
+  })
+  .catch(err => {
+    console.log(err);
+});
+
+let picture = webcam.snap();
+document.querySelector('#download-photo').href = picture;
 </script>
 @endsection
