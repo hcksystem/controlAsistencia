@@ -9,20 +9,14 @@
 			<div class="modal-body">
             <form id="formAsistencia">
 				<div class="form-row">
-					<div class="col-md-12">
-                    <div class="row">
-                            <div class="col-md-12">
-                                <div id="my_camera"></div>
-                                    <br/>
-                                    <input type=button value="Tomar foto" onClick="take_snapshot()">
-                                    <input type="hidden" name="image" class="image-tag">
-                            </div>
-                            <div class="col-md-12">
-                                    <div id="results">Tu imagen capturada aparecerá aquí...</div>
-                            </div>
-                        </div> 
-                    
-					</div>
+                <div>
+                    <select name="listaDeDispositivos" id="listaDeDispositivos"></select>
+                    <button id="boton">Tomar foto</button>
+                    <p id="estado"></p>
+	            </div>
+                    <br>
+                    <video muted="muted" id="video"></video>
+                    <canvas id="canvas" style="display: none;"></canvas>
 				</div>
                 @if(isset($asistencia))
                     @if($asistencia->tipo == 0)
