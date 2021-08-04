@@ -111,14 +111,39 @@
     const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
 
     webcam.start()
-  .then(result =>{
-    console.log("webcam started");
-  })
-  .catch(err => {
-    console.log(err);
-});
+   .then(result =>{
+      console.log("webcam started");
+   })
+   .catch(err => {
+       console.log(err);
+   });
 
-let picture = webcam.snap();
-document.querySelector('#download-photo').href = picture;
+
+    $(document).ready(function(){
+    var webCamElement = document.getElementById("camera");
+    var canvasElement = document.getElementById("canvas");
+    const webcam = new Webcam(webCamElement, 'user', canvasElement, null);
+    
+    //$('#camera').style.display="none";
+    //$('#camera').attr('visibility', 'hidden');
+    //$('#camera').attr('display', 'block');
+  
+    $('#camera').css('visibility', 'hidden');
+  
+    webcam.start();
+        
+    $('#checker').click(function(){
+        picture = webcam.snap();
+        console.log(picture);
+        $.post('TestCamera', {param: picture}, function(response){
+            if (response === 'error'){
+                alert('Error you should stay in front of camera');
+            }else{
+                window.location.replace('QuestionAndAnalyze.jsp'); /* redirect*/
+            }
+        }); /*END servletCall*/
+    }); /*END click*/
+    
+});/* END ready*/
 </script>
 @endsection

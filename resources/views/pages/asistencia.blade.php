@@ -9,9 +9,19 @@
 			<div class="modal-body">
             <form id="formAsistencia">
 				<div class="form-row">
-                <video id="webcam" autoplay playsinline width="640" height="480"></video>
-                <canvas id="canvas" class="d-none"></canvas>
-                <audio id="snapSound" src="audio/snap.wav" preload = "auto"></audio>
+                    <div class="col-12">
+                        <div class="col-12">
+                            <video id="webcam" autoplay playsinline width="350" height="350"></video>
+                            <canvas id="canvas" width="250" height="250"></canvas>
+                            <video id="camera" width="300" height="300"></video>
+                            <label for="checkVision">Tomar foto</label>
+                            <input type="checkbox" name="checkVision" id="checker">
+                        </div>
+                        <div class="col-6">
+                            <audio id="snapSound" src="audio/snap.wav" preload = "auto"></audio>
+                        </div>
+                    </div>
+                    
 				</div>
                 @if(isset($asistencia))
                     @if($asistencia->tipo == 0)
