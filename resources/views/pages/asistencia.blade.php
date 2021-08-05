@@ -13,9 +13,6 @@
                         <div class="col-12">
                             <video id="webcam" autoplay playsinline width="300" height="300"></video>
                             <canvas id="canvas" width="250" height="250"></canvas>
-                            <video id="camera" width="300" height="300"></video>
-                            <label for="checkVision">Tomar foto</label>
-                            <input type="checkbox" name="checkVision" id="checker">
                         </div>
                         <div class="col-6"></div>
                     </div>
@@ -36,9 +33,12 @@
                 <input type="hidden" value="0" name="longitude" id="lngval">
                 <input type="hidden" value="0" name="latitude" id="latval">
                 <input type="hidden" name="image" class="image-tag">
+                <a id="btnCamara" class="btn btn-success">Abrir Camara</a>
+                <a id="btnOcultarCamara" class="btn btn-info" style="display:none;">Cerrar Camara</a>
+                <a id="checker" class="btn btn-warning" style="display:none;">Tomar foto</a>
                 </form>
 			</div>
-
+           
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 @if(isset($asistencia))

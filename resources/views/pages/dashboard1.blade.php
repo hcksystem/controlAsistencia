@@ -106,39 +106,51 @@
        $('#create').modal('show');
     }
 
-    const webcamElement = document.getElementById('webcam');
-    const canvasElement = document.getElementById('canvas');
-    const webcam = new Webcam(webcamElement, 'user', canvasElement,null);
-
-    webcam.start()
-   .then(result =>{
-      console.log("webcam started");
-   })
-   .catch(err => {
-       console.log(err);
-   });
-
-
     $(document).ready(function(){
-    var webCamElement = document.getElementById("camera");
+
+    var webCamElement = document.getElementById("webcam");
     var canvasElement = document.getElementById("canvas");
-    const webcam = new Webcam(webCamElement, 'user', canvasElement, null);
+    const webcam = new Webcam(webCamElement, 'user', canvasElement, null);    
+   
+    $('#btnCamara').click(function(){
+       
+        webcam.start()
+        .then(result =>{
+            console.log("webcam started");
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+        $('#btnCamara').hide();
+        $('#btnOcultarCamara').show();
+        $('#checker').show();
+    });
+    
     
     //$('#camera').style.display="none";
     //$('#camera').attr('visibility', 'hidden');
     //$('#camera').attr('display', 'block');
   
-    $('#camera').css('visibility', 'hidden');
-  
-    webcam.start();
-        
     $('#checker').click(function(){
         picture = webcam.snap();
         console.log(picture);
         $(".image-tag").val(picture);
-        
+        webcam.stop();
+        $('#checker').hide();
     }); /*END click*/
     
+    
+    $('#btnOcultarCamara').click(function(){
+        
+        webcam.stop();
+        $('#btnCamara').show();
+        $('#btnOcultarCamara').hide();
+        $('#checker').hide();
+    }); 
+        
+
+
 });/* END ready*/
 
 var map;
@@ -166,7 +178,7 @@ $(document).ready(function() {
     }
 
     function fail() {
-        alert("it fails");
+        console.log("fracaso conexion");
     }
 
    /* function createMap(myLatLng) {
