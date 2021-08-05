@@ -9,7 +9,7 @@ class Asistencia extends Model
     protected $table = 'asistencias';
 
     protected $fillable = [
-        'id_user','tipo','sistema','fecha','ip','image'
+        'id_user','tipo','sistema','fecha','ip','image','latitude','longitude'
     ];
 
     public $timestamps = false;

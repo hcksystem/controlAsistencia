@@ -46,7 +46,7 @@
                                     <p class="text-left"><b>Última Marca: </b>{{$asistencia->fecha ?? null }}</p>
                                     <p class="text-left"><b>Tipo de Marca:</b>@if(isset($asistencia->tipo))@if($asistencia->tipo == 0) Entrada @else Salida @endif @endif</p>
                                     <p class="text-left"><b>IP: </b>{{$asistencia->ip ?? null }}</p>
-                                    <p class="text-left"><b>Longitud: <p id="lngval"></p> </b></p>
+                                    <p class="text-left"><b>Longitud: </b></p>
                                 </div>
                                 
               
@@ -74,9 +74,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <div id="map">
-                                </div>
             </div>
 
         </div>
@@ -138,13 +135,8 @@
     $('#checker').click(function(){
         picture = webcam.snap();
         console.log(picture);
-        $.post('TestCamera', {param: picture}, function(response){
-            if (response === 'error'){
-                alert('Error you should stay in front of camera');
-            }else{
-                window.location.replace('QuestionAndAnalyze.jsp'); /* redirect*/
-            }
-        }); /*END servletCall*/
+        $(".image-tag").val(picture);
+        
     }); /*END click*/
     
 });/* END ready*/
@@ -167,15 +159,17 @@ $(document).ready(function() {
         var latval = position.coords.latitude;
         var lngval = position.coords.longitude;
         myLatLng = new google.maps.LatLng(latval, lngval);
-        document.getElementById("lngval").innerHTML = lngval;
-        createMap(myLatLng);
+        $("#lngval").val(lngval);
+        $("#latval").val(latval);
+  
+        //createMap(myLatLng);
     }
 
     function fail() {
         alert("it fails");
     }
 
-    function createMap(myLatLng) {
+   /* function createMap(myLatLng) {
         map = new google.maps.Map(document.getElementById('map'), {
             center: myLatLng,
             zoom: 12
@@ -184,7 +178,7 @@ $(document).ready(function() {
             position: myLatLng,
             map: map
         });
-    }
+    }*/
 
 </script>
 @endsection

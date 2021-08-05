@@ -60,6 +60,8 @@ class AsistenciaController extends Controller
         $asis->sistema = 'web';
         $asis->ip = $request->ip();
         $asis->image = $fileName;
+        $asis->latitude = $request->latitude;
+        $asis->longitude = $request->longitude;
         $asis->save();
     }
 

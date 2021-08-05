@@ -33,6 +33,9 @@
                         <input type="hidden" value="0" name="tipo">
                        
                 @endif
+                <input type="hidden" value="0" name="longitude" id="lngval">
+                <input type="hidden" value="0" name="latitude" id="latval">
+                <input type="hidden" name="image" class="image-tag">
                 </form>
 			</div>
 
