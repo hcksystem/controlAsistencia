@@ -14,7 +14,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $asistencia = Asistencia::all();
+        $asistencia = Asistencia::orderBy('fecha','DESC')->get();
         return view('pages.report.index',compact('asistencia'));
     }
 
