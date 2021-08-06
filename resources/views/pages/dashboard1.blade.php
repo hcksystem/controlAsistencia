@@ -42,22 +42,17 @@
                         </div>
                     </div>
                 </div>
-                
-                                    <p class="text-left"><b>Última Marca: </b>{{Carbon\Carbon::parse($asistencia->fecha)->format('m-d-Y h:i:s A')?? null }}</p>
-                                    <p class="text-left"><b>Tipo de Marca:</b>@if(isset($asistencia->tipo))@if($asistencia->tipo == 0) Entrada @else Salida @endif @endif</p>
-                                    <p class="text-left"><b>IP: </b>{{$asistencia->ip ?? null }}</p>
-                                    <p class="text-left"><b>Longitud: </b></p>
-                                </div>
-                                
-              
-                
-                
-                                <div class="footer text-left">
-                                    <p>Para registrar asistencia presione el botón abajo. 
-                                   Por seguridad se guardará
-                                        su IP y geolocalización.
-                                    </p>
-                                </div>
+                <p class="text-left"><b>Última Marca: </b>{{$asistencia->fecha ?? null }}</p>
+                <p class="text-left"><b>Tipo de Marca:</b>@if(isset($asistencia->tipo))@if($asistencia->tipo == 0) Entrada @else Salida @endif @endif</p>
+                <p class="text-left"><b>IP: </b>{{$asistencia->ip ?? null }}</p>
+                </div>
+                            
+                <div class="footer text-left">
+                        <p>Para registrar asistencia presione el botón abajo. 
+                        Por seguridad se guardará
+                        su IP, foto y geolocalización.
+                        </p>
+                </div>
                                 @if(isset($asistencia))
                                     @if($asistencia->tipo == 0)
                                         <input type="hidden" value="1" name="tipo">
