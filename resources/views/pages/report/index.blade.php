@@ -49,7 +49,7 @@ MARCAS</h1>
                                     <td>{{ $a->user->rut ?? null }}</td>
                                     <td>{{ $a->user->grupo->group->group ?? null}}</td> 
                                     <td>{{ Carbon\Carbon::parse($a->fecha)->format('d-m-Y h:i:s A') ?? null }}</td>
-                                    <td>@if(isset($a->tipo)) @if($a->tipo == 0) <a onclick="details({{ $a->image }},{{ $a->latitude }},{{ $a->longitude }})">Entrada</a> @else 
+                                    <td>@if(isset($a->tipo)) @if($a->tipo == 0) <a onclick="details('{{ $a->image }}','{{ $a->latitude }}','{{ $a->longitude }}')">Entrada</a> @else 
                                     <a onclick="details('{{ $a->image }}','{{ $a->latitude }}','{{ $a->longitude }}')">Salida</a> @endif @endif </td>
                                     <td>{{ $a->ip ?? null }}</td>
                                     <td>{{ $a->sistema ?? null }}</td>
@@ -133,15 +133,19 @@ function geoLocationInit() {
 
 
 function details(image, latitude, longitude){
-    console.log(image);
-    console.log(latitude);
-    console.log(longitude);
+ 
     $('#details').modal('show');
-    myLatLng = new google.maps.LatLng(latitude, longitude);
-    createMap(myLatLng);
-    $('#image').append('<img src="img/avatar/'+image+'" alt="" width="200" height="200">');
+    if(latitude != "" && longitude != ""){
+        myLatLng = new google.maps.LatLng(latitude, longitude);
+        createMap(myLatLng);
+    }
+    
+    if(image != ""){
+        $('#image').append('<img src="img/avatar/'+image+'" alt="" width="200" height="200">');
+    }
 }
 function createMap(myLatLng) {
+        $('#map').show();
         map = new google.maps.Map(document.getElementById('map'), {
             center: myLatLng,
             zoom: 12
@@ -151,6 +155,11 @@ function createMap(myLatLng) {
             map: map
         });
 }
+
+$(document).on('hide.bs.modal','#details', function () { 
+    $('#image img').remove();
+    $('#map').hide();
+});
 
 </script>
 @endsection
