@@ -8,9 +8,7 @@
 			</div>
 			<div class="modal-body  text-center">
                 
-                <div class="row" style="width:300px;height:300px;">
-                    <div id="map" style="width:400px;height:300px;"></div>
-                </div>
+				<div id="mapid" style="height: 180px;"></div>
                 <div class="row" id="image" style="width:300px;height:200px;">
                 </div>
             

@@ -1,6 +1,16 @@
 @extends('layouts.app')
 <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKA5z9mjBp51OKJ0Ub2rEZmOf2TDliAnk&libraries=places">
 </script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+
+<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+    integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+    crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 @section('title')
 <h1 class="nav-title text-white"> <i class="icon icon-documents3 text-blue s-18"></i>
 MARCAS</h1>
@@ -136,8 +146,9 @@ function details(image, latitude, longitude){
  
     $('#details').modal('show');
     if(latitude != "" && longitude != ""){
-        myLatLng = new google.maps.LatLng(latitude, longitude);
-        createMap(myLatLng);
+        //createMap2(myLatLng);
+        console.log(longitude+"-"+latitude)
+        var mymap = L.map('mapid').setView([latitude, longitude], 13);
     }
     
     if(image != ""){
@@ -155,6 +166,23 @@ function createMap(myLatLng) {
             map: map
         });
 }
+
+function createMap2(lat,long) {
+    var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([long, lat]),
+          zoom:3
+        })
+      });
+}
+
+
 
 $(document).on('hide.bs.modal','#details', function () { 
     $('#image img').remove();

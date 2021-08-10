@@ -17,9 +17,7 @@
     <link rel="stylesheet" href=  {{asset('assets/plugins/bootstrap-fileinput/css/fileinput.css')}}>
     <link rel="stylesheet" href=  {{asset('assets/plugins/datatables/buttons-1.5.6/css/buttons.dataTables.min.css')}}>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    
 
-     
     <style>
         .loader{
             position: fixed;
