@@ -57,9 +57,9 @@ MARCAS</h1>
                                 <tr class="tbody">
                                     <td>{{ $a->user->fullname ?? null }} {{ $a->user->last_name ?? null}}</td>
                                     <td>{{ $a->user->rut ?? null }}</td>
-                                    <td>{{ $a->user->grupo->group->group ?? null}}</td> 
+                                    <td>{{ $a->user->grupo->group->group ?? null}}</td>
                                     <td>{{ Carbon\Carbon::parse($a->fecha)->format('d-m-Y h:i:s A') ?? null }}</td>
-                                    <td>@if(isset($a->tipo)) @if($a->tipo == 0) <a onclick="details('{{ $a->image }}','{{ $a->latitude }}','{{ $a->longitude }}')">Entrada</a> @else 
+                                    <td>@if(isset($a->tipo)) @if($a->tipo == 0) <a onclick="details('{{ $a->image }}','{{ $a->latitude }}','{{ $a->longitude }}')">Entrada</a> @else
                                     <a onclick="details('{{ $a->image }}','{{ $a->latitude }}','{{ $a->longitude }}')">Salida</a> @endif @endif </td>
                                     <td>{{ $a->ip ?? null }}</td>
                                     <td>{{ $a->sistema ?? null }}</td>
@@ -111,11 +111,11 @@ $(document).ready(function() {
                        }
                    }
                } );
-   
+
    });
 
 var map;
-var myLatLng;   
+var myLatLng;
 $(document).ready(function() {
     geoLocationInit();
 });
@@ -143,14 +143,14 @@ function geoLocationInit() {
 
 
 function details(image, latitude, longitude){
- 
+
     $('#details').modal('show');
     if(latitude != "" && longitude != ""){
         //createMap2(myLatLng);
         console.log(longitude+"-"+latitude)
         var mymap = L.map('mapid').setView([latitude, longitude], 13);
         $('#map').show();
-        
+
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2Fib2xlYWwxMjMiLCJhIjoiY2tqYWh1bmYxMW9zOTJ6bnllZDJ5cHU1ZiJ9.dWucc-gHwan1ANwOgt2fFQ', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
@@ -159,10 +159,16 @@ function details(image, latitude, longitude){
             zoomOffset: -1,
             accessToken: 'pk.eyJ1IjoiZ2Fib2xlYWwxMjMiLCJhIjoiY2tqYWh1bmYxMW9zOTJ6bnllZDJ5cHU1ZiJ9.dWucc-gHwan1ANwOgt2fFQ'
         }).addTo(mymap);
+
+        var myIcon = L.divIcon({className: 'my-div-icon'});
+
+        var popup = L.popup()
+        .setLatLng([latitude, longitude])
+        .openOn(mymap);
     }
-    
+
     if(image != ""){
-        $('#image').append('<img src="img/avatar/'+image+'" alt="" width="200" height="200">');
+        $('#image').append('<img src="img/avatar/'+image+'" alt="" id="img_marca" width="200" height="200">');
     }
 }
 function createMap(myLatLng) {
@@ -194,9 +200,14 @@ function createMap2(lat,long) {
 
 
 
-$(document).on('hide.bs.modal','#details', function () { 
-    $('#image img').html("");
-    $('#map').hide();
+$(document).on('hide.bs.modal','#details', function () {
+    $('#img_marca').remove();
+    var container= L.DomUtil.get('mapid');
+    if(container != null){
+
+            container._leaflet_id = null;
+
+    }
 });
 
 </script>
