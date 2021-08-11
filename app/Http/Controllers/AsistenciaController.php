@@ -40,15 +40,15 @@ class AsistenciaController extends Controller
 
         $img = $request->image;
         $path = public_path().'/img/avatar/';
-    
+
         $image_parts = explode(";base64,", $img);
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_parts[0] = isset($image_type_aux[1]) ? $image_type_aux[1] : null;
         //$image_type = $image_type_aux[1];
-    
+
         $image_base64 = base64_decode($image_parts[1]);
         $fileName = uniqid() . '.png';
-    
+
         $file = $path . $fileName;
         file_put_contents($file, $image_base64);
 
@@ -73,7 +73,8 @@ class AsistenciaController extends Controller
      */
     public function show($id)
     {
-        //
+        $asistencia= Asistencia::find($id);
+        return view('pages.report.show',compact('asistencia'));
     }
 
     /**

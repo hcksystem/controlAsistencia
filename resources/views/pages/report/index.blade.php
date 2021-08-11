@@ -59,8 +59,8 @@ MARCAS</h1>
                                     <td>{{ $a->user->rut ?? null }}</td>
                                     <td>{{ $a->user->grupo->group->group ?? null}}</td>
                                     <td>{{ Carbon\Carbon::parse($a->fecha)->format('d-m-Y h:i:s A') ?? null }}</td>
-                                    <td>@if(isset($a->tipo)) @if($a->tipo == 0) <a onclick="details('{{ $a->image }}','{{ $a->latitude }}','{{ $a->longitude }}')">Entrada</a> @else
-                                    <a onclick="details('{{ $a->image }}','{{ $a->latitude }}','{{ $a->longitude }}')">Salida</a> @endif @endif </td>
+                                    <td>@if(isset($a->tipo)) @if($a->tipo == 0) <a target="_blank" href="{{ route('asistencia.show',$a->id) }}">Entrada</a> @else
+                                    <a target="_blank" href="{{ route('asistencia.show',$a->id) }}">Salida</a> @endif @endif </td>
                                     <td>{{ $a->ip ?? null }}</td>
                                     <td>{{ $a->sistema ?? null }}</td>
                                 </tr>
@@ -145,26 +145,18 @@ function geoLocationInit() {
 function details(image, latitude, longitude){
 
     $('#details').modal('show');
-    if(latitude != "" && longitude != ""){
+    if(latitude != 0 && longitude != 0){
         //createMap2(myLatLng);
         console.log(longitude+"-"+latitude)
-        var mymap = L.map('mapid').setView([latitude, longitude], 13);
+        var mymap = L.map('mapid').setView([latitude, longitude], 15);
         $('#map').show();
 
-        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2Fib2xlYWwxMjMiLCJhIjoiY2tqYWh1bmYxMW9zOTJ6bnllZDJ5cHU1ZiJ9.dWucc-gHwan1ANwOgt2fFQ', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            zoomOffset: -1,
-            accessToken: 'pk.eyJ1IjoiZ2Fib2xlYWwxMjMiLCJhIjoiY2tqYWh1bmYxMW9zOTJ6bnllZDJ5cHU1ZiJ9.dWucc-gHwan1ANwOgt2fFQ'
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mymap);
+        var marker = L.marker([latitude, longitude]).addTo(mymap);
 
-        var myIcon = L.divIcon({className: 'my-div-icon'});
 
-        var popup = L.popup()
-        .setLatLng([latitude, longitude])
-        .openOn(mymap);
     }
 
     if(image != ""){

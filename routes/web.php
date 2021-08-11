@@ -37,7 +37,7 @@ Route::get('factura1', function () {
 
 Route::get('login', function () {
 	return view('auth.login');
-}); 
+});
 
 Route::get("lang/{locale}", function ($locale) {
 	Session::put("locale", $locale);
@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::post('loginUser', 'HomeController@indexByUser')->name('loginUser');
 	// modules
-	
+
 	Route::resource('grupo','GrupoController');
 	Route::resource('posicion','PositionController');
 
@@ -75,6 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('user/update/{id}', 'UserController@update')->name('user.update');
 	Route::post('asistencia/store', 'AsistenciaController@store')->name('asistencia.store');
 	Route::post('asistencia/update/{id}', 'AsistenciaController@update')->name('asistencia.update');
+    Route::get('asistencia/show/{id}', 'AsistenciaController@show')->name('asistencia.show');
 
 });
 
