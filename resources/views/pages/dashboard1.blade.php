@@ -1,4 +1,29 @@
 @extends('layouts.app')
+<style>
+    .spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border-left-color: #09f;
+
+  animation: spin 1s ease infinite;
+  position:absolute;
+  z-index:3;
+  left:25em;
+  top:50px; opacity:0.9
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
 <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
 <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKA5z9mjBp51OKJ0Ub2rEZmOf2TDliAnk&libraries=places">
         </script>
@@ -16,14 +41,14 @@
                 <div class="col-md-5">
                     <div class="card text-center">
                         <div class="p-4">
-                           
+
                                 <div class=" pt-2 pb-1" style="background-color:#f5f8fa">
                                     <h4 class="text-center font-weight-normal ">Registrar Nueva Marcación</h4>
                                 </div>
                                 <div class="content">
                                     <h6 class="pt-2 pb-2" > HORA ACTUAL </h6>
                                     <h1 class="text-blue "  id="hour"></h1>
-                                    
+
                                       <div class="row p-t-b-10 ">
                     <div class="col">
                         <div class="pb-3">
@@ -37,7 +62,7 @@
                             <div>
                                 <h6 class="p-t-10 text-left">{{ Auth::user()->fullname }} {{ Auth::user()->last_name }}</h6>
                                 <h6 class="p-t-10 text-left">{{ Auth::user()->rut ??  null }}</h6>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -46,9 +71,9 @@
                 <p class="text-left"><b>Tipo de Marca:</b>@if(isset($asistencia->tipo))@if($asistencia->tipo == 0) Entrada @else Salida @endif @endif</p>
                 <p class="text-left"><b>IP: </b>{{$asistencia->ip ?? null }}</p>
                 </div>
-                            
+
                 <div class="footer text-left">
-                        <p>Para registrar asistencia presione el botón abajo. 
+                        <p>Para registrar asistencia presione el botón abajo.
                         Por seguridad se guardará
                         su IP, foto y geolocalización.
                         </p>
@@ -105,10 +130,10 @@
 
     var webCamElement = document.getElementById("webcam");
     var canvasElement = document.getElementById("canvas");
-    const webcam = new Webcam(webCamElement, 'user', canvasElement, null);    
-   
+    const webcam = new Webcam(webCamElement, 'user', canvasElement, null);
+
     $('#btnCamara').click(function(){
-       
+
         webcam.start()
         .then(result =>{
             console.log("webcam started");
@@ -121,12 +146,12 @@
         $('#btnOcultarCamara').show();
         $('#checker').show();
     });
-    
-    
+
+
     //$('#camera').style.display="none";
     //$('#camera').attr('visibility', 'hidden');
     //$('#camera').attr('display', 'block');
-  
+
     $('#checker').click(function(){
         picture = webcam.snap();
         console.log(picture);
@@ -134,16 +159,16 @@
         webcam.stop();
         $('#checker').hide();
     }); /*END click*/
-    
-    
+
+
     $('#btnOcultarCamara').click(function(){
-        
+
         webcam.stop();
         $('#btnCamara').show();
         $('#btnOcultarCamara').hide();
         $('#checker').hide();
-    }); 
-        
+    });
+
 
 
 });/* END ready*/
@@ -168,7 +193,7 @@ $(document).ready(function() {
         myLatLng = new google.maps.LatLng(latval, lngval);
         $("#lngval").val(lngval);
         $("#latval").val(latval);
-  
+
         //createMap(myLatLng);
     }
 
@@ -187,5 +212,17 @@ $(document).ready(function() {
         });
     }*/
 
+    enviando = false; //Obligaremos a entrar el if en el primer submit
+
+    function checkSubmit() {
+        if (!enviando) {
+    		enviando= true;
+    		return true;
+        } else {
+            //Si llega hasta aca significa que pulsaron 2 veces el boton submit
+            alert("El formulario ya se esta enviando");
+            return false;
+        }
+    }
 </script>
 @endsection

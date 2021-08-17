@@ -16,15 +16,14 @@
                             <span class="campo_span"></span>
                         </div>
                     </div>
-                    
-                    
+
+
                 </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <a class="btn btn-danger" onclick="eventGroup(1)">Eliminar</a>
-                <a class="btn btn-primary" onclick="eventGroup(2)"><i class="icon-save mr-2"></i>Guardar Datos</a>
+                <button class="btn btn-primary" type="submit"><i class="icon-save mr-2"></i>Guardar Datos</button>
             </div>
         </div>
     </div>

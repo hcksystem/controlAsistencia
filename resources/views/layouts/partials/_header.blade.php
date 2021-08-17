@@ -16,34 +16,20 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                
+
             </div>
         </div>
-        
+
         <ul class="sidebar-menu">
         <li class="header"><strong>LIBRO DE ASISTENCIA</strong></li>
-        
+
          @if(Auth::user()->hasRole('super') || Auth::user()->hasRole('user'))
           <li class="treeview"><a href="{{url('home')}}">
                 <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Dashboard') }}</span></a>
           </li>
-        @endif 
-   
-    
-    
+        @endif
     @if(Auth::user()->hasRole('super'))
-        <li class="treeview no-b"><a href="{{ route('grupo.index') }}">
-            <i class="icon icon-equalizer gray-text s-18"></i>
-            <span>{{ __('Grupos') }}</span></a>
-        </li>
-        <li class="treeview">
-            <a href="{{ route('user.index') }}">
-                <i class="icon icon-equalizer gray-text s-18"></i>{{ __('Usuarios') }}
-            </a>
-        </li>  
-    @endif
-    @if(Auth::user()->hasRole('super'))
-        
+
         <li class="header light mt-3"><strong>CONFIGURACIÓN</strong></li>
         <li class="treeview">
             <a href="#">
@@ -51,10 +37,19 @@
                 <i class="icon icon-angle-left s-18 pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                
+
                 <li class="treeview"><a href="{{ route('posicion.index') }}">
                     <i class="icon icon-circle-o gray-text s-14"></i>
                     <span>{{ __('Posición') }}</span></a>
+                </li>
+                <li class="treeview"><a href="{{ route('grupo.index') }}">
+                    <i class="icon icon-circle-o gray-text s-14"></i>
+                    <span>{{ __('Grupo') }}</span></a>
+                </li>
+                <li class="treeview">
+                    <a href="{{ route('user.index') }}">
+                        <i class="icon icon-equalizer gray-text s-18"></i>{{ __('Usuarios') }}
+                    </a>
                 </li>
             </ul>
         </li>
@@ -78,14 +73,14 @@
         @else
             <!--<div>Acceso usuario</div>-->
     @endif
-    
-        
-      
+
+
+
 </section>
 </aside>
 <script>
     $(document).ready(function() {
-    
+
         $.ajaxSetup({
                   headers: {
                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -102,7 +97,7 @@
             data:{'search':$value},
             success:function(data){
                 //$('tbody').html(data);
-                
+
                 //console.log(data);
                 $('tbody').html(data);
                 }
@@ -127,14 +122,14 @@
                 success: function(data){
                     console.log(data);
                     // window.location.href = "{{URL::to('getAllLanguages')}}"
-                    
+
                 }
             });
 
     }
 </script>
 <script type="text/javascript">
-   
+
 </script>
 
 

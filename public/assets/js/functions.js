@@ -41,24 +41,24 @@ $(document).ready(function(){
 
     $( "#first_name , #last_name" ).keyup(function() {
       $("#fullname").val($("#first_name").val()+" "+ $("#last_name").val());
-    }); 
+    });
 
     $( "#_first_name , #_last_name" ).keyup(function() {
       $("#_fullname").val($("#_first_name").val()+" "+ $("#_last_name").val());
-    }); 
+    });
 
     $( "#cust_first_name , #cust_last_name" ).keyup(function() {
       $("#cust_fullname").val($("#cust_first_name").val()+" "+ $("#cust_last_name").val());
-    }); 
+    });
 
     $( "#sup_first_name , #sup_last_name" ).keyup(function() {
       $("#sup_fullname").val($("#sup_first_name").val()+" "+ $("#sup_last_name").val());
-    }); 
+    });
 
      $( "form input , form select, form textarea" ).each(function(index) {
        var input = $(this);
        input.attr('autocomplete', 'off');
-    }); 
+    });
 
 });
 
@@ -240,7 +240,7 @@ function saveDataMultitap(url, forml, method, inputFile)
 {
     var route = $('#route').val();
     var formData = new FormData();
-    
+
     if (inputFile != null)
     {
         formData.append('file', inputFile[0].files[0]);
@@ -586,7 +586,7 @@ function dataTableExport(title, columns) {
                 text: 'Test',
                 action: function ( e, dt, button, config ) {
                 window.location = 'getOperation';
-              }    
+              }
 
             }
         ],
@@ -623,7 +623,7 @@ function comboBox(id,route,receptor) {
         console.log(data);
 
          var paises= data;
-          
+
 
         const array=[];
 
@@ -657,7 +657,7 @@ function comboBoxPort(id,route,receptor) {
         console.log(data);
 
          var paises= data;
-          
+
 
         const array=[];
 
@@ -698,7 +698,7 @@ function comboBoxPort(id,route,receptor) {
 
             $('#'+receptor).val(1);
         }
-        
+
     });
  }
 
@@ -824,7 +824,7 @@ function showModal(idModal, idforml) {
     var comToPay            = $('#comtopay').val();
     var comToRecive         = $('#comtoreceive').val();
     var estCharges          = $('#est_charges').val();
-    
+
     //console.log(orderSaleUsd);
     var orderSale = orderSaleUsd.split('.').join('');
     var orderSaleUsd = parseFloat(orderSale.replace(",", "."));
@@ -858,14 +858,14 @@ function showModal(idModal, idforml) {
     console.log("estCharges = " + estCharges); * ////
     //console.log("Pre UssbBudget = " + usbBudget);
 
-    //console.log('hola globalmente ' + comToRecive);  
+    //console.log('hola globalmente ' + comToRecive);
     if(isNaN(isComToRecive) || isNaN(usbBudget)  || isNaN(isOrderSale) || isNaN(isOrderPurchase) || isNaN(isEstCharges) || isNaN(isComToPay)){
         isComToRecive = 0;
         usbBudget= 0;
 
-         //console.log('Validamos globalmente a ComToRecive = ' + comToRecive);  
+         //console.log('Validamos globalmente a ComToRecive = ' + comToRecive);
     }
-   
+
 
      var usbBudget = (isOrderSale + isComToPay + isComToRecive) - (isOrderPurchase + isTotalEst + isEstCharges);
     //console.log(usbBudget);
@@ -887,12 +887,12 @@ function cEstPSale_EstSale(i, value, multiplo, recept) {
 
 
     //console.log($('#'+multiplo+i).value);*///
-    
+
     var vl = value.replace(',','');
     //console.log(vl);
     var isVl = parseFloat(vl);
     //console.log(isVl);
-    
+
     var orderQty = $('#'+multiplo+i).val();
     var orderQ   = orderQty.replace(',','');
     var isOrderQty = parseFloat(orderQ);
@@ -902,9 +902,9 @@ function cEstPSale_EstSale(i, value, multiplo, recept) {
     var total = isOrderQty * isVl;
     //console.log("el total es = " + addCommas(total.toFixed(2)));
 
-    $('#'+recept+i).val(total.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+    $('#'+recept+i).val(total.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
-    //$('#order_purchase').val(0);   
+    //$('#order_purchase').val(0);
     //$('#order_purchase').val(total);
 }
 
@@ -928,10 +928,10 @@ function sEstPSale_EstSale(i, value, multiplo, recept) {
     //console.log("el total es = " + addCommas(total));
 
     //console.log("el total es = " + total);
-    $('#'+recept+i).val(total.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+    $('#'+recept+i).val(total.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
      //$('#order_sale').val(0);
-     //$('#order_sale').val(total); 
+     //$('#order_sale').val(total);
 }
 
 function addCommas(nStr)
@@ -951,7 +951,7 @@ $("#_principal_com , #_p_broker_com_mt_id, #_s_broker_com_mt" ).on("click keyup 
       var number = $(this).val().match(/^[0-9.]+$/)
       $(this).val(number);
     }
-}); 
+});
 
 function guardarAsistencia(){
     url = route("asistencia.store");
@@ -960,8 +960,13 @@ function guardarAsistencia(){
         url: url,
         type: "POST",
         data: formData,
+        beforeSend: function () {
+            $(".btn_asistencia").prop("disabled",true);
+            $(".spinner").show();
+        },
         success: function(data)
         {
+            $(".btn_asistencia").prop("disabled",false);
             toastr.success('¡Actualizado con éxito!');
             location.reload();
         },
