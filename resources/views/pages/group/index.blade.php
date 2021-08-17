@@ -32,7 +32,6 @@
                                 data-order='[[ 0, "desc" ]]' data-page-length='10'>
                             <thead>
                                 <tr>
-                                    <th><b>ID</b></th>
                                     <th><b>NOMBRE</b></th>
                                     <th><b>OPCIONES</b></th>
                                 </tr>
@@ -40,7 +39,6 @@
                             <tbody id="tbody">
                                 @foreach ($subgroups as $p)
                                 <tr class="tbody">
-                                    <td> {{ $p->id }}</td>
                                     <td>{{ $p->group ?? null }}</td>
                                     <td class="text-center">
                                         <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('grupo.edit',$p->id) }}', '{{ route('grupo.update',$p->id) }}')">
@@ -68,7 +66,7 @@
 
 
     var table = $('#mydatatable').DataTable( {
-                dom: '<"top"i>rt<"bottom"lp><"clear">',
+                dom: '<"top"if>rt<"bottom"lp><"clear">',
                 orderCellsTop: true,
                 fixedHeader: true,
                 // dom: 'Blrtip ',

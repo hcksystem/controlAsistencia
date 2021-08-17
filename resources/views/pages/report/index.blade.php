@@ -39,8 +39,7 @@ MARCAS</h1>
                         </div>
                     {{-- </div> --}}
                     <div id="table" class=" table-responsive">
-                    <table id="mydatatable" class="table table-bordered table-hover table-sm"
-                                data-order='[[ 0, "desc" ]]' data-page-length='10'>
+                    <table id="mydatatable" class="table table-bordered table-hover table-sm text-12" data-page-length='10' style="font-size:14px;">
                             <thead>
                                 <tr>
                                     <th><b>NOMBRE</b></th>
@@ -80,16 +79,27 @@ MARCAS</h1>
 <script>
 $(document).ready(function() {
 
+    $('#mydatatable thead tr').clone(true).appendTo( '#mydatatable thead' );
+            $('#mydatatable thead tr:eq(1) th').each( function (i) {
+                var title = $(this).text();
+                $(this).html( '<input type="text" class="form-control" placeholder="'+title+'" />' );
+                $( 'input', this ).on( 'keyup change', function () {
+                    if ( table.column(i).search() !== this.value ) {
+                        table.column(i).search( this.value ).draw();
+                    }
+                } );
+            } );
+
        var table = $('#mydatatable').DataTable( {
-                   dom: '<"top"i>rt<"bottom"lp><"clear">',
+                   dom: "<'row'><'row'<'col-md-10'l><'col-md-2'B>r>t<'row'<'col-md-4'i>><'row'<'#colvis'>p>",
                    orderCellsTop: true,
                    fixedHeader: true,
-                   // dom: 'Blrtip ',
-                   buttons: [],
+                   //dom: 'Blrtip ',
+                   buttons: ['excel'],
                    info:true,
                    bLengthChange: true,
                    lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
-                   order: [[7, 'desc']],
+                   order: [],
                    language: {
                        "decimal": "",
                        "emptyTable": "No hay información",
