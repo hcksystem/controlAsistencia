@@ -224,5 +224,9 @@ $(document).ready(function() {
             return false;
         }
     }
+
+    function checkSubmit() {
+        $(".btn_asistencia").prop("disabled",true);
+    }
 </script>
 @endsection
