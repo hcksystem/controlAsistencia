@@ -44,14 +44,14 @@
                 @if(isset($asistencia))
                     @if($asistencia->tipo == 0)
                         <input type="hidden" value="1" name="tipo">
-                        <a onclick="guardarAsistencia()" class="btn btn-danger col-6 mw-100 btn_asistencia">Registrar Salida</a>
+                        <button onclick="guardarAsistencia()" class="btn btn-danger col-6 mw-100 btn_asistencia">Registrar Salida</button>
                     @else
                         <input type="hidden" value="0" name="tipo">
-                        <a onclick="guardarAsistencia()" class="btn btn-success col-6 mw-100 btn_asistencia">Registrar Entrada</a>
+                        <button onclick="guardarAsistencia()" class="btn btn-success col-6 mw-100 btn_asistencia">Registrar Entrada</button>
                      @endif
                 @else
                         <input type="hidden" value="0" name="tipo">
-                        <a onclick="guardarAsistencia()" class="btn btn-success btn_asistencia">Registrar Entrada</a>
+                        <button onclick="guardarAsistencia()" class="btn btn-success btn_asistencia">Registrar Entrada</button>
                 @endif
 
 			</div>
