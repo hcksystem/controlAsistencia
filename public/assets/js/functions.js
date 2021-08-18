@@ -954,6 +954,7 @@ $("#_principal_com , #_p_broker_com_mt_id, #_s_broker_com_mt" ).on("click keyup 
 });
 
 function guardarAsistencia(){
+    $(".btn_asistencia").prop("disabled",true);
     url = route("asistencia.store");
     var formData =  $('#formAsistencia').serialize();
     $.ajax({
@@ -962,17 +963,20 @@ function guardarAsistencia(){
         data: formData,
         beforeSend: function () {
             $(".btn_asistencia").prop("disabled",true);
-            $(".spinner").show();
+           // $(".spinner").show();
         },
         success: function(data)
         {
-            $(".btn_asistencia").prop("disabled",false);
             toastr.success('¡Actualizado con éxito!');
             location.reload();
         },
         error: function (data){
             toastr.error('¡Ocurrió un error!');
         },
+    }).done(function() {
+        setTimeout(function(){
+        $("#overlay").fadeOut(300);
+        },500);
     });
 }
 

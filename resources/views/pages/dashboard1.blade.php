@@ -1,28 +1,38 @@
 @extends('layouts.app')
 <style>
-    .spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border-left-color: #09f;
-
-  animation: spin 1s ease infinite;
-  position:absolute;
-  z-index:3;
-  left:25em;
-  top:50px; opacity:0.9
+#overlay{
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height:100%;
+  display: none;
+  background: rgba(0,0,0,0.6);
 }
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
+.cv-spinner {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px #ddd solid;
+  border-top: 4px #2e93e6 solid;
+  border-radius: 50%;
+  animation: sp-anime 0.8s infinite linear;
+}
+@keyframes sp-anime {
   100% {
     transform: rotate(360deg);
   }
 }
+.is-hide{
+  display:none;
+}
+
+
 </style>
 <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
 <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKA5z9mjBp51OKJ0Ub2rEZmOf2TDliAnk&libraries=places">
@@ -46,7 +56,7 @@
                                     <h4 class="text-center font-weight-normal ">Registrar Nueva Marcación</h4>
                                 </div>
                                 <div class="content">
-                                    <h6 class="pt-2 pb-2" > HORA ACTUAL </h6>
+                                    <h6 class="pt-2 pb-2">HORA ACTUAL</h6>
                                     <h1 class="text-blue "  id="hour"></h1>
 
                                       <div class="row p-t-b-10 ">
@@ -70,6 +80,7 @@
                 <p class="text-left"><b>Última Marca: </b>{{$asistencia->fecha ?? null }}</p>
                 <p class="text-left"><b>Tipo de Marca:</b>@if(isset($asistencia->tipo))@if($asistencia->tipo == 0) Entrada @else Salida @endif @endif</p>
                 <p class="text-left"><b>IP: </b>{{$asistencia->ip ?? null }}</p>
+                <input type="hidden" value="{{ Auth::user()->id }}" id="user_id">
                 </div>
 
                 <div class="footer text-left">
@@ -228,5 +239,36 @@ $(document).ready(function() {
     function checkSubmit() {
         $(".btn_asistencia").prop("disabled",true);
     }
+
+   /* jQuery(function($){
+        $(document).ajaxSend(function() {
+        $("#overlay").fadeIn(300);　
+        });
+        url = route("asistencia.store");
+        var formData =  $('#formAsistencia').serialize();
+        var image = $('#image-tag').val()
+        $('.btn_asistencia').click(function(){
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: image,
+            beforeSend: function () {
+                $(".btn_asistencia").prop("disabled",true);
+            },
+            success: function(data){
+                $(".btn_asistencia").prop("disabled",false);
+                toastr.success('¡Actualizado con éxito!');
+                //location.reload();
+            }
+        }).done(function() {
+            setTimeout(function(){
+            $("#overlay").fadeOut(300);
+            },500);
+        });
+        });
+    });*/
+
+
+
 </script>
 @endsection

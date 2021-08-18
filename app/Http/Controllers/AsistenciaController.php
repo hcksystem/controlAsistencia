@@ -36,9 +36,9 @@ class AsistenciaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   //dd($request->all());
+    {
+        //dd($request->all());
 
-        $resultado = array_unique($request->all());
         $img = $request->image;
         $path = public_path().'/img/avatar/';
 
