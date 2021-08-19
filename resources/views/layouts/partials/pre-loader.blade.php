@@ -1,7 +1,7 @@
 <!-- Pre loader -->
 <div class="loader" id="loader">
 </div>
-    <div id="loader-icon" class="loader-icon">
+    <div id="loader-icon" class="loader-icon" style="position:absolute; z-index:3">
         <div class="plane-container">
             <div class="preloader-wrapper small active">
                 <div class="spinner-layer spinner-blue">
