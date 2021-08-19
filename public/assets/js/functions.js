@@ -957,6 +957,8 @@ $("#_principal_com , #_p_broker_com_mt_id, #_s_broker_com_mt" ).on("click keyup 
 function guardarAsistencia(){
     $('#create').modal('hide');
     $(".btn_asistencia").prop("disabled",true);
+    $(".spinner").show();
+    $(".spinner").fadeIn(15000);
     $("#loader-icon").fadeIn(3000);
     url = route("asistencia.store");
     var formData =  $('#formAsistencia').serialize();
