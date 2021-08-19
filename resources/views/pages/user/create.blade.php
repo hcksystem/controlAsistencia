@@ -188,6 +188,7 @@
 	
 	
 	function checkSubmit() {
+		$('#create').modal('hide');
         $("#save").prop("disabled",true);
     }
 
