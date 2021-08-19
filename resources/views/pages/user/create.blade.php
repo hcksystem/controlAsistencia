@@ -106,7 +106,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				<button type="submit" id="save" class="btn btn-primary"><i class="icon-save mr-2"></i>Guardar Datos</button>
+				<button type="submit" id="save" class="btn btn-primary" onclick=""><i class="icon-save mr-2"></i>Guardar Datos</button>
 			</div>
 		</div>
 	</div>
@@ -185,6 +185,11 @@
 		var key = window.Event ? e.which : e.keyCode
 		return (key >= 48 && key <= 57)
   	}
+	
+	
+	function checkSubmit() {
+        $("#save").prop("disabled",true);
+    }
 
 </script>
 {!! Form::close() !!}

@@ -226,18 +226,15 @@ $(document).ready(function() {
     enviando = false; //Obligaremos a entrar el if en el primer submit
 
     function checkSubmit() {
+
         if (!enviando) {
     		enviando= true;
     		return true;
         } else {
             //Si llega hasta aca significa que pulsaron 2 veces el boton submit
-            alert("El formulario ya se esta enviando");
+            $(".btn_asistencia").prop("disabled",true);
             return false;
         }
-    }
-
-    function checkSubmit() {
-        $(".btn_asistencia").prop("disabled",true);
     }
 
    /* jQuery(function($){
