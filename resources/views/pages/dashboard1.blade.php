@@ -22,6 +22,13 @@
   border-top: 4px #2e93e6 solid;
   border-radius: 50%;
   animation: sp-anime 0.8s infinite linear;
+  position: absolute; /* Cambiamos de absolute a relative */
+  margin: auto;
+ z-index: 9999;
+ left : 50%;
+  bottom : 0;
+  right : 0;
+  top : 50%;
 }
 @keyframes sp-anime {
   100% {

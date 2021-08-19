@@ -959,7 +959,6 @@ function guardarAsistencia(){
     $(".spinner").show();
     $(".spinner").fadeIn(15000);
     $("#loader-icon").fadeIn(3000);
-    $('#create').modal('hide');
     url = route("asistencia.store");
     var formData =  $('#formAsistencia').serialize();
     $.ajax({
