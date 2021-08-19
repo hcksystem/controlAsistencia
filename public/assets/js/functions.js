@@ -252,7 +252,7 @@ function saveDataMultitap(url, forml, method, inputFile)
         cache: false,
         processData: false,
         contentType: false,
-
+        async: false,
         success: function(result)
         {
             $('.modal').modal('hide');
@@ -963,6 +963,7 @@ function guardarAsistencia(){
         url: url,
         type: "POST",
         data: formData,
+        async: false,
         beforeSend: function () {
             $(".btn_asistencia").prop("disabled",true);
            // $(".spinner").show();
