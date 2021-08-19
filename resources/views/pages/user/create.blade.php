@@ -188,6 +188,7 @@
 	
 	
 	function checkSubmit() {
+		$("#loader-icon").fadeIn(3000);
 		$('#create').modal('hide');
         $("#save").prop("disabled",true);
     }
