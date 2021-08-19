@@ -67,6 +67,7 @@ $(document).ready(function(){
  */
 $(".formlDinamic").on('submit', function(e) {
     e.preventDefault();
+    $("#loader-icon").fadeIn(15000);
     var id = $(this).attr('id');
     var url = $(this).attr("action");
     var method = $(this).attr("method");
@@ -966,7 +967,7 @@ function guardarAsistencia(){
         async: false,
         beforeSend: function () {
             $(".btn_asistencia").prop("disabled",true);
-           // $(".spinner").show();
+            $("#loader-icon").fadeIn(15000);
         },
         success: function(data)
         {
