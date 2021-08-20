@@ -1,5 +1,5 @@
 <!-- Modal -->
-{!! Form::open(['route'=>['asistencia.store',Auth::user()->id],'method'=>'POST', 'class'=>'formlDinamic', 'id'=>'guardarRegistro','enctype'=>'multipart/form-data','files'=>'true','onsubmit'=>'loading()']) !!}
+{!! Form::open(['route'=>['asistencia.store',Auth::user()->id],'method'=>'POST','onsubmit'=>'loading()']) !!}
 <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">

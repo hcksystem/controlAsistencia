@@ -64,6 +64,8 @@ class AsistenciaController extends Controller
         $asis->latitude = $request->latitude;
         $asis->longitude = $request->longitude;
         $asis->save();
+
+        return redirect()->back();
     }
 
     /**
