@@ -16,8 +16,6 @@
                         </div>
                         <div class="col-6"></div>
                     </div>
-                    <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-
 				</div>
                 @if(isset($asistencia))
                     @if($asistencia->tipo == 0)
