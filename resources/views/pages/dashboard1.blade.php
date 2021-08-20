@@ -275,7 +275,7 @@ $(document).ready(function() {
 
 function loading(){
     localStorage.clear()
-    //$("#overlay").fadeIn(300);　
+    $("#overlay").fadeIn(300);　
 }
 
 </script>
