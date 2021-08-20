@@ -1,4 +1,5 @@
 <!-- Modal -->
+{!! Form::open(['route'=>['asistencia.store',Auth::user()->id],'method'=>'POST', 'class'=>'formlDinamic', 'id'=>'guardarRegistro','enctype'=>'multipart/form-data','files'=>'true','onsubmit'=>'loading()']) !!}
 <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -7,7 +8,6 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			</div>
 			<div class="modal-body">
-            <form id="formAsistencia"  method="post"  action="{{ route('asistencia.store',Auth::user()->id) }}" onsubmit="loading()">
 				<div class="form-row">
                     <div class="col-12">
                         <div class="col-12">
@@ -37,7 +37,7 @@
                 <a id="btnCamara" class="btn btn-success">Abrir Camara</a>
                 <a id="btnOcultarCamara" class="btn btn-info" style="display:none;">Cerrar Camara</a>
                 <a id="checker" class="btn btn-warning" style="display:none;">Tomar foto</a>
-                </form>
+               
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -57,3 +57,4 @@
 		</div>
 	</div>
 </div>
+{!! Form::close() !!}
