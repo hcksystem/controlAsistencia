@@ -274,8 +274,9 @@ $(document).ready(function() {
 
 
 function loading(){
+    $(".btn_asistencia").prop("disabled",true);
     localStorage.clear()
-    $("#overlay").fadeIn(300);　
+    $("#overlay").fadeIn(300);
 }
 
 </script>
