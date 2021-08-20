@@ -278,6 +278,7 @@ $(document).ready(function() {
         });
                 
         $('.btn_asistencia').click(function(){
+            $("#overlay").fadeIn(300);　
             url = route("asistencia.store");
             var formData =  $('#formAsistencia').serialize();
 
