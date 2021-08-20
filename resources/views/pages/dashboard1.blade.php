@@ -272,6 +272,35 @@ $(document).ready(function() {
         });
     });*/
 
+    jQuery(function($){
+        $(document).ajaxSend(function() {
+            $("#overlay").fadeIn(300);　
+        });
+                
+        $('.btn_asistencia').click(function(){
+            url = route("asistencia.store");
+            var formData =  $('#formAsistencia').serialize();
+
+            $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            async: false,
+            success: function(data){
+                toastr.success('¡Actualizado con éxito!');
+                location.reload();
+            },
+            error: function (data){
+                toastr.error('¡Ocurrió un error!');
+            }
+            }).done(function() {
+            setTimeout(function(){
+                $("#overlay").fadeOut(300);
+            },500);
+            });
+        });	
+});
+
 
 
 </script>

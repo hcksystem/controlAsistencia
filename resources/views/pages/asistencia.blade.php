@@ -37,23 +37,21 @@
                 <a id="btnOcultarCamara" class="btn btn-info" style="display:none;">Cerrar Camara</a>
                 <a id="checker" class="btn btn-warning" style="display:none;">Tomar foto</a>
                 </form>
-                <div class="spinner" style="display:none;"></div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 @if(isset($asistencia))
                     @if($asistencia->tipo == 0)
                         <input type="hidden" value="1" name="tipo">
-                        <button onclick="guardarAsistencia()" class="btn btn-danger col-6 mw-100 btn_asistencia">Registrar Salida</button>
+                        <button type="button" class="btn btn-danger col-6 mw-100 btn_asistencia">Registrar Salida</button>
                     @else
                         <input type="hidden" value="0" name="tipo">
-                        <button onclick="guardarAsistencia()" class="btn btn-success col-6 mw-100 btn_asistencia">Registrar Entrada</button>
+                        <button type="button" class="btn btn-success col-6 mw-100 btn_asistencia">Registrar Entrada</button>
                      @endif
                 @else
                         <input type="hidden" value="0" name="tipo">
-                        <button onclick="guardarAsistencia()" class="btn btn-success btn_asistencia">Registrar Entrada</button>
+                        <button type="button" class="btn btn-success btn_asistencia">Registrar Entrada</button>
                 @endif
-
 			</div>
 		</div>
 	</div>
