@@ -7,7 +7,7 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			</div>
 			<div class="modal-body">
-            <form id="formAsistencia">
+            <form id="formAsistencia"  method="post"  action="{{ route('asistencia.store',Auth::user()->id) }}">
 				<div class="form-row">
                     <div class="col-12">
                         <div class="col-12">
@@ -16,6 +16,7 @@
                         </div>
                         <div class="col-6"></div>
                     </div>
+                    <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
 
 				</div>
                 @if(isset($asistencia))
@@ -43,14 +44,14 @@
                 @if(isset($asistencia))
                     @if($asistencia->tipo == 0)
                         <input type="hidden" value="1" name="tipo">
-                        <button type="button" class="btn btn-danger col-6 mw-100 btn_asistencia">Registrar Salida</button>
+                        <button type="submit" class="btn btn-danger col-6 mw-100 btn_asistencia">Registrar Salida</button>
                     @else
                         <input type="hidden" value="0" name="tipo">
-                        <button type="button" class="btn btn-success col-6 mw-100 btn_asistencia">Registrar Entrada</button>
+                        <button type="submit" class="btn btn-success col-6 mw-100 btn_asistencia">Registrar Entrada</button>
                      @endif
                 @else
                         <input type="hidden" value="0" name="tipo">
-                        <button type="button" class="btn btn-success btn_asistencia">Registrar Entrada</button>
+                        <button type="submit" class="btn btn-success btn_asistencia">Registrar Entrada</button>
                 @endif
 			</div>
 		</div>

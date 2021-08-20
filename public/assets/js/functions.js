@@ -989,9 +989,7 @@ function actualizarAsistencia(id){
     url = route("asistencia.update",id);
     var formData =  $('#formAsistencia').serialize();
     $.ajax({
-        url: url,
-        type: "POST",
-        data: formData,
+        type: 'GET',
         success: function(data)
         {
             toastr.success('¡Actualizado con éxito!');
