@@ -283,9 +283,7 @@ $(document).ready(function() {
             var formData =  $('#formAsistencia').serialize();
 
             $.ajax({
-            url: url,
-            type: "POST",
-            data: formData,
+            type: "GET",
             async: false,
             success: function(data){
                 toastr.success('¡Actualizado con éxito!');
@@ -302,7 +300,9 @@ $(document).ready(function() {
         });	
 });
 
-
+function loading(){
+    $("#overlay").fadeIn(300);　
+}
 
 </script>
 @endsection

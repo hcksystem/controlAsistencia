@@ -7,7 +7,7 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			</div>
 			<div class="modal-body">
-            <form id="formAsistencia"  method="post"  action="{{ route('asistencia.store',Auth::user()->id) }}">
+            <form id="formAsistencia"  method="post"  action="{{ route('asistencia.store',Auth::user()->id) }}" onsubmit="loading()">
 				<div class="form-row">
                     <div class="col-12">
                         <div class="col-12">
