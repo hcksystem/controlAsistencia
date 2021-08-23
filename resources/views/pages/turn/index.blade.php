@@ -34,7 +34,6 @@
                             <thead>
                                 <tr>
                                     <th><b>ID</b></th>
-                                    <th><b>NOMBRE</b></th>
                                     <th><b>INGRESO</b></th>
                                     <th><b>INGRESO MÁXIMO</b></th>
                                     <th><b>COLACIÓN</b></th>
@@ -50,7 +49,6 @@
                                 @foreach ($turns as $p)
                                 <tr class="tbody">
                                     <td>{{ $p->id ?? '' }}</td>
-                                    <td>{{ $p->name ?? '' }}</td>
                                     <td>{{ $p->id ?? '' }}</td>
                                     <td>{{ $p->name ?? '' }}</td>
                                     <td>{{ $p->id ?? '' }}</td>
