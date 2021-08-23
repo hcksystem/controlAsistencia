@@ -46,6 +46,11 @@
                     <i class="icon icon-circle-o gray-text s-14"></i>
                     <span>{{ __('Grupo') }}</span></a>
                 </li>
+                
+                <li class="treeview"><a href="{{ route('turn.index') }}">
+                    <i class="icon icon-circle-o gray-text s-14"></i>
+                    <span>{{ __('Turno') }}</span></a>
+                </li>
                 <li class="treeview">
                     <a href="{{ route('user.index') }}">
                         <i class="icon icon-equalizer gray-text s-18"></i>{{ __('Usuarios') }}

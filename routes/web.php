@@ -15,25 +15,6 @@ Route::get('/', function () {
 	return view('auth.login');
 });
 
-Route::get('pdf/{name}', function ($name) {
-    $pdf = App::make('dompdf.wrapper');
-    $pdf->loadView('pages.operation.pdf.'.$name);
-    return $pdf->stream();
-})->name('pdf');
-
-Route::get('pdf1', function () {
-    $pdf = App::make('dompdf.wrapper');
-    $pdf->loadView('pages.operation.pdf.factura6');
-    return $pdf->stream();
-})->name('pdf1');
-
-Route::get('factura', function () {
-	return view('pages.operation.pdf.factura6');
-});
-Route::get('factura1', function () {
- 	return view('pages.operation.pdf.factura1');
-});
-
 
 Route::get('login', function () {
 	return view('auth.login');
@@ -56,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('rol', 'RolController');
 	Route::resource('permission', 'PermissionController');
 	Route::resource('report', 'ReportController')->middleware('has.role:super');
+	Route::resource('turn', 'TurnController')->middleware('has.role:super');
 	// home
 	Route::get('/home', 'HomeController@index')->name('home');
 
