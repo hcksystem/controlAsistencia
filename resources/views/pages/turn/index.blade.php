@@ -49,16 +49,16 @@
                             <tbody id="tbody">
                                 @foreach ($turns as $p)
                                 <tr class="tbody">
-                                    <td> {{ $p->id }}</td>
-                                    <td>{{ $p->name }}</td>
-                                    <td> {{ $p->id }}</td>
-                                    <td>{{ $p->name }}</td>
-                                    <td> {{ $p->id }}</td>
-                                    <td>{{ $p->name }}</td>
-                                    <td> {{ $p->id }}</td>
-                                    <td>{{ $p->name }}</td>
-                                    <td> {{ $p->id }}</td>
-                                    <td>{{ $p->name }}</td>
+                                    <td>{{ $p->id ?? '' }}</td>
+                                    <td>{{ $p->name ?? '' }}</td>
+                                    <td>{{ $p->id ?? '' }}</td>
+                                    <td>{{ $p->name ?? '' }}</td>
+                                    <td>{{ $p->id ?? '' }}</td>
+                                    <td>{{ $p->name ?? '' }}</td>
+                                    <td>{{ $p->id ?? '' }}</td>
+                                    <td>{{ $p->name ?? '' }}</td>
+                                    <td>{{ $p->id ?? '' }}</td>
+                                    <td>{{ $p->name ?? '' }}</td>
                                     <td class="text-center">
                                     {!! Form::open(['route'=>['posicion.destroy',$p->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
                                         <a href="#" class="btn btn-default btn-sm" title="Detalles" data-toggle="modal" data-target="#show" onclick="showData('{{ route('posicion.show', $p->id) }}')">
