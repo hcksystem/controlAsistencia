@@ -55,7 +55,7 @@
                                     <td>{{ $p->salida ?? '' }}</td>
                                     <td>{{ $p->horas_trabajo ?? '' }}</td>
                                     <td>{{ $p->tiempo_colacion ?? '' }}</td>
-                                    <td>{{ $p->tipo_turno ?? '' }}</td>
+                                    <td>{{ $p->tipo->name ?? '' }}</td>
                                     <td class="text-center">
                                     {!! Form::open(['route'=>['turn.destroy',$p->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
                                         

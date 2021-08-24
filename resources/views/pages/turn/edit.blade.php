@@ -35,12 +35,12 @@
 							</div>
                             <div class="form-group col-3 m-0" id="ingreso_max_group">
 								{!! Form::label('horas_trabajo', 'Horas Trabajo', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::text('horas_trabajo', null, ['class'=>'form-control r-0 light s-12','id'=>'_horas_trabajo']) !!}
+								{!! Form::number('horas_trabajo', null, ['class'=>'form-control r-0 light s-12','id'=>'_horas_trabajo']) !!}
 								<span class="ingreso_span"></span>
 							</div>
                             <div class="form-group col-3 m-0" id="tiempo_colacion_group">
 								{!! Form::label('tiempo_colacion', 'Tiempo Colación', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::text('tiempo_colacion', null, ['class'=>'form-control r-0 light s-12','id'=>'_tiempo_colacion']) !!}
+								{!! Form::number('tiempo_colacion', null, ['class'=>'form-control r-0 light s-12','id'=>'_tiempo_colacion']) !!}
 								<span class="tiempo_colacion_span"></span>
 							</div>
                             <div class="form-group col-3 m-0" id="tipo_turno_group">
