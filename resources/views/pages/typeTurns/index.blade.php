@@ -4,11 +4,10 @@
 @endsection
 @section('maincontent')
 {{-- modal create --}}
-@include('pages.position.create')
-{{-- modal show --}}
-@include('pages.position.show')
+@include('pages.typeTurns.create')
+
 {{-- modal edit --}}
-@include('pages.position.edit')
+@include('pages.typeTurns.edit')
 <div class="page height-full">
 
     {{-- alerts --}}
@@ -46,9 +45,6 @@
                                     
                                     <td class="text-center">
                                     {!! Form::open(['route'=>['typeTurn.destroy',$t->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
-                                        <a href="#" class="btn btn-default btn-sm" title="Detalles" data-toggle="modal" data-target="#show" onclick="showData('{{ route('typeTurn.show', $t->id) }}')">
-                                            <i class="icon-eye text-info"></i>
-                                        </a>
                                         <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('typeTurn.edit',$t->id) }}', '{{ route('typeTurn.update',$t->id) }}')">
                                             <i class="icon-pencil text-info"></i>
                                         </a>

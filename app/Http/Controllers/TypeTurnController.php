@@ -37,7 +37,9 @@ class TypeTurnController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();         
+        Type_Turn::create($data);
+        return response()->json(['message'=>'Tipo registrado correctamente']);
     }
 
     /**
@@ -59,7 +61,8 @@ class TypeTurnController extends Controller
      */
     public function edit($id)
     {
-        //
+        $type = Type_Turn::find($id);
+        return response()->json($type);
     }
 
     /**
