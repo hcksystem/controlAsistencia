@@ -37,7 +37,10 @@
                 <i class="icon icon-angle-left s-18 pull-right"></i>
             </a>
             <ul class="treeview-menu">
-
+            <li class="treeview"><a href="{{ route('planificador.index') }}">
+                    <i class="icon icon-circle-o gray-text s-14"></i>
+                    <span>{{ __('Planificador') }}</span></a>
+                </li>
                 <li class="treeview"><a href="{{ route('posicion.index') }}">
                     <i class="icon icon-circle-o gray-text s-14"></i>
                     <span>{{ __('Posición') }}</span></a>
