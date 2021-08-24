@@ -28,4 +28,9 @@ class Planner extends Model
         return $this->belongsTo('App\MetaType', 'metaTypeID');
     }
 
+    public function estado($e)
+    {
+        return $e;
+    }
+
 }

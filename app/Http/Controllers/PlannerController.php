@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
+use App\Models\Planner;
+use App\Models\Type_Planner;
 class PlannerController extends Controller
 {
     /**
@@ -13,7 +15,8 @@ class PlannerController extends Controller
      */
     public function index()
     {
-        //
+        $planners = Planner::all();
+        return view('pages.planner.index',compact('planners'));
     }
 
     /**
