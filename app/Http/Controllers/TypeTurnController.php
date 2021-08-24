@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Models\Type_Turn;
 
 class TypeTurnController extends Controller
@@ -74,7 +75,9 @@ class TypeTurnController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $turn = Type_Turn::find($id);
+        $turn->update($request->all());
+        Session::flash('message-success',' Posición actualizado correctamente.');
     }
 
     /**
@@ -85,6 +88,8 @@ class TypeTurnController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $turn =Type_Turn::find($id);
+        $turn->delete();
+        return response()->json(['message'=>'Posición eliminado correctamente']);
     }
 }
