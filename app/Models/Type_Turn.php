@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Turn extends Model
+class Type_Turn extends Model
 {
   /**
     * The attributes that are mass assignable.
     *
     * @var array
     */
-   protected $table = 'turns';
+   protected $table = 'type_turns';
 
    protected $fillable = [
-        'id','ingreso','ingreso_max','colacion','detalles','salida','horas_trabajo','tiempo_colacion','tipo_turno','created_at','updated_at'
+        'id','name','description'
    ];
 
    public $timestamps  = false;

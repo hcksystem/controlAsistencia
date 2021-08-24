@@ -4,11 +4,10 @@
 @endsection
 @section('maincontent')
 {{-- modal create --}}
-@include('pages.position.create')
-{{-- modal show --}}
-@include('pages.position.show')
+@include('pages.turn.create')
+
 {{-- modal edit --}}
-@include('pages.position.edit')
+@include('pages.turn.edit')
 <div class="page height-full">
 
     {{-- alerts --}}
@@ -49,20 +48,18 @@
                                 @foreach ($turns as $p)
                                 <tr class="tbody">
                                     <td>{{ $p->id ?? '' }}</td>
-                                    <td>{{ $p->id ?? '' }}</td>
-                                    <td>{{ $p->name ?? '' }}</td>
-                                    <td>{{ $p->id ?? '' }}</td>
-                                    <td>{{ $p->name ?? '' }}</td>
-                                    <td>{{ $p->id ?? '' }}</td>
-                                    <td>{{ $p->name ?? '' }}</td>
-                                    <td>{{ $p->id ?? '' }}</td>
-                                    <td>{{ $p->name ?? '' }}</td>
+                                    <td>{{ $p->ingreso ?? '' }}</td>
+                                    <td>{{ $p->ingreso_max ?? '' }}</td>
+                                    <td>{{ $p->colacion ?? '' }}</td>
+                                    <td>{{ $p->detalles ?? '' }}</td>
+                                    <td>{{ $p->salida ?? '' }}</td>
+                                    <td>{{ $p->horas_trabajo ?? '' }}</td>
+                                    <td>{{ $p->tiempo_colacion ?? '' }}</td>
+                                    <td>{{ $p->tipo_turno ?? '' }}</td>
                                     <td class="text-center">
-                                    {!! Form::open(['route'=>['posicion.destroy',$p->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
-                                        <a href="#" class="btn btn-default btn-sm" title="Detalles" data-toggle="modal" data-target="#show" onclick="showData('{{ route('posicion.show', $p->id) }}')">
-                                            <i class="icon-eye text-info"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('posicion.edit',$p->id) }}', '{{ route('posicion.update',$p->id) }}')">
+                                    {!! Form::open(['route'=>['turn.destroy',$p->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
+                                        
+                                        <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('turn.edit',$p->id) }}', '{{ route('turn.update',$p->id) }}')">
                                             <i class="icon-pencil text-info"></i>
                                         </a>
                                         <button class="btn btn-default btn-sm" onclick="return confirm('¿Realmente deseas borrar el registro?')">

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Models\Turn;
+use App\Models\Type_Turn;
 
 class TurnController extends Controller
 {
@@ -15,7 +17,8 @@ class TurnController extends Controller
     public function index()
     {
         $turns=Turn::all();
-        return view('pages.turn.index',compact('turns')); 
+        $tipos = Type_Turn::get()->pluck('name','id')->prepend('Seleccione un tipo','');
+        return view('pages.turn.index',compact('turns','tipos')); 
     }
 
     /**
@@ -36,7 +39,9 @@ class TurnController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();         
+        Turn::create($data);
+        return response()->json(['message'=>'Turno registrado correctamente']);
     }
 
     /**
@@ -58,7 +63,8 @@ class TurnController extends Controller
      */
     public function edit($id)
     {
-        //
+        $turn = Turn::find($id);
+        return response()->json($turn);
     }
 
     /**
@@ -70,7 +76,9 @@ class TurnController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $turn = Turn::find($id);
+        $turn->update($request->all());
+        Session::flash('message-success',' Posición actualizado correctamente.');
     }
 
     /**
@@ -81,6 +89,8 @@ class TurnController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $turn =Turn::find($id);
+        $turn->delete();
+        return response()->json(['message'=>'Posición eliminado correctamente']);
     }
 }
