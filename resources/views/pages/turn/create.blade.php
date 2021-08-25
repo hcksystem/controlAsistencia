@@ -28,7 +28,7 @@
 							</div>
 						</div>
 						<div class="form-row">
-                        <div class="form-group col-3 m-0" id="salida_group">
+                        	<div class="form-group col-3 m-0" id="salida_group">
 								{!! Form::label('salida', 'Salida', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::time('salida', null, ['class'=>'form-control r-0 light s-12','id'=>'salida']) !!}
 								<span class="salida_span"></span>

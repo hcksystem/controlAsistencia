@@ -42,7 +42,7 @@
                                 @foreach ($planners as $p)
                                 <tr class="tbody">
                                     <td>{{ $p->descripcion ?? '' }}</td>
-                                    <td>{{ $p->tipo_planificador->nombre ?? '' }}</td>
+                                    <td>{{ $p->tipo->nombre ?? '' }}</td>
                                     <td>{{ $p->estado($p->Estado) }}</td>
                                     <td class="text-center">
                                     {!! Form::open(['route'=>['posicion.destroy',$p->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}

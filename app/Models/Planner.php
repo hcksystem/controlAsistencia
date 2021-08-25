@@ -23,9 +23,9 @@ class Planner extends Model
     * Get the user that owns the Operations.
     */
  
-    public function metaType()
+    public function tipo()
     {
-        return $this->belongsTo('App\MetaType', 'metaTypeID');
+        return $this->belongsTo('App\Models\Type_Planner','tipo_planificador');
     }
 
     public function estado($e)

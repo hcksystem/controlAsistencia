@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Planner;
 use App\Models\Type_Planner;
+use App\Models\Turn;
 class PlannerController extends Controller
 {
     /**
@@ -26,7 +27,9 @@ class PlannerController extends Controller
      */
     public function create()
     {
-        //
+        $turns = Turn::get()->pluck('detalles','id')->prepend('Seleccione...','');
+        $types = Type_Planner::get()->pluck('nombre','id')->prepend('Seleccione...','');
+        return view('pages.planner.create',compact('turns','types'));
     }
 
     /**
@@ -37,7 +40,26 @@ class PlannerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $planificacion = array();
+        $planificacion = [
+            'turno_dia1' => $request->turno_dia1,
+            'turno_dia2' => $request->turno_dia2,
+            'turno_dia3' => $request->turno_dia3,
+            'turno_dia4' => $request->turno_dia4,
+            'turno_dia5' => $request->turno_dia5,
+            'turno_dia6' => $request->turno_dia6,
+            'turno_dia7' => $request->turno_dia7
+        ];
+    
+        $plann = implode(',',$planificacion);
+        $planner = new Planner();
+        $planner->descripcion = $request->detalles;
+        $planner->tipo_planificador = $request->tipo_planificador;
+        $planner->Estado = 'Activo';
+        $planner->planificacion = $plann;
+        $planner->save();
+        return redirect()->route('planificador.index');
     }
 
     /**
