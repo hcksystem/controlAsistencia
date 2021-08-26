@@ -30,7 +30,11 @@ class Planner extends Model
 
     public function estado($e)
     {
-        return $e;
+        if($e == 0){
+            return 'Activo';
+        }else{
+            return 'Inactivo';
+        }
     }
 
 }

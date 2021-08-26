@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="form-group">
                     <div class="card-header white">
-                        <h6> CREAR PLANIFICADOR </h6>
+                        <h6> ACTUALIZAR PLANIFICADOR </h6>
                     </div>
                 </div>
                 <div class="card-body">

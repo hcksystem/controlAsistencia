@@ -139,6 +139,8 @@ class PlannerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $planner = Planner::find($id);
+        $planner->delete();
+        return response()->json(['message'=>'Planificador eliminado correctamente']);
     }
 }
