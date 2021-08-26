@@ -44,7 +44,7 @@
 								<span class="tiempo_colacion_span"></span>
 							</div>
                             <div class="form-group col-3 m-0" id="tipo_turno_group">
-								{!! Form::label('tiempo_colacion', 'Tiempo Colación', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::label('tipo_turno', 'Tipo', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::select('tipo_turno',$tipos, null, ['class'=>'form-control r-0 light s-12','id'=>'tipo_turno']) !!}
 								<span class="tipo_turno_span"></span>
 							</div>

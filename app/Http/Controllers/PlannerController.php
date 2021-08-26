@@ -25,11 +25,25 @@ class PlannerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
+        switch ($id) {
+            case 'seamanal':
+                $type = 1;
+                break;
+            case 'mensual':
+                $type = 2;
+                break;
+            case 'perosnalizado':
+                $type = 3;
+                break;
+            default:
+                $type = 1;
+                break;
+        }
         $turns = Turn::get()->pluck('detalles','id')->prepend('Seleccione...','');
         $types = Type_Planner::get()->pluck('nombre','id')->prepend('Seleccione...','');
-        return view('pages.planner.create',compact('turns','types'));
+        return view('pages.planner.create',compact('turns','types','type'));
     }
 
     /**

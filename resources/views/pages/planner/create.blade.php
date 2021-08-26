@@ -26,7 +26,7 @@
 							</div>
                             <div class="form-group col-6 m-0" id="ingreso_max_group">
 								{!! Form::label('horas_trabajo', 'Tipo Planificador', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::select('tipo_planificador',$types, null, ['class'=>'form-control r-0 light s-12','id'=>'tipo_planificador','required']) !!}
+								{!! Form::select('tipo_planificador',$types, $type, ['class'=>'form-control r-0 light s-12','id'=>'tipo_planificador','required']) !!}
 								<span class="ingreso_span"></span>
 							</div>
                     </div>

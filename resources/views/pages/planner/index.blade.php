@@ -23,7 +23,16 @@
                     <div class="row text-right"> 
                         <div class="col-md-12 text-right">
                             <div class="form-group">
-                                <a href="{{ route('planificador.create') }}" class="btn btn-primary">AGREGAR NUEVO</a>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                AGREGAR NUEVO
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{{ route('planificador.create','semanal') }}">Semanal</a>
+                                    <a class="dropdown-item" href="{{ route('planificador.create','mensual') }}">Mensual</a>
+                                    <a class="dropdown-item" href="{{ route('planificador.create','personalizado') }}">Personalizado</a>
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -46,9 +55,6 @@
                                     <td>{{ $p->estado($p->Estado) }}</td>
                                     <td class="text-center">
                                     {!! Form::open(['route'=>['posicion.destroy',$p->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
-                                        <a href="#" class="btn btn-default btn-sm" title="Detalles" data-toggle="modal" data-target="#show" onclick="showData('{{ route('posicion.show', $p->id) }}')">
-                                            <i class="icon-eye text-info"></i>
-                                        </a>
                                         <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('posicion.edit',$p->id) }}', '{{ route('posicion.update',$p->id) }}')">
                                             <i class="icon-pencil text-info"></i>
                                         </a>
