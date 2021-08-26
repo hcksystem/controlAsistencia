@@ -54,8 +54,8 @@
                                     <td>{{ $p->tipo->nombre ?? '' }}</td>
                                     <td>{{ $p->estado($p->Estado) }}</td>
                                     <td class="text-center">
-                                    {!! Form::open(['route'=>['posicion.destroy',$p->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
-                                        <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('posicion.edit',$p->id) }}', '{{ route('posicion.update',$p->id) }}')">
+                                    {!! Form::open(['route'=>['planificador.destroy',$p->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
+                                        <a class="btn btn-default btn-sm" title="Editar" href="{{ route('planificador.edit',$p->id) }}">
                                             <i class="icon-pencil text-info"></i>
                                         </a>
                                         <button class="btn btn-default btn-sm" onclick="return confirm('¿Realmente deseas borrar el registro?')">

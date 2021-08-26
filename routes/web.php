@@ -62,6 +62,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('asistencia/show/{id}', 'AsistenciaController@show')->name('asistencia.show');
 
 	Route::get('planificador/create/{id}', 'PlannerController@create')->name('planificador.create');
+	Route::post('planificador/update/{id}', 'PlannerController@update')->name('planificador.update');
+
 
 });
 

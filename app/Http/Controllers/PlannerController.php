@@ -68,7 +68,7 @@ class PlannerController extends Controller
     
         $plann = implode(',',$planificacion);
         $planner = new Planner();
-        $planner->descripcion = $request->detalles;
+        $planner->descripcion = $request->descripcion;
         $planner->tipo_planificador = $request->tipo_planificador;
         $planner->Estado = $request->Estado;
         $planner->planificacion = $plann;
@@ -95,7 +95,10 @@ class PlannerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $planner = Planner::find($id);
+        $turns = Turn::get()->pluck('detalles','id')->prepend('Seleccione...','');
+        $types = Type_Planner::get()->pluck('nombre','id')->prepend('Seleccione...','');
+        return view('pages.planner.edit',compact('planner','turns','types'));
     }
 
     /**
@@ -107,7 +110,25 @@ class PlannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $planificacion = array();
+        $planificacion = [
+            'turno_dia1' => $request->turno_dia1,
+            'turno_dia2' => $request->turno_dia2,
+            'turno_dia3' => $request->turno_dia3,
+            'turno_dia4' => $request->turno_dia4,
+            'turno_dia5' => $request->turno_dia5,
+            'turno_dia6' => $request->turno_dia6,
+            'turno_dia7' => $request->turno_dia7
+        ];
+    
+        $plann = implode(',',$planificacion);
+        $planner = Planner::find($id);
+        $planner->descripcion = $request->descripcion;
+        $planner->tipo_planificador = $request->tipo_planificador;
+        $planner->Estado = $request->Estado;
+        $planner->planificacion = $plann;
+        $planner->save();
+        return redirect()->back();
     }
 
     /**
