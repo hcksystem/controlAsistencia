@@ -70,7 +70,7 @@ class PlannerController extends Controller
         $planner = new Planner();
         $planner->descripcion = $request->detalles;
         $planner->tipo_planificador = $request->tipo_planificador;
-        $planner->Estado = 'Activo';
+        $planner->Estado = $request->Estado;
         $planner->planificacion = $plann;
         $planner->save();
         return redirect()->route('planificador.index');
