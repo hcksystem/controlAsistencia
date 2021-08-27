@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Planner;
 use App\Models\Type_Planner;
 use App\Models\Turn;
+use App\User;
+use DB;
 class PlannerController extends Controller
 {
     /**
@@ -142,5 +144,26 @@ class PlannerController extends Controller
         $planner = Planner::find($id);
         $planner->delete();
         return response()->json(['message'=>'Planificador eliminado correctamente']);
+    }
+
+    public function assignment()
+    {
+        $planners = Planner::all();
+        $users = User::all();
+        $turns = Turn::get()->pluck('detalles','id')->prepend('Seleccione...','');
+        return view('pages.planner.assignment',compact('planners','users','turns'));
+    }
+
+    public function assignmentStore(Request $request)
+    {
+        //dd($request->all());
+
+        $array = $request->users;
+        foreach($array as $a){
+            if($a != 'all'){
+                $user = DB::insert('insert into planificador_user (user_id, planificador_id) values (?, ?)', [$a, $request->planificador_id,]);
+            }
+        }
+        return redirect()->route('planificador.index');
     }
 }

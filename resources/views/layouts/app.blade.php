@@ -13,6 +13,7 @@
     <link rel="stylesheet" href=  {{asset('assets/plugins/toastr/toastr.css')}}>
     <link rel="stylesheet" href=  {{asset('assets/css/daterangepicker.css')}}>
     <link rel="stylesheet" href=  {{asset('assets/css/fullcalendar.min.css')}}>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href=  {{asset('assets/plugins/bootstrap-fileinput/css/fileinput.css')}}>
     <link rel="stylesheet" href=  {{asset('assets/plugins/datatables/buttons-1.5.6/css/buttons.dataTables.min.css')}}>
@@ -111,6 +112,7 @@
     <script src={{asset('assets/plugins/bootstrap-fileinput/js/plugins/sortable.js')}}></script>
     <script src={{asset('assets/plugins/bootstrap-fileinput/js/locales/es.js')}}></script>
     <script src={{asset('assets/plugins/bootstrap-fileinput/themes/gly/theme.js')}}></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
 </html>

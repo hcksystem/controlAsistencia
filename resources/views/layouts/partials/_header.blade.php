@@ -37,9 +37,21 @@
                 <i class="icon icon-angle-left s-18 pull-right"></i>
             </a>
             <ul class="treeview-menu">
-            <li class="treeview"><a href="{{ route('planificador.index') }}">
-                    <i class="icon icon-circle-o gray-text s-14"></i>
-                    <span>{{ __('Planificador') }}</span></a>
+            <li>
+                    <a href="#">
+                        <i class="icon icon-circle-o gray-text s-14"></i> <span>{{ __('Planificador') }}</span>
+                        <i class="icon icon-angle-left s-18 pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="treeview"><a href="{{ route('planificador.index') }}">
+                            <i class="icon icon-widgets gray-text s-14"></i>
+                            <span>{{ __('Planificador') }}</span></a>
+                        </li>
+                        <li><a href="{{ route('planificador.assignment') }}">
+                                <i class="icon icon-plus-circle gray-text s-14"></i> <span>{{__('Asignación')}}</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="treeview"><a href="{{ route('posicion.index') }}">
                     <i class="icon icon-circle-o gray-text s-14"></i>
