@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"><i class="icon-eye"></i> Editar Data Type</h4>
+                <h4 class="modal-title" id="myModalLabel"><i class="icon-eye"></i> Editar Asignación</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -13,11 +13,11 @@
                         <div class="form-row">
                             <div class="form-group col-6 m-0">
                                 {!! Form::label('lbl_user', 'Usuario', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::select('user_id',$users, null, ['class'=>'form-control r-0 light s-12 select2 p-4','id'=>'_user_id', 'onclick'=>'inputClear(this.id)']) !!}
+							    {!! Form::select('user_id',$users, null, ['class'=>'form-control r-0 light s-12','id'=>'_user_id']) !!}
                             </div>
                             <div class="form-group col-6 m-0">
                                 {!! Form::label('lbl_planner', 'Planificador', ['class'=>'col-form-label s-12']) !!}
-                                {!! Form::select('planner_id',$planners, null, ['class'=>'form-control r-0 light s-12 select2','id'=>'_planner_id', 'onclick'=>'inputClear(this.id)']) !!}
+                                {!! Form::select('planner_id',$planners, null, ['class'=>'form-control r-0 light s-12','id'=>'_planner_id']) !!}
                             </div>
                             <div class="form-group col-6 m-0">
                                 {!! Form::label('since', 'Desde', ['class'=>'col-form-label s-12']) !!}

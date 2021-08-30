@@ -65,7 +65,8 @@
                                             <td>{{ $a->until ?? null }}</td>
                                             <td class="text-center">
                                             {!! Form::open(['route'=>['assignment.destroy',$a->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
-                                                <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('assignment.edit',$a->id) }}', '{{ route('assignment.update',$a->id) }}')">
+                                                <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('assignment.edit',$a->id) }}', '{{ route('assignment.update',$a->id) }}')"
+                                                    data-user_id="{{ $a->user_id }}" data-planner_id="{{ $a->planner_id }}">
                                                     <i class="icon-pencil text-info"></i>
                                                 </a>
                                                 <button class="btn btn-default btn-sm" onclick="return confirm('¿Realmente deseas borrar el registro?')">
@@ -92,11 +93,12 @@
 @endsection
 @section('js')
 <script>
- $(function () {
-        $("#users").css("height", parseInt($("#users option").length) * 20);
-});
 
-
+$('#update').on('show.bs.modal', function(event){
+    let button = $(event.relatedTarget);
+    let modal = $(this);
+    $('#user').val(1)
+})
 function turno(sel){
         let str = $('option:selected', sel).data("description");
         let arr = str.split(',');
@@ -105,32 +107,6 @@ function turno(sel){
             $('#turno_dia'+i).val(arr[i-1]);
         }
 }
-
-
-$(document).ready(function() {
-
-    $('.select_combo').select2({
-        theme: "classic",
-        width: '100%',
-        placeholder: $(this).data('placeholder'),
-        allowClear: Boolean($(this).data('allow-clear')),
-    });
-
-    $('#users').on('select2:select', function(e) {
-                switch (e.target.id) {
-                    case 'users':
-                    if(e.params.data.id == 'all') {
-                        $('#users > option').prop('selected', 'selected');
-                        $('#users option.all-class').prop('selected', false);
-                        $('#users').trigger('change');
-                        $('#users').attr('size', $('#users').find('option').length)
-                    }
-                    break;
-                }
-    });
-
-
-});
 
 function validate_date(){
         let f1 = new Date($("#since").val());
