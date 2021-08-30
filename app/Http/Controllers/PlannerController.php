@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Models\Assignment;
 use App\Models\Planner;
 use App\Models\Type_Planner;
 use App\Models\Turn;
@@ -67,7 +68,7 @@ class PlannerController extends Controller
             'turno_dia6' => $request->turno_dia6,
             'turno_dia7' => $request->turno_dia7
         ];
-    
+
         $plann = implode(',',$planificacion);
         $planner = new Planner();
         $planner->descripcion = $request->descripcion;
@@ -122,7 +123,7 @@ class PlannerController extends Controller
             'turno_dia6' => $request->turno_dia6,
             'turno_dia7' => $request->turno_dia7
         ];
-    
+
         $plann = implode(',',$planificacion);
         $planner = Planner::find($id);
         $planner->descripcion = $request->descripcion;
@@ -148,22 +149,41 @@ class PlannerController extends Controller
 
     public function assignment()
     {
-        $planners = Planner::all();
-        $users = User::all();
+        $planners = Planner::get()->pluck('descripcion','id')->prepend('Seleccione...','');
+        $users = User::select(
+            DB::raw("CONCAT(fullname,' ',last_name) AS name"),'id')
+            ->orderBy('name')
+            ->pluck('name', 'id')->prepend('Seleccione...','');
+        $assignments = Assignment::all();
         $turns = Turn::get()->pluck('detalles','id')->prepend('Seleccione...','');
-        return view('pages.planner.assignment',compact('planners','users','turns'));
+        return view('pages.planner.assignment',compact('planners','users','turns','assignments'));
     }
 
     public function assignmentStore(Request $request)
     {
-        //dd($request->all());
-
-        $array = $request->users;
-        foreach($array as $a){
-            if($a != 'all'){
-                $user = DB::insert('insert into planificador_user (user_id, planificador_id) values (?, ?)', [$a, $request->planificador_id,]);
-            }
-        }
-        return redirect()->route('planificador.index');
+        $data = $request->all();
+        Assignment::create($data);
+        return response()->json(['message'=>'Asignación registrado correctamente']);
     }
+
+    public function assignmentEdit($id)
+    {
+        $assig = Assignment::find($id);
+        return response()->json($assig);
+    }
+
+    public function assignmentUpdate(Request $request)
+    {
+        $data = $request->all();
+        Assignment::update($data);
+        return response()->json(['message'=>'Asignación registrado correctamente']);
+    }
+
+    public function assignmentDestroy($id)
+    {
+        $planner = Assignment::find($id);
+        $planner->delete();
+        return response()->json(['message'=>'Planificador eliminado correctamente']);
+    }
+
 }

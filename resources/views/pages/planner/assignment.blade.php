@@ -4,6 +4,8 @@
 @endsection
 @section('maincontent')
 
+@include('pages.planner.edit_assignment')
+
 <div class="page height-full">
 
     {{-- alerts --}}
@@ -16,78 +18,71 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('assignment.store') }}" method="POST" autocomplete="off">
-                        @csrf
-                        <div class="form-row">
-                            <div class="form-inline col-12 mt-4">
-								{!! Form::label('planificador_semanal', 'Planificador', ['class'=>'col-form-label s-12 col-1']) !!}
-                                <select name="planificador_id" id="planner_id" class="form-control r-0 light s-12 select_combo" data-placeholder="{{__('Seleccione')}}..." data-allow-clear="1"
-                                required onchange="turno(this)">
-                                        <option value=""></option>
-                                        @foreach ($planners as $p)
-                                        <option value="{{ $p->id }}" data-description="{{ $p->planificacion }}">{{ $p->descripcion }}</option>
-                                        @endforeach
-                                </select>
-
-								<span class="dia1_span"></span>
-							</div>
-						</div>
-                        <div class="form-row mt-2">
-							<div class="form-group col-5 m-0 p-4" style="height: auto!important;overflow-y: auto !important;">
-								
-								{!! Form::label('name', 'Usuario', ['class'=>'col-form-label s-12']) !!}
-								
-                                    <select name="users[]" id="users" class="form-control r-0 light s-12 select_combo" data-placeholder="{{__('Buscar Cliente')}}..." data-allow-clear="1"
-                                    multiple='multiple' style="overflow-y: auto !important;height: auto!important;">
-                                        <option value=""></option>
-                                        <option value="all">{{__('Seleccionar todos')}}</option>
-                                        @foreach ($users as $u)
-                                        <option value="{{ $u->id }}">{{ $u->fullname }} {{ $u->first_name }}</option>
-                                        @endforeach
-                                    </select>
-							</div>
-                            <div class="form-group col-6 m-0 p-4">
-                                <div class="row">
-                                {!! Form::label('turno_dia1', 'Día 1', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::select('turno_dia1',$turns, null, ['class'=>'form-control r-0 light s-12',  'id'=>'turno_dia1', 'onclick'=>'inputClear(this.id)']) !!}
-                                </div>
-                                <div class="row">
-                                {!! Form::label('turno_dia2', 'Día 2', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::select('turno_dia2',$turns, null, ['class'=>'form-control r-0 light s-12',  'id'=>'turno_dia2', 'onclick'=>'inputClear(this.id)']) !!}
-                                </div>
-                                <div class="row">
-                                {!! Form::label('turno_dia3', 'Día 3', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::select('turno_dia3',$turns, null, ['class'=>'form-control r-0 light s-12',  'id'=>'turno_dia3', 'onclick'=>'inputClear(this.id)']) !!}
-                                </div>
-                                <div class="row">
-                                {!! Form::label('turno_dia4', 'Día 4', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::select('turno_dia4',$turns, null, ['class'=>'form-control r-0 light s-12',  'id'=>'turno_dia4', 'onclick'=>'inputClear(this.id)']) !!}
-                                </div>
-                                <div class="row">
-                                {!! Form::label('turno_dia5', 'Día 5', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::select('turno_dia5',$turns, null, ['class'=>'form-control r-0 light s-12',  'id'=>'turno_dia5', 'onclick'=>'inputClear(this.id)']) !!}
-                                </div>
-                                <div class="row">
-                                {!! Form::label('turno_dia6', 'Día 6', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::select('turno_dia6',$turns, null, ['class'=>'form-control r-0 light s-12',  'id'=>'turno_dia6', 'onclick'=>'inputClear(this.id)']) !!}
-                                </div>
-                                <div class="row">
-                                {!! Form::label('turno_dia7', 'Día 7', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::select('turno_dia7',$turns, null, ['class'=>'form-control r-0 light s-12',  'id'=>'turno_dia7', 'onclick'=>'inputClear(this.id)']) !!}
-                                </div>
-                                <div class="row text-right">
-                                <div class="col-md-12 mt-4">
-                                        <a href="{{ url()->previous() }}" class="btn btn-default" data-dismiss="modal">{{__('Atrás')}}</a>
-                                        <button  type="submit" id="editar" class="btn btn-primary"><i class="icon-save mr-2"></i>{{__('Guardar Datos')}}</button>
-                                </div>
+                    {!! Form::open(['route'=>'assignment.store','method'=>'POST', 'class'=>'formlDinamic', 'id'=>'guardarRegistro']) !!}
+                    @csrf
+                        <div class="form-row m-2">
+                            <div class="col-3">
+                                {!! Form::label('lbl_user', 'Usuario', ['class'=>'col-form-label s-12']) !!}
+							    {!! Form::select('user_id',$users, null, ['class'=>'form-control r-0 light s-12 select2 p-4','id'=>'user_id', 'onclick'=>'inputClear(this.id)']) !!}
                             </div>
-                                
-							</div>
-                            
+                            <div class="col-3">
+                                {!! Form::label('lbl_planner', 'Planificador', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::select('planner_id',$planners, null, ['class'=>'form-control r-0 light s-12 select2','id'=>'planner_id', 'onclick'=>'inputClear(this.id)']) !!}
+                            </div>
+                            <div class="col-2">
+                                {!! Form::label('since', 'Desde', ['class'=>'col-form-label s-12']) !!}
+							    {!! Form::date('since',null, ['class'=>'form-control r-0 light s-12',  'id'=>'since', 'onchange'=>'validate_date()']) !!}
+                            </div>
+                            <div class="col-2">
+                                {!! Form::label('until', 'Hasta', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::date('until',null, ['class'=>'form-control r-0 light s-12',  'id'=>'until', 'onchange'=>'validate_date()']) !!}
+                                <span class="text-danger m-0 p-0" id="span_until" style="display: none;font-size: 12px;">{{__('La fecha no puede ser menor que la inicial.')}}</span>
+                            </div>
+                            <div class="col-2 pt-1">
+                                <button type="submit" class="btn btn-primary mt-4" id="save"><i class="icon-save mr-2"></i>Guardar</button>
+                            </div>
 						</div>
-                    </form>
+                    {!! Form::close() !!}
+                    <div class="form-row mt-2">
+                        <div id="table" class=" table-responsive">
+                            <table id="mydatatable" class="table table-bordered table-hover table-sm"
+                                        data-order='[[ 0, "desc" ]]' data-page-length='10'>
+                                    <thead>
+                                        <tr>
+                                            <th><b>USUARIO</b></th>
+                                            <th><b>PLANIFICADOR</b></th>
+                                            <th><b>DESDE</b></th>
+                                            <th><b>HASTA</b></th>
+                                            <th><b>OPCIONES</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody">
+                                        @foreach ($assignments as $a)
+                                        <tr class="tbody">
+                                            <td>{{ $a->user->fullname ?? null }} {{ $a->user->last_name ?? null }}</td>
+                                            <td>{{ $a->planner->descripcion ?? null }}</td>
+                                            <td>{{ $a->since ?? null }}</td>
+                                            <td>{{ $a->until ?? null }}</td>
+                                            <td class="text-center">
+                                            {!! Form::open(['route'=>['assignment.destroy',$a->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
+                                                <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('assignment.edit',$a->id) }}', '{{ route('assignment.update',$a->id) }}')">
+                                                    <i class="icon-pencil text-info"></i>
+                                                </a>
+                                                <button class="btn btn-default btn-sm" onclick="return confirm('¿Realmente deseas borrar el registro?')">
+                                                        <i class="icon-trash-can3 text-danger"></i>
+                                                </button>
+                                            {!! Form::close() !!}
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                    </div>
                 </div>
-                    
+
+
                 </div>
             </div>
         </div>
@@ -104,12 +99,12 @@
 
 function turno(sel){
         let str = $('option:selected', sel).data("description");
-        let arr = str.split(','); 
+        let arr = str.split(',');
         for (var i=1; i <= 7; i++) {
             ;
             $('#turno_dia'+i).val(arr[i-1]);
         }
-}  
+}
 
 
 $(document).ready(function() {
@@ -134,6 +129,23 @@ $(document).ready(function() {
                 }
     });
 
+
 });
+
+function validate_date(){
+        let f1 = new Date($("#since").val());
+        let f2 = new Date($("#until").val());
+
+        if(f1 != '' || f2 != ''){
+
+            if (f1 > f2){
+                $("#span_until").show();
+                $('#save').attr('disabled','disabled');
+            }else{
+                $("#span_until").hide();
+                $('#save').removeAttr('disabled');
+            }
+        }
+    }
 </script>
 @endsection
