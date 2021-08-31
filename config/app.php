@@ -184,6 +184,7 @@ return [
         //DomPDF
         Barryvdh\DomPDF\ServiceProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+        Yoeunes\Toastr\ToastrServiceProvider::class,
 
     ],
 

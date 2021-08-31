@@ -35645,7 +35645,7 @@ sticky:before {
     line-height: 1.42857;
     padding-left: 2px;
     padding-right: 0;
-    padding-top: 7px;
+    padding-top: 1px;
     font-size: 12px
 }
 
@@ -36939,7 +36939,7 @@ html[dir=rtl] .form-group.has-icon input {
 }
 
 .cursor-modals{
-   cursor:pointer; 
+   cursor:pointer;
    cursor: hand;
 }
 

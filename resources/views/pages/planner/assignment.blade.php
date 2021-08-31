@@ -18,16 +18,16 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    {!! Form::open(['route'=>'assignment.store','method'=>'POST', 'class'=>'formlDinamic', 'id'=>'guardarRegistro']) !!}
+                    {!! Form::open(['route'=>'assignment.store','method'=>'POST']) !!}
                     @csrf
                         <div class="form-row m-2">
                             <div class="col-3">
                                 {!! Form::label('lbl_user', 'Usuario', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::select('user_id',$users, null, ['class'=>'form-control r-0 light s-12 select2 p-4','id'=>'user_id', 'onclick'=>'inputClear(this.id)','required']) !!}
+							    {!! Form::select('user_id',$users, null, ['class'=>'form-control r-0 s-12 select2','id'=>'user_id', 'onclick'=>'inputClear(this.id)','required']) !!}
                             </div>
                             <div class="col-3">
                                 {!! Form::label('lbl_planner', 'Planificador', ['class'=>'col-form-label s-12']) !!}
-                                {!! Form::select('planner_id',$planners, null, ['class'=>'form-control r-0 light s-12 select2','id'=>'planner_id', 'onclick'=>'inputClear(this.id)','required']) !!}
+                                {!! Form::select('planner_id',$planners, null, ['class'=>'form-control r-0 light s-12 select2','id'=>'planner_id', 'onclick'=>'inputClear(this.id)','required','style'=>'padding:20px !important;']) !!}
                             </div>
                             <div class="col-2">
                                 {!! Form::label('since', 'Desde', ['class'=>'col-form-label s-12']) !!}
@@ -104,14 +104,6 @@ $('#update').on('show.bs.modal', function(event){
     $("#id_assignment").val(button.data('id'));
 
 })
-function turno(sel){
-        let str = $('option:selected', sel).data("description");
-        let arr = str.split(',');
-        for (var i=1; i <= 7; i++) {
-            ;
-            $('#turno_dia'+i).val(arr[i-1]);
-        }
-}
 
 function validate_date(){
         let f1 = new Date($("#since").val());

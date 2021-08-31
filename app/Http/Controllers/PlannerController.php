@@ -161,9 +161,22 @@ class PlannerController extends Controller
 
     public function assignmentStore(Request $request)
     {
-        $data = $request->all();
-        Assignment::create($data);
-        return response()->json(['message'=>'Asignación registrado correctamente']);
+        $assig = Assignment::where('user_id',$request->user_id)
+                            ->where('planner_id',$request->planner_id)
+                            ->where('since',$request->since)
+                            ->where('until',$request->until)
+                            ->first();
+        if($assig === null){
+            dd('hola');
+            $data = $request->all();
+            Assignment::create($data);
+            toastr()->success('¡Registro existoso!');
+            return redirect()->back();
+        }else{
+            toastr()->error('¡Ya existe este registro!');
+            return redirect()->back();
+        }
+
     }
 
     public function assignmentEdit($id)
