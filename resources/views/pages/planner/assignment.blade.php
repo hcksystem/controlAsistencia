@@ -23,19 +23,19 @@
                         <div class="form-row m-2">
                             <div class="col-3">
                                 {!! Form::label('lbl_user', 'Usuario', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::select('user_id',$users, null, ['class'=>'form-control r-0 light s-12 select2 p-4','id'=>'user_id', 'onclick'=>'inputClear(this.id)']) !!}
+							    {!! Form::select('user_id',$users, null, ['class'=>'form-control r-0 light s-12 select2 p-4','id'=>'user_id', 'onclick'=>'inputClear(this.id)','required']) !!}
                             </div>
                             <div class="col-3">
                                 {!! Form::label('lbl_planner', 'Planificador', ['class'=>'col-form-label s-12']) !!}
-                                {!! Form::select('planner_id',$planners, null, ['class'=>'form-control r-0 light s-12 select2','id'=>'planner_id', 'onclick'=>'inputClear(this.id)']) !!}
+                                {!! Form::select('planner_id',$planners, null, ['class'=>'form-control r-0 light s-12 select2','id'=>'planner_id', 'onclick'=>'inputClear(this.id)','required']) !!}
                             </div>
                             <div class="col-2">
                                 {!! Form::label('since', 'Desde', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::date('since',null, ['class'=>'form-control r-0 light s-12',  'id'=>'since', 'onchange'=>'validate_date()']) !!}
+							    {!! Form::date('since',null, ['class'=>'form-control r-0 light s-12',  'id'=>'since', 'onchange'=>'validate_date()','required']) !!}
                             </div>
                             <div class="col-2">
                                 {!! Form::label('until', 'Hasta', ['class'=>'col-form-label s-12']) !!}
-                                {!! Form::date('until',null, ['class'=>'form-control r-0 light s-12',  'id'=>'until', 'onchange'=>'validate_date()']) !!}
+                                {!! Form::date('until',null, ['class'=>'form-control r-0 light s-12',  'id'=>'until', 'onchange'=>'validate_date()','required']) !!}
                                 <span class="text-danger m-0 p-0" id="span_until" style="display: none;font-size: 12px;">{{__('La fecha no puede ser menor que la inicial.')}}</span>
                             </div>
                             <div class="col-2 pt-1">
@@ -65,8 +65,8 @@
                                             <td>{{ $a->until ?? null }}</td>
                                             <td class="text-center">
                                             {!! Form::open(['route'=>['assignment.destroy',$a->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
-                                                <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('assignment.edit',$a->id) }}', '{{ route('assignment.update',$a->id) }}')"
-                                                    data-user_id="{{ $a->user_id }}" data-planner_id="{{ $a->planner_id }}">
+                                                <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update"
+                                                    data-user_id="{{ $a->user_id }}" data-planner_id="{{ $a->planner_id }}" data-since="{{ $a->since }}" data-until="{{ $a->until }}" data-id="{{ $a->id }}">
                                                     <i class="icon-pencil text-info"></i>
                                                 </a>
                                                 <button class="btn btn-default btn-sm" onclick="return confirm('¿Realmente deseas borrar el registro?')">
@@ -97,7 +97,12 @@
 $('#update').on('show.bs.modal', function(event){
     let button = $(event.relatedTarget);
     let modal = $(this);
-    $('#user').val(1)
+    $("#_user_id").val(button.data('user_id')).trigger('change');
+    $("#_planner_id").val(button.data('planner_id')).trigger('change');
+    $("#_since").val(button.data('since'));
+    $("#_until").val(button.data('until'));
+    $("#id_assignment").val(button.data('id'));
+
 })
 function turno(sel){
         let str = $('option:selected', sel).data("description");

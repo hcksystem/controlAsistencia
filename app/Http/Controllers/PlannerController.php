@@ -175,8 +175,9 @@ class PlannerController extends Controller
     public function assignmentUpdate(Request $request)
     {
         $data = $request->all();
-        Assignment::update($data);
-        return response()->json(['message'=>'Asignación registrado correctamente']);
+        $assig = assignment::find($request->id_assignment);
+        $assig->update($data);
+        return redirect()->back();
     }
 
     public function assignmentDestroy($id)

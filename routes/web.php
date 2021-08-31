@@ -65,8 +65,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('planificador/update/{id}', 'PlannerController@update')->name('planificador.update');
 	Route::get('assignment', 'PlannerController@assignment')->name('planificador.assignment');
 	Route::post('assignment/store', 'PlannerController@assignmentStore')->name('assignment.store');
-    Route::get('assignment/edit/{id}', 'PlannerController@assignmentEdit')->name('assignment.edit');
-    Route::post('assignment/update/{id}', 'PlannerController@assignmentUpdate')->name('assignment.update');
+    Route::get('assignment/edit', 'PlannerController@assignmentEdit')->name('assignment.edit');
+    Route::post('assignment/update', 'PlannerController@assignmentUpdate')->name('assignment.update');
     Route::delete('assignment/destroy/{id}', 'PlannerController@assignmentDestroy')->name('assignment.destroy');
 
 
