@@ -46,7 +46,7 @@
                     <div class="form-row mt-2">
                         <div id="table" class=" table-responsive">
                             <table id="mydatatable" class="table table-bordered table-hover table-sm"
-                                        data-order='[[ 0, "desc" ]]' data-page-length='10'>
+                                        data-order='[[ 2, "asc" ]]' data-page-length='10'>
                                     <thead>
                                         <tr>
                                             <th><b>USUARIO</b></th>
@@ -61,8 +61,8 @@
                                         <tr class="tbody">
                                             <td>{{ $a->user->fullname ?? null }} {{ $a->user->last_name ?? null }}</td>
                                             <td>{{ $a->planner->descripcion ?? null }}</td>
-                                            <td>{{ $a->since ?? null }}</td>
-                                            <td>{{ $a->until ?? null }}</td>
+                                            <td>{{ Carbon\Carbon::parse($a->since)->format('d-m-Y') ?? null }}</td>
+                                            <td>{{ Carbon\Carbon::parse($a->until)->format('d-m-Y') ?? null }}</td>
                                             <td class="text-center">
                                             {!! Form::open(['route'=>['assignment.destroy',$a->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
                                                 <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update"
