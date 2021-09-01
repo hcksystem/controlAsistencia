@@ -120,5 +120,52 @@ function validate_date(){
             }
         }
     }
+
+    $(document).ready(function() {
+
+        $('#mydatatable thead tr').clone(true).appendTo( '#mydatatable thead' );
+
+        $('#mydatatable thead tr:eq(1) th').each( function (i) {
+            var title = $(this).text();
+            $(this).html( '<input type="text" class="form-control" placeholder="'+title+'" />' );
+            $( 'input', this ).on( 'keyup change', function () {
+                if ( table.column(i).search() !== this.value ) {
+                    table.column(i).search( this.value ).draw();
+                }
+            } );
+        });
+
+        var table = $('#mydatatable').DataTable( {
+                dom: '<"top"i>rt<"bottom"lp><"clear">',
+                orderCellsTop: true,
+                fixedHeader: true,
+                // dom: 'Blrtip ',
+                buttons: [],
+                info:true,
+                bLengthChange: true,
+                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
+                order: [[7, 'desc']],
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            } );
+    });
 </script>
 @endsection

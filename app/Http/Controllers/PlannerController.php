@@ -167,7 +167,6 @@ class PlannerController extends Controller
                             ->where('until',$request->until)
                             ->first();
         if($assig === null){
-            dd('hola');
             $data = $request->all();
             Assignment::create($data);
             toastr()->success('¡Registro existoso!');
