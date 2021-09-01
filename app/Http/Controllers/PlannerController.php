@@ -163,8 +163,8 @@ class PlannerController extends Controller
     {
         $assig = Assignment::where('user_id',$request->user_id)
                             ->where('planner_id',$request->planner_id)
-                            ->whereBetween('since',array($request->since, $request->until))
-                            ->whereBetween('until',array($request->since, $request->until))
+                            ->where('since','>=',$request->since)
+                            ->where('until','<=',$request->until)
                             ->get();
 
         if($assig->isEmpty()){
