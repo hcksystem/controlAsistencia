@@ -174,7 +174,7 @@ class PlannerController extends Controller
             toastr()->success('¡Registro existoso!');
             return redirect()->back();
         }else{
-            toastr()->error('¡Ya existe este registro!');
+            toastr()->error('¡Ya existe una planificación asignada!');
             return redirect()->back();
         }
 
