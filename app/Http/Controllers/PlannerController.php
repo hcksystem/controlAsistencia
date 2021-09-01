@@ -164,6 +164,7 @@ class PlannerController extends Controller
         $assig = Assignment::where('user_id',$request->user_id)
                             ->where('planner_id',$request->planner_id)
                             ->where('since','>=',$request->since)
+                            ->where('since','<=',$request->until)
                             ->where('until','<=',$request->until)
                             ->get();
 
