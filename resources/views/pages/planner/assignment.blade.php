@@ -154,6 +154,55 @@ function check_date(input){
 
 }
 
+function check_date_edit(input){
+
+let formData = {'date': $('#_'+input).val(),
+         'field': input,'planner_id':$('#_planner_id').val(),'user_id':$('#_user_id').val()}
+
+url = route('check_date_assign');
+
+$.ajax({
+    url: url,
+    type: 'GET',
+    data: formData,
+    async: true,
+    beforeSend: function () {
+        $(".btn_asistencia").prop("disabled",true);
+        //$("#loader-icon").fadeIn(60);
+    },
+    success: function(data)
+    {
+        if(data == 'false'){
+            toastr.error('¡Ya existe una planificación asignada con esa fecha!');
+            $('#saveEdit').attr('disabled','disabled');
+
+            if(input === 'since'){
+                $('#_until').attr('disabled','disabled');
+            }else{
+                $('#_since').attr('disabled','disabled');
+            }
+        }else{
+            $('#saveEdit').removeAttr('disabled');
+            if(input === 'since'){
+                $('#_until').removeAttr('disabled','disabled');
+            }else{
+                $('#_since').removeAttr('disabled','disabled');
+            }
+
+        }
+
+    },
+    error: function (data){
+        toastr.error('¡Ocurrió un error!');
+    },
+}).done(function() {
+    setTimeout(function(){
+    $("#overlay").fadeOut(300);
+    },500);
+});
+
+}
+
 function validate_date(){
         let f1 = new Date($("#since").val());
         let f2 = new Date($("#until").val());

@@ -22,11 +22,11 @@
                             </div>
                             <div class="form-group col-6 m-0">
                                 {!! Form::label('since', 'Desde', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::date('since',null, ['class'=>'form-control r-0 light s-12',  'id'=>'_since', 'onchange'=>'validate_date()']) !!}
+							    {!! Form::date('since',null, ['class'=>'form-control r-0 light s-12',  'id'=>'_since', 'onchange'=>'validate_date(),check_date_edit("since")']) !!}
                             </div>
                             <div class="form-group col-6 m-0">
                                 {!! Form::label('until', 'Hasta', ['class'=>'col-form-label s-12']) !!}
-                                {!! Form::date('until',null, ['class'=>'form-control r-0 light s-12',  'id'=>'_until', 'onchange'=>'validate_date()']) !!}
+                                {!! Form::date('until',null, ['class'=>'form-control r-0 light s-12',  'id'=>'_until', 'onchange'=>'validate_date(),check_date_edit("until")']) !!}
                             </div>
 
                             {!! Form::hidden('id_assignment',null, ['class'=>'form-control r-0 light s-12',  'id'=>'id_assignment', 'onchange'=>'validate_date()']) !!}
@@ -40,7 +40,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary"><i class="icon-save mr-2"></i>Guardar Datos</button>
+                <button type="submit" class="btn btn-primary" id="saveEdit"><i class="icon-save mr-2"></i>Guardar Datos</button>
             </div>
         </div>
     </div>
