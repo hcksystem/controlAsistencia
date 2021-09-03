@@ -161,23 +161,10 @@ class PlannerController extends Controller
 
     public function assignmentStore(Request $request)
     {
-        //dd($request->all());
-        $assig = Assignment::orwhere('user_id',$request->user_id)
-                            ->orwhere('planner_id',$request->planner_id)
-                            ->WhereBetween('since', [$request->since,$request->until])
-                            ->orWhereBetween('until', [$request->since,$request->until])
-                            ->get();
-        //dd($assig);
-        if($assig->isEmpty()){
             $data = $request->all();
             Assignment::create($data);
             toastr()->success('¡Registro existoso!');
             return redirect()->back();
-        }else{
-            toastr()->error('¡Ya existe una planificación asignada!');
-            return redirect()->back();
-        }
-
     }
 
     public function assignmentEdit($id)
