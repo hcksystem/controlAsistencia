@@ -212,6 +212,43 @@ class PlannerController extends Controller
 
     public function assignmentUpdate(Request $request)
     {
+        $assig1 = Assignment::where('user_id',$request->user_id)
+        ->whereRaw('? between since and until', [$request->since])
+        ->get();
+
+        if($assig1->count() > 0){
+            toastr()->error('¡Ya existe una planificación asignada con esa fecha!');
+            return back()->withInput();
+        }
+
+        $assig2 = Assignment::where('user_id',$request->user_id)
+        ->whereRaw('? between since and until', [$request->until])
+        ->get();
+
+        if($assig2->count() > 0){
+            toastr()->error('¡Ya existe una planificación asignada con esa fecha!');
+            return back()->withInput();
+        }
+
+        $assig3 = Assignment::where('user_id',$request->user_id)
+        ->WhereBetween('since', [$request->since,$request->until])
+        ->get();
+
+        if($assig3->count() > 0){
+            toastr()->error('¡Ya existe una planificación asignada con esa fecha!');
+            return back()->withInput();
+        }
+
+        $assig4 = Assignment::where('user_id',$request->user_id)
+        ->WhereBetween('until', [$request->since,$request->until])
+        ->get();
+
+        if($assig4->count() > 0){
+            toastr()->error('¡Ya existe una planificación asignada con esa fecha!');
+            return back()->withInput();
+        }
+
+
         $data = $request->all();
         $assig = assignment::find($request->id_assignment);
         $assig->update($data);
