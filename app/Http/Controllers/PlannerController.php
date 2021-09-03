@@ -191,7 +191,6 @@ class PlannerController extends Controller
     public function check_date(Request $request)
     {
         $assig = Assignment::where('user_id',$request->user_id)
-        ->where('planner_id',$request->planner_id)
         ->whereRaw('? between since and until', [$request->date])
         ->get();
 
