@@ -23,7 +23,7 @@
                         <div class="form-row m-2">
                             <div class="col-3">
                                 {!! Form::label('lbl_user', 'Usuario', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::select('user_id',$users, null, ['class'=>'form-control r-0 s-12 select2','id'=>'user_id', 'onclick'=>'inputClear(this.id)','required']) !!}
+							    {!! Form::select('user_id',$users, null, ['class'=>'form-control r-0 s-12 select2','id'=>'user_id', 'onclick'=>'inputClear(this.id)','onchange'=>'check_date("since"),check_date("until")','required']) !!}
                             </div>
                             <div class="col-3">
                                 {!! Form::label('lbl_planner', 'Planificador', ['class'=>'col-form-label s-12']) !!}
