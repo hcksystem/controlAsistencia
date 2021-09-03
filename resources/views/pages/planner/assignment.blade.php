@@ -31,11 +31,11 @@
                             </div>
                             <div class="col-2">
                                 {!! Form::label('since', 'Desde', ['class'=>'col-form-label s-12']) !!}
-							    {!! Form::date('since',null, ['class'=>'form-control r-0 light s-12',  'id'=>'since', 'onchange'=>'validate_date()','required']) !!}
+							    {!! Form::date('since',null, ['class'=>'form-control r-0 light s-12',  'id'=>'since', 'onchange'=>'validate_date(),check_date("since")','required']) !!}
                             </div>
                             <div class="col-2">
                                 {!! Form::label('until', 'Hasta', ['class'=>'col-form-label s-12']) !!}
-                                {!! Form::date('until',null, ['class'=>'form-control r-0 light s-12',  'id'=>'until', 'onchange'=>'validate_date()','required']) !!}
+                                {!! Form::date('until',null, ['class'=>'form-control r-0 light s-12',  'id'=>'until', 'onchange'=>'validate_date(),check_date("until")','required']) !!}
                                 <span class="text-danger m-0 p-0" id="span_until" style="display: none;font-size: 12px;">{{__('La fecha no puede ser menor que la inicial.')}}</span>
                             </div>
                             <div class="col-2 pt-1">
@@ -104,6 +104,43 @@ $('#update').on('show.bs.modal', function(event){
     $("#id_assignment").val(button.data('id'));
 
 })
+
+function check_date(input){
+
+    let formData = {'date': $('#'+input).val(),
+             'field': input,'planner_id':$('#planner_id').val(),'user_id':$('#user_id').val()}
+
+    url = route('check_date_assign');
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        data: formData,
+        async: false,
+        beforeSend: function () {
+            $(".btn_asistencia").prop("disabled",true);
+            //$("#loader-icon").fadeIn(60);
+        },
+        success: function(data)
+        {
+            if(data == 'false'){
+                toastr.error('¡Ya existe una planificación asignada con esa fecha!');
+                $('#save').attr('disabled','disabled');
+            }else{
+                $('#save').removeAttr('disabled');
+            }
+
+        },
+        error: function (data){
+            toastr.error('¡Ocurrió un error!');
+        },
+    }).done(function() {
+        setTimeout(function(){
+        $("#overlay").fadeOut(300);
+        },500);
+    });
+
+}
 
 function validate_date(){
         let f1 = new Date($("#since").val());

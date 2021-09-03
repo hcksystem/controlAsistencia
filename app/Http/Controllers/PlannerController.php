@@ -161,13 +161,13 @@ class PlannerController extends Controller
 
     public function assignmentStore(Request $request)
     {
-        $assig = Assignment::where('user_id',$request->user_id)
-                            ->where('planner_id',$request->planner_id)
-                            ->where('since','>=',$request->since)
-                            ->where('since','<=',$request->until)
-                            ->where('until','<=',$request->until)
+        //dd($request->all());
+        $assig = Assignment::orwhere('user_id',$request->user_id)
+                            ->orwhere('planner_id',$request->planner_id)
+                            ->WhereBetween('since', [$request->since,$request->until])
+                            ->orWhereBetween('until', [$request->since,$request->until])
                             ->get();
-
+        //dd($assig);
         if($assig->isEmpty()){
             $data = $request->all();
             Assignment::create($data);
@@ -199,6 +199,20 @@ class PlannerController extends Controller
         $planner = Assignment::find($id);
         $planner->delete();
         return response()->json(['message'=>'Planificador eliminado correctamente']);
+    }
+
+    public function check_date(Request $request)
+    {
+        $assig = Assignment::where('user_id',$request->user_id)
+        ->where('planner_id',$request->planner_id)
+        ->whereRaw('? between since and until', [$request->date])
+        ->get();
+
+        if($assig->count() == 0){
+            return response()->json('true');
+        }else{
+            return response()->json('false');
+        }
     }
 
 }

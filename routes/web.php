@@ -66,8 +66,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('assignment', 'PlannerController@assignment')->name('planificador.assignment');
 	Route::post('assignment/store', 'PlannerController@assignmentStore')->name('assignment.store');
     Route::get('assignment/edit', 'PlannerController@assignmentEdit')->name('assignment.edit');
+    Route::get('assignment/edit', 'PlannerController@assignmentEdit')->name('assignment.edit');
     Route::post('assignment/update', 'PlannerController@assignmentUpdate')->name('assignment.update');
     Route::delete('assignment/destroy/{id}', 'PlannerController@assignmentDestroy')->name('assignment.destroy');
+    Route::get('check_date_assign', 'PlannerController@check_date')->name('check_date_assign');
 
 
 });

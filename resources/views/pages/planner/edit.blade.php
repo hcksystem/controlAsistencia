@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <form action="{{ route('planificador.update',$planner->id) }}" method="POST" autocomplete="off">
                     @csrf
-                    <div class="form-row"> 
+                    <div class="form-row">
                             <div class="form-group col-4 m-0">
 								{!! Form::label('descripcion', 'Nombre', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::text('descripcion', $planner->descripcion ?? null, ['class'=>'form-control r-0 light s-12','id'=>'descripcion','required']) !!}
@@ -36,7 +36,7 @@
 							</div>
                     </div>
                     <div class="form-row">
-                        <?php $planificacion = explode(',',$planner->planificacion); ?> 
+                        <?php $planificacion = explode(',',$planner->planificacion); ?>
                             <div class="form-inline col-12 mt-4">
 								{!! Form::label('dia_1', 'Día 1', ['class'=>'col-form-label s-12 col-1']) !!}
 								{!! Form::select('turno_dia1',$turns, $planificacion[0] ?? null, ['class'=>'form-control r-0 light s-12 col-11','id'=>'turno_dia1','required']) !!}
@@ -82,18 +82,11 @@
                 </div>
                 </form>
             </div>
-                    
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-@endsection
-@section('js')
-<script>
-$(document).ready(function() {
-
-});
-</script>
 @endsection
