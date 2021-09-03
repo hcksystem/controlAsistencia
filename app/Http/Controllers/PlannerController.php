@@ -179,6 +179,24 @@ class PlannerController extends Controller
                 return back()->withInput();
             }
 
+            $assig3 = Assignment::where('user_id',$request->user_id)
+            ->WhereBetween('since', [$request->since,$request->until])
+            ->get();
+
+            if($assig3->count() > 0){
+                toastr()->error('¡Ya existe una planificación asignada con esa fecha!');
+                return back()->withInput();
+            }
+
+            $assig4 = Assignment::where('user_id',$request->user_id)
+            ->WhereBetween('until', [$request->since,$request->until])
+            ->get();
+
+            if($assig4->count() > 0){
+                toastr()->error('¡Ya existe una planificación asignada con esa fecha!');
+                return back()->withInput();
+            }
+
 
             $data = $request->all();
             Assignment::create($data);
