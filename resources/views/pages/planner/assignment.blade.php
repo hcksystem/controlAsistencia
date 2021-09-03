@@ -116,7 +116,7 @@ function check_date(input){
         url: url,
         type: 'GET',
         data: formData,
-        async: false,
+        async: true,
         beforeSend: function () {
             $(".btn_asistencia").prop("disabled",true);
             //$("#loader-icon").fadeIn(60);
@@ -126,8 +126,20 @@ function check_date(input){
             if(data == 'false'){
                 toastr.error('¡Ya existe una planificación asignada con esa fecha!');
                 $('#save').attr('disabled','disabled');
+
+                if(input === 'since'){
+                    $('#until').attr('disabled','disabled');
+                }else{
+                    $('#since').attr('disabled','disabled');
+                }
             }else{
                 $('#save').removeAttr('disabled');
+                if(input === 'since'){
+                    $('#until').removeAttr('disabled','disabled');
+                }else{
+                    $('#since').removeAttr('disabled','disabled');
+                }
+
             }
 
         },
