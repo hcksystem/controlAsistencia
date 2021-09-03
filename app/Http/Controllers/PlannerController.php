@@ -161,6 +161,25 @@ class PlannerController extends Controller
 
     public function assignmentStore(Request $request)
     {
+            $assig = Assignment::where('user_id',$request->user_id)
+            ->whereRaw('? between since and until', [$request->since])
+            ->get();
+
+            if($assig->count() > 0){
+                toastr()->error('¡Ya existe una planificación asignada con esa fecha!');
+                return back()->withInput();
+            }
+
+            $assig2 = Assignment::where('user_id',$request->user_id)
+            ->whereRaw('? between since and until', [$request->until])
+            ->get();
+
+            if($assig2->count() > 0){
+                toastr()->error('¡Ya existe una planificación asignada con esa fecha!');
+                return back()->withInput();
+            }
+
+
             $data = $request->all();
             Assignment::create($data);
             toastr()->success('¡Registro existoso!');
