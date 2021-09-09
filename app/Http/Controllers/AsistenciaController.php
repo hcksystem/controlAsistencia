@@ -88,7 +88,8 @@ class AsistenciaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $asistencia= Asistencia::find($id);
+        return view('pages.asistencia.edit',compact('asistencia'));
     }
 
     /**
@@ -100,12 +101,11 @@ class AsistenciaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request->all());
         $asis = Asistencia::find($id);
-        $asis->fecha = Carbon::now();
-        $asis->tipo = $request->tipo;
-        $asis->sistema = 'web';
+        $asis->note = $request->note;
+        $asis->sistema = $request->sistema;
         $asis->save();
+        return back();
     }
 
     /**
@@ -116,6 +116,7 @@ class AsistenciaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $asis = Asistencia::find($id);
+        $asis->delete();
     }
 }

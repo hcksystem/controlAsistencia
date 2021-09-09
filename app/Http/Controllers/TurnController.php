@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Turn;
 use App\Models\Type_Turn;
+use App\Models\Type_Collation;
 
 class TurnController extends Controller
 {
@@ -18,7 +19,8 @@ class TurnController extends Controller
     {
         $turns=Turn::all();
         $tipos = Type_Turn::get()->pluck('name','id')->prepend('Seleccione un tipo','');
-        return view('pages.turn.index',compact('turns','tipos')); 
+        $collations = Type_Collation::get()->pluck('name','id')->prepend('Seleccione un tipo','');
+        return view('pages.turn.index',compact('turns','tipos','collations'));
     }
 
     /**
@@ -39,7 +41,7 @@ class TurnController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();         
+        $data = $request->all();
         Turn::create($data);
         return response()->json(['message'=>'Turno registrado correctamente']);
     }
