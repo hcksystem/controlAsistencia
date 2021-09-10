@@ -61,7 +61,7 @@
                     <i class="icon icon-circle-o gray-text s-14"></i>
                     <span>{{ __('Grupo') }}</span></a>
                 </li>
-                
+
                 <li class="treeview"><a href="{{ route('turn.index') }}">
                     <i class="icon icon-circle-o gray-text s-14"></i>
                     <span>{{ __('Turno') }}</span></a>
@@ -82,9 +82,20 @@
                 </ul>
          </li>
          <li class="treeview ">
-                <a href="{{ route('report.index') }}">
-                    <i class="icon icon-data_usage text-lime s-18"></i> <span>Reporte</span>
+                <a href="#">
+                    <i class="icon icon-circle-o gray-text s-18"></i> <span>{{ __('Reportes') }}</span>
+                    <i class="icon icon-angle-left s-18 pull-right"></i>
                 </a>
+                <ul class="treeview-menu">
+                    <li class="treeview"><a href="{{ route('report.index') }}">
+                        <i class="icon icon-circle-o gray-text s-14"></i>
+                        <span>{{ __('Marcaje') }}</span></a>
+                    </li>
+                    <li><a href="{{ route('report.jornada') }}">
+                            <i class="icon icon-circle-o gray-text s-14"></i> <span>{{__('Jornada')}}</span>
+                        </a>
+                    </li>
+                </ul>
          </li>
 
 

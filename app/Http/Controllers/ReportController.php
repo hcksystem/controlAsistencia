@@ -18,6 +18,12 @@ class ReportController extends Controller
         return view('pages.report.index',compact('asistencia'));
     }
 
+    public function report_jornada(){
+
+        $asistencia = Asistencia::orderBy('fecha','DESC')->get();
+        return view('pages.report.jornada',compact('asistencia'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
