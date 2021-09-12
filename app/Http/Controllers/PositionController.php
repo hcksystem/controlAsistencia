@@ -39,6 +39,7 @@ class PositionController extends Controller
     {
         $data = $request->all();         
         Position::create($data);
+        toastr()->success('¡Se ha registrado exitosamente!');
         return response()->json(['message'=>'Posición registrado correctamente']);
     }
 
@@ -77,6 +78,7 @@ class PositionController extends Controller
     {
         $position = Position::find($id);
         $position->update($request->all());
+        toastr()->success('¡Se ha actualizado exitosamente!');
         Session::flash('message-success',' Posición actualizado correctamente.');
     }
 
@@ -90,6 +92,7 @@ class PositionController extends Controller
     {
         $position = Position::find($id);
         $position->delete();
+        toastr()->success('¡Se ha eliminado exitosamente!');
         return response()->json(['message'=>'Posición eliminado correctamente']);
     }
 }

@@ -51,6 +51,7 @@ class GrupoController extends Controller
     {
         $data = $request->all();         
         Group::create($data);
+        toastr()->success('¡Se ha registrado exitosamente!');
         return response()->json(['message'=>'Grupo registrado correctamente']);
     }
 
@@ -89,6 +90,7 @@ class GrupoController extends Controller
         $group = Group::find($id);
         $group->update($request->all());
         $group->save();
+        toastr()->success('¡Se ha actualizado exitosamente!');
         Session::flash('message-success',' Grupo '. $request->group.' editada correctamente.');
     }
 
@@ -106,6 +108,7 @@ class GrupoController extends Controller
         }else{
             $group = Group::find($id);
             $group->delete();
+            toastr()->success('¡Se ha eliminado exitosamente!');
             return response()->json($parent);
         }
         

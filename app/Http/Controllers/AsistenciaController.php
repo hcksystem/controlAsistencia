@@ -64,6 +64,7 @@ class AsistenciaController extends Controller
         $asis->latitude = $request->latitude;
         $asis->longitude = $request->longitude;
         $asis->save();
+        toastr()->success('¡Se ha registrado exitosamente!');
 
         return redirect()->back();
     }
@@ -106,6 +107,7 @@ class AsistenciaController extends Controller
         $asis->tipo = $request->tipo;
         $asis->sistema = 'web';
         $asis->save();
+        toastr()->success('¡Se ha actualizado exitosamente!');
     }
 
     /**

@@ -41,6 +41,7 @@ class TurnController extends Controller
     {
         $data = $request->all();         
         Turn::create($data);
+        toastr()->success('¡Se ha registrado exitosamente!');
         return response()->json(['message'=>'Turno registrado correctamente']);
     }
 
@@ -78,6 +79,7 @@ class TurnController extends Controller
     {
         $turn = Turn::find($id);
         $turn->update($request->all());
+        toastr()->success('¡Se ha actualizado exitosamente!');
         Session::flash('message-success',' Posición actualizado correctamente.');
     }
 
@@ -91,6 +93,7 @@ class TurnController extends Controller
     {
         $turn =Turn::find($id);
         $turn->delete();
+        toastr()->success('¡Se ha eliminado exitosamente!');
         return response()->json(['message'=>'Posición eliminado correctamente']);
     }
 }
