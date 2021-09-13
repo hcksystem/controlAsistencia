@@ -40,6 +40,7 @@ class TypeTurnController extends Controller
     {
         $data = $request->all();         
         Type_Turn::create($data);
+        toastr()->success('¡Se ha registrado exitosamente!');
         return response()->json(['message'=>'Tipo registrado correctamente']);
     }
 
@@ -77,6 +78,7 @@ class TypeTurnController extends Controller
     {
         $turn = Type_Turn::find($id);
         $turn->update($request->all());
+        toastr()->success('¡Se ha actualizado exitosamente!');
         Session::flash('message-success',' Posición actualizado correctamente.');
     }
 
@@ -90,6 +92,7 @@ class TypeTurnController extends Controller
     {
         $turn =Type_Turn::find($id);
         $turn->delete();
+        toastr()->success('¡Se ha eliminado exitosamente!');
         return response()->json(['message'=>'Posición eliminado correctamente']);
     }
 }

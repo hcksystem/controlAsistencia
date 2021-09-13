@@ -75,7 +75,8 @@ class PlannerController extends Controller
         $planner->tipo_planificador = $request->tipo_planificador;
         $planner->Estado = $request->Estado;
         $planner->planificacion = $plann;
-        $planner->save();
+        $planner->save(); 
+        toastr()->success('¡Se ha registrado exitosamente!');
         return redirect()->route('planificador.index');
     }
 
@@ -131,6 +132,7 @@ class PlannerController extends Controller
         $planner->Estado = $request->Estado;
         $planner->planificacion = $plann;
         $planner->save();
+        toastr()->success('¡Se ha actualizado exitosamente!');
         return redirect()->back();
     }
 
@@ -144,6 +146,7 @@ class PlannerController extends Controller
     {
         $planner = Planner::find($id);
         $planner->delete();
+        toastr()->success('¡Se ha eliminado exitosamente!');
         return response()->json(['message'=>'Planificador eliminado correctamente']);
     }
 
@@ -251,7 +254,9 @@ class PlannerController extends Controller
 
         $data = $request->all();
         $assig = assignment::find($request->id_assignment);
+        toastr()->success('¡Se ha actualizado exitosamente!');
         $assig->update($data);
+        toastr()->success('¡Se ha actualizado exitosamente!');
         return redirect()->back();
     }
 
@@ -259,6 +264,7 @@ class PlannerController extends Controller
     {
         $planner = Assignment::find($id);
         $planner->delete();
+        toastr()->success('¡Planificador eliminado correctamente!');
         return response()->json(['message'=>'Planificador eliminado correctamente']);
     }
 

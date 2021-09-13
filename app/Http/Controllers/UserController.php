@@ -97,7 +97,7 @@ class UserController extends Controller
         $user->assignRoles($data['rol']);
         $lastUser= User::all()->last();
         DB::insert('insert into users_groups (id_user, id_group) values (?, ?)', [$lastUser->id, $request->id_grupo]);
-
+        toastr()->success('¡Se ha registrado exitosamente!');
         Session::flash('message-success',' User '. $request->fullname.' creado correctamente.');
     }
 
@@ -157,6 +157,7 @@ class UserController extends Controller
                 $user->update($data);
             }   
             $user->save();
+            toastr()->success('¡Se ha actualizado exitosamente!');
             $user->syncRoles($data['rol']);
 
             $userGroups = UsersGroups::where('id_user',$id)->first();
@@ -187,6 +188,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        toastr()->success('¡Se ha eliminado exitosamente!');
         Session::flash('message-success','Usuario elminado correctamente');
         return Redirect::to('user');
     }
@@ -211,6 +213,7 @@ class UserController extends Controller
         $password = bcrypt($request->input('password'));
         $user->update(['password' => $password]);
         $user->save();
+        toastr()->success('¡Se ha actualizado exitosamente!');
         Session::flash('message-success',' User '. $user->fullname.' actualizado correctamente.');
     }
 
