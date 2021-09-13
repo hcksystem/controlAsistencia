@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Asistencia;
+use App\Models\Assignment;
+use App\Models\Turn;
 
 class ReportController extends Controller
 {
@@ -20,8 +22,33 @@ class ReportController extends Controller
 
     public function report_jornada(){
 
-        $asistencia = Asistencia::orderBy('fecha','DESC')->get();
-        return view('pages.report.jornada',compact('asistencia'));
+        $asistencia = Asistencia::leftjoin('users as us','asistencias.id_user','us.id')
+                                ->leftjoin('asignaciones as asig','us.id','asig.user_id')
+                                ->leftjoin('planificador as pl','asig.planner_id','pl.id')
+                                ->leftjoin('asistencias as asis','us.id','asis.id_user')
+                                ->select('pl.planificacion','pl.id as id','asig.since as since','asig.until as until','us.fullname as first_name',
+                                'us.last_name as last_name','us.rut as rut','pl.planificacion as planificacion','asis.fecha as fecha')
+                                ->orderBy('fecha','DESC')
+                                ->get();
+        $primer = Assignment::first();
+        $ultimo = Assignment::orderBy('id', 'desc')->first();
+        $inicio = strtotime($primer->since);
+        $final = strtotime($ultimo->until);
+        //dd($final);
+        $turns = Turn::all();
+        foreach($asistencia as $a){
+            foreach(array($a->planificacion) as $pl){
+                foreach($turns as $t){
+                    if($t->id == $pl){
+                        $a['ingreso'] = $t->ingreso;
+                        $a['salida'] = $t->salida;
+                    }
+                }
+            }
+        }
+
+        //dd($asistencia);
+        return view('pages.report.jornada',compact('asistencia','inicio','final'));
     }
 
     /**

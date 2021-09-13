@@ -42,24 +42,45 @@ MARCAS</h1>
                     <table id="mydatatable" class="table table-bordered table-hover table-sm text-12" data-page-length='10' style="font-size:14px;">
                             <thead>
                                 <tr>
+                                    <th><b>FECHA</b></th>
                                     <th><b>NOMBRE</b></th>
                                     <th><b>IDENTIFICACIÓN</b></th>
+                                    <th><b>TURNO</b></th>
+                                    <th><b>ENTRÓ</b></th>
+                                    <th><b>ATRASO</b></th>
+                                    <!--
+                                    <th><b>TURNO</b></th>
                                     <th><b>GRUPO</b></th>
-                                    <th><b>FECHA</b></th>
+
                                     <th><b>TIPO</b></th>
                                     <th><b>DIRECCIÓN IP</b></th>
                                     <th><b>SISTEMA</b></th>
                                     <th><b>NOTA</b></th>
-                                    <th></th>
+                                    <th></th>-->
                                 </tr>
                             </thead>
                             <tbody id="tbody">
-                                @foreach ($asistencia as $a)
+                                @for($i=$inicio; $i<=$final; $i+=86400)
+                                    @foreach ($asistencia as $a)
+                                    @if (check_in_range($a->since, $a->until, $i))
+                                        <tr class="tbody">
+                                            <td>{{ date("d-m-Y", $i) }}</td>
+                                            <td>{{ $a->first_name ?? null }} {{ $a->last_name ?? null}}</td>
+                                            <td>{{ $a->rut ?? null }}</td>
+                                            <td>{{ check_turn($i,$a->planificacion) ?? null }}</td>
+                                            <td>{{ Carbon\Carbon::parse($a->fecha)->format('g:i:s A') ?? null }}</td>
+                                            <td>{{ obtener_atraso($i,$a->planificacion,$a->fecha) ?? null }}</td>
+                                        </tr>
+                                    @endif
+                                    @endforeach
+                                @endfor
+                               <!-- @foreach ($asistencia as $a)
                                 <tr class="tbody">
+                                    <td>{{ Carbon\Carbon::parse($a->fecha)->format('d-m-Y h:i:s A') ?? null }}</td>
                                     <td>{{ $a->user->fullname ?? null }} {{ $a->user->last_name ?? null}}</td>
                                     <td>{{ $a->user->rut ?? null }}</td>
+                                    <td>{{ $a->user ?? null }}</td>
                                     <td>{{ $a->user->grupo->group->group ?? null}}</td>
-                                    <td>{{ Carbon\Carbon::parse($a->fecha)->format('d-m-Y h:i:s A') ?? null }}</td>
                                     <td>@if(isset($a->tipo)) @if($a->tipo == 0) <a target="_blank" href="{{ route('asistencia.show',$a->id) }}">Entrada</a> @else
                                     <a target="_blank" href="{{ route('asistencia.show',$a->id) }}">Salida</a> @endif @endif </td>
                                     <td>{{ $a->ip ?? null }}</td>
@@ -77,7 +98,7 @@ MARCAS</h1>
                                                 {!! Form::close() !!}
                                     </td>
                                 </tr>
-                                @endforeach
+                                @endforeach -->
                             </tbody>
                         </table>
                     </div>

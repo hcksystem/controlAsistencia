@@ -14,7 +14,7 @@ class Turn extends Model
    protected $table = 'turns';
 
    protected $fillable = [
-        'id','ingreso','ingreso_max','colacion','detalles','salida','horas_trabajo','tiempo_colacion','tipo_turno','created_at','updated_at'
+        'id','ingreso','ingreso_max','colacion','detalles','salida','horas_trabajo','tiempo_colacion','tipo_colacion_id','tipo_turno','created_at','updated_at'
    ];
 
    public $timestamps  = false;
@@ -22,7 +22,7 @@ class Turn extends Model
     /**
     * Get the user that owns the Operations.
     */
- 
+
     public function tipo()
     {
         return $this->belongsTo('App\Models\Type_Turn','tipo_turno');
