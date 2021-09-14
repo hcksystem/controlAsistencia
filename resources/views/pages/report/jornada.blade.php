@@ -43,6 +43,8 @@ MARCAS</h1>
                             <thead>
                                 <tr>
                                     <th><b>FECHA</b></th>
+                                    <th><b>DESDE</b></th>
+                                    <th><b>HASTA</b></th>
                                     <th><b>NOMBRE</b></th>
                                     <th><b>IDENTIFICACIÓN</b></th>
                                     <th><b>TURNO</b></th>
@@ -57,6 +59,8 @@ MARCAS</h1>
                                     @if (check_in_range($a->since, $a->until, $i))
                                         <tr class="tbody">
                                             <td>{{ date("d-m-Y", $i) }}</td>
+                                            <td>{{ Carbon\Carbon::createFromFormat('Y-m-d', $a->since)->format('d-m-Y') ?? null }}</td>
+                                            <td>{{ Carbon\Carbon::createFromFormat('Y-m-d', $a->until)->format('d-m-Y') ?? null }}</td>
                                             <td>{{ $a->first_name ?? null }} {{ $a->last_name ?? null}}</td>
                                             <td>{{ $a->rut ?? null }}</td>
                                             <td>{{ check_turn($i,$a->planificacion) ?? null }}</td>
@@ -127,93 +131,6 @@ $(document).ready(function() {
 
    });
 
-var map;
-var myLatLng;
-$(document).ready(function() {
-    geoLocationInit();
-});
-function geoLocationInit() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(success, fail);
-    } else {
-        alert("Browser not supported");
-    }
-}
-
-    function success(position) {
-        console.log(position);
-        var latval = position.coords.latitude;
-        var lngval = position.coords.longitude;
-        myLatLng = new google.maps.LatLng(latval, lngval);
-    }
-
-    function fail() {
-        console.log("fracaso conexion");
-    }
-
-
-
-
-
-function details(image, latitude, longitude){
-
-    $('#details').modal('show');
-    if(latitude != 0 && longitude != 0){
-        //createMap2(myLatLng);
-        console.log(longitude+"-"+latitude)
-        var mymap = L.map('mapid').setView([latitude, longitude], 15);
-        $('#map').show();
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(mymap);
-        var marker = L.marker([latitude, longitude]).addTo(mymap);
-
-
-    }
-
-    if(image != ""){
-        $('#image').append('<img src="img/avatar/'+image+'" alt="" id="img_marca" width="200" height="200">');
-    }
-}
-function createMap(myLatLng) {
-        $('#map').show();
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: myLatLng,
-            zoom: 15
-        });
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map
-        });
-}
-
-function createMap2(lat,long) {
-    var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([long, lat]),
-          zoom:3
-        })
-      });
-}
-
-
-
-$(document).on('hide.bs.modal','#details', function () {
-    $('#img_marca').remove();
-    var container= L.DomUtil.get('mapid');
-    if(container != null){
-
-            container._leaflet_id = null;
-
-    }
-});
 
 </script>
 @endsection
