@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 use App\Asistencia;
 use App\Models\Assignment;
 use App\Models\Turn;
+use DB;
 
 class ReportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        set_time_limit(8000000);
+    }
+
     public function index()
     {
         $asistencia = Asistencia::orderBy('fecha','DESC')->get();
@@ -22,32 +23,14 @@ class ReportController extends Controller
 
     public function report_jornada(){
 
-        $asistencia = Asistencia::leftjoin('users as us','asistencias.id_user','us.id')
-                                ->leftjoin('asignaciones as asig','us.id','asig.user_id')
-                                ->leftjoin('planificador as pl','asig.planner_id','pl.id')
-                                ->leftjoin('asistencias as asis','us.id','asis.id_user')
-                                ->select('pl.planificacion','pl.id as id','asig.since as since','asig.until as until','us.fullname as first_name',
-                                'us.last_name as last_name','us.rut as rut','pl.planificacion as planificacion','asis.fecha as fecha')
-                                ->orderBy('fecha','DESC')
-                                ->get();
+        ini_set('max_execution_time', 300);
+        set_time_limit(0);
+        $asistencia = DB::table('jornada')->get();
         $primer = Assignment::first();
         $ultimo = Assignment::orderBy('id', 'desc')->first();
         $inicio = strtotime($primer->since);
         $final = strtotime($ultimo->until);
-        //dd($final);
-        $turns = Turn::all();
-        foreach($asistencia as $a){
-            foreach(array($a->planificacion) as $pl){
-                foreach($turns as $t){
-                    if($t->id == $pl){
-                        $a['ingreso'] = $t->ingreso;
-                        $a['salida'] = $t->salida;
-                    }
-                }
-            }
-        }
 
-        //dd($asistencia);
         return view('pages.report.jornada',compact('asistencia','inicio','final'));
     }
 

@@ -48,15 +48,7 @@ MARCAS</h1>
                                     <th><b>TURNO</b></th>
                                     <th><b>ENTRÓ</b></th>
                                     <th><b>ATRASO</b></th>
-                                    <!--
-                                    <th><b>TURNO</b></th>
-                                    <th><b>GRUPO</b></th>
 
-                                    <th><b>TIPO</b></th>
-                                    <th><b>DIRECCIÓN IP</b></th>
-                                    <th><b>SISTEMA</b></th>
-                                    <th><b>NOTA</b></th>
-                                    <th></th>-->
                                 </tr>
                             </thead>
                             <tbody id="tbody">
@@ -74,31 +66,7 @@ MARCAS</h1>
                                     @endif
                                     @endforeach
                                 @endfor
-                               <!-- @foreach ($asistencia as $a)
-                                <tr class="tbody">
-                                    <td>{{ Carbon\Carbon::parse($a->fecha)->format('d-m-Y h:i:s A') ?? null }}</td>
-                                    <td>{{ $a->user->fullname ?? null }} {{ $a->user->last_name ?? null}}</td>
-                                    <td>{{ $a->user->rut ?? null }}</td>
-                                    <td>{{ $a->user ?? null }}</td>
-                                    <td>{{ $a->user->grupo->group->group ?? null}}</td>
-                                    <td>@if(isset($a->tipo)) @if($a->tipo == 0) <a target="_blank" href="{{ route('asistencia.show',$a->id) }}">Entrada</a> @else
-                                    <a target="_blank" href="{{ route('asistencia.show',$a->id) }}">Salida</a> @endif @endif </td>
-                                    <td>{{ $a->ip ?? null }}</td>
-                                    <td>{{ $a->sistema ?? null }}</td>
-                                    <td>{{ $a->note ?? null }}</td>
-                                    <td class="text-center">
-                                        {!! Form::open(['route'=>['asistencia.destroy',$a->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
 
-                                            <a href='{{ route('asistencia.edit',$a->id)}}'class="btn btn-default btn-sm" title="Editar">
-                                                <i class="icon-pencil text-info"></i>
-                                            </a>
-                                            <button class="btn btn-default btn-sm" onclick="return confirm('¿Realmente deseas borrar el registro?')">
-                                                    <i class="icon-trash-can3 text-danger"></i>
-                                                </button>
-                                                {!! Form::close() !!}
-                                    </td>
-                                </tr>
-                                @endforeach -->
                             </tbody>
                         </table>
                     </div>
