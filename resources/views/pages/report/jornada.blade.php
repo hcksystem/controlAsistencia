@@ -50,25 +50,51 @@ MARCAS</h1>
                                     <th><b>TURNO</b></th>
                                     <th><b>ENTRÓ</b></th>
                                     <th><b>ATRASO</b></th>
-
+                                    <th><b>SALIDA</b></th>
                                 </tr>
                             </thead>
                             <tbody id="tbody">
                                 @for($i=$inicio; $i<=$final; $i+=86400)
-                                    @foreach ($asistencia as $a)
-                                    @if (check_in_range($a->since, $a->until, $i))
-                                        <tr class="tbody">
-                                            <td>{{ date("d-m-Y", $i) }}</td>
-                                            <td>{{ Carbon\Carbon::createFromFormat('Y-m-d', $a->since)->format('d-m-Y') ?? null }}</td>
-                                            <td>{{ Carbon\Carbon::createFromFormat('Y-m-d', $a->until)->format('d-m-Y') ?? null }}</td>
-                                            <td>{{ $a->first_name ?? null }} {{ $a->last_name ?? null}}</td>
-                                            <td>{{ $a->rut ?? null }}</td>
-                                            <td>{{ check_turn($i,$a->planificacion) ?? null }}</td>
-                                            <td>{{ Carbon\Carbon::parse($a->fecha)->format('g:i:s A') ?? null }}</td>
-                                            <td>{{ obtener_atraso($i,$a->planificacion,$a->fecha) ?? null }}</td>
-                                        </tr>
-                                    @endif
-                                    @endforeach
+
+                                        @foreach ($asistencia as $key => $a)
+
+
+
+
+                                                        @if(check_day(date("d-m-Y", $i),$a['user_id']) == true)
+                                                        @if(date("d-m-Y", $i) === Carbon\Carbon::parse($a['fecha'])->format('d-m-Y'))
+                                                        <tr class="tbody">
+                                                            <td>{{ date("d-m-Y", $i) }}</td>
+                                                            <td>@isset($a['since']){{ Carbon\Carbon::createFromFormat('Y-m-d', $a['since'])->format('d-m-Y')  }} @endisset</td>
+                                                            <td>@isset($a['until']){{ Carbon\Carbon::createFromFormat('Y-m-d',$a['until'])->format('d-m-Y') }}  @endisset</td>
+                                                            <td>{{ $a['first_name'] ?? null }} {{ $a['last_name'] ?? null}}</td>
+                                                            <td>{{ $a['rut'] ?? null }}</td>
+                                                            <td>{{ check_turn($i,$a['planificacion']) ?? null }}</td>
+                                                            <td>{{ Carbon\Carbon::parse($a['entrada'])->format('g:i:s A') ?? null }}</td>
+                                                            <td>{{ obtener_atraso($i,$a['planificacion'],$a['entrada']) ?? null }}</td>
+                                                            <td>{{ Carbon\Carbon::parse($a['salida'])->format('g:i:s A') ?? null }}</td>
+                                                        </tr>
+                                                        @endif
+                                                        @else
+                                                        @if(check_in_range($a['since'],$a['until'],$a['fecha']))
+                                                        <tr class="tbody">
+                                                            <td>{{ date("d-m-Y", $i) }}</td>
+                                                            <td>@isset($a['since']){{ Carbon\Carbon::createFromFormat('Y-m-d', $a['since'])->format('d-m-Y')  }} @endisset</td>
+                                                            <td>@isset($a['until']){{ Carbon\Carbon::createFromFormat('Y-m-d',$a['until'])->format('d-m-Y') }}  @endisset</td>
+                                                            <td>{{ $a['first_name'] ?? null }} {{ $a['last_name'] ?? null}}</td>
+                                                            <td>{{ $a['rut'] ?? null }}</td>
+                                                            <td>{{ check_turn($i,$a['planificacion']) ?? null }}</td>
+                                                            <td>No Trabajo</td>
+                                                            <td></td>
+                                                            <td>No Trabajo</td>
+                                                        </tr>
+                                                        @endif
+
+                                                        @endif
+
+
+
+                                        @endforeach
                                 @endfor
 
                             </tbody>

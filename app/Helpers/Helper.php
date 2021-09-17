@@ -1,12 +1,14 @@
 <?php
 
     use App\Models\Turn;
+    use App\Asistencia;
     use App\Models\Type_Turn;
 
     function check_in_range($fecha_inicio, $fecha_fin, $fecha){
 
         $fecha_inicio = strtotime($fecha_inicio);
         $fecha_fin = strtotime($fecha_fin);
+        $fecha = strtotime($fecha);
 
         if(($fecha >= $fecha_inicio) && ($fecha <= $fecha_fin)) {
 
@@ -76,4 +78,16 @@
 
         }
 
+    }
+
+    function check_day($fecha,$user){
+
+        $fecha =  Carbon\Carbon::parse($fecha)->format('Y-m-d');
+        $asistencia = Asistencia::where('id_user',$user)->whereDate('fecha',$fecha)->get();
+
+        if(count($asistencia) > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
